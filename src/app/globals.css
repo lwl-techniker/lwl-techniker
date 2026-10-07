@@ -1,0 +1,688 @@
+@import 'tailwindcss';
+
+/*
+ * DESIGNSYSTEM LWL-TECHNIKER V4
+ *
+ * Herkunft (siehe docs/01-herkunftsmatrix.md):
+ * - V2: Nachtblau mit Bernstein, Faserwellen-Animation hinter der ganzen Seite, Schriften Exo 2 / Poppins,
+ *       Titel in Versalien mit Konturwort, Knöpfe mit abgeschnittener Ecke, Punktraster.
+ * - V3: ruhigere Typografie-Hierarchie, dezent abgestufte Abschnittsflächen in beiden Farbmodi,
+ *       gelbe CTA-Bänder, Kopf- und Fusszeile, funktionierender Lightmode.
+ *
+ * Abschnittsflächen (.flaeche-*) sind halbtransparent, damit die V2-Animation hindurchscheint und die Seite
+ * trotzdem in Abschnitte gegliedert ist. Es gibt keine weissen Inhaltsblöcke im Darkmode.
+ */
+
+@theme inline {
+  --color-marke: var(--c-marke);
+  --color-marke-dunkel: var(--c-marke-dunkel);
+  --color-marke-hell: var(--c-marke-hell);
+  --color-grund: var(--c-grund);
+  --color-flaeche: var(--c-flaeche);
+  --color-flaeche-dunkel: var(--c-flaeche-dunkel);
+  --color-flaeche-dunkel-2: var(--c-flaeche-dunkel-2);
+  --color-blau: var(--c-blau);
+  --color-text: var(--c-text);
+  --color-text-leise: var(--c-text-leise);
+  --color-text-hell: var(--c-text-hell);
+  --color-text-hell-leise: var(--c-text-hell-leise);
+  --color-text-dunkel: var(--c-text-dunkel);
+  --color-linie: var(--c-linie);
+  --color-linie-dunkel: var(--c-linie-dunkel);
+  /* Gelbes Band (V3): feste Werte, in beiden Modi gleich kräftig */
+  --color-band: var(--c-band);
+  --color-band-text: var(--c-band-text);
+
+  --breakpoint-3xl: 137.5rem;
+
+  --font-sans: var(--font-text), ui-sans-serif, system-ui, sans-serif;
+  --font-titel: var(--font-ueberschrift), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-karte: 0.125rem;
+  --radius-knopf: 0;
+
+  --animate-einblenden: einblenden 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  @keyframes einblenden {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+/*
+ * FARBWERTE
+ * Dunkel ist der Standard. Hell greift bei Geräteeinstellung "hell" (ohne manuelle Wahl) oder bei data-theme="hell".
+ * Der Schalter in der Kopfzeile schreibt data-theme und localStorage (src/lib/theme.ts).
+ */
+:root {
+  --c-marke: #f0a800;
+  --c-marke-dunkel: #d99700;
+  --c-marke-hell: #f0d200;
+  --c-grund: #08112e;
+  --c-flaeche: #0f1a40;
+  --c-flaeche-dunkel: #060d22;
+  --c-flaeche-dunkel-2: #0f1a40;
+  --c-blau: #1e2d78;
+  --c-text: #e8e4f8;
+  --c-text-leise: #b3b0cf;
+  --c-text-hell: #e8e4f8;
+  --c-text-hell-leise: #b3b0cf;
+  --c-text-dunkel: #060d22;
+  --c-linie: #1e2d78;
+  --c-linie-dunkel: #1e2d78;
+  --c-band: #f0a800;
+  --c-band-text: #08112e;
+  /* Abschnittsflächen (dunkel): abgestufte Navy-Töne, halbtransparent über der Animation */
+  --f-ruhig: rgb(13 24 60 / 0.62);
+  --f-betont: rgb(18 32 72 / 0.78);
+  --f-tief: rgb(6 13 34 / 0.82);
+  --f-kopf: rgb(8 17 46 / 0.92);
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme='dunkel']) {
+    --c-marke: #865800;
+    --c-marke-dunkel: #5c3c00;
+    --c-marke-hell: #6f4900;
+    --c-grund: #f5f3ed;
+    --c-flaeche: #fffef9;
+    --c-flaeche-dunkel: #e9e7df;
+    --c-flaeche-dunkel-2: #e9e7df;
+    --c-blau: #33468f;
+    --c-text: #142641;
+    --c-text-leise: #526074;
+    --c-linie: #d2d5d3;
+    --c-linie-dunkel: #c7c9c7;
+    --c-band: #efba36;
+    --c-band-text: #142641;
+    --f-ruhig: rgb(233 231 223 / 0.72);
+    --f-betont: rgb(255 254 249 / 0.86);
+    --f-tief: rgb(227 231 230 / 0.9);
+    --f-kopf: rgb(245 243 237 / 0.94);
+    color-scheme: light;
+  }
+}
+
+:root[data-theme='hell'] {
+  --c-marke: #865800;
+  --c-marke-dunkel: #5c3c00;
+  --c-marke-hell: #6f4900;
+  --c-grund: #f5f3ed;
+  --c-flaeche: #fffef9;
+  --c-flaeche-dunkel: #e9e7df;
+  --c-flaeche-dunkel-2: #e9e7df;
+  --c-blau: #33468f;
+  --c-text: #142641;
+  --c-text-leise: #526074;
+  --c-linie: #d2d5d3;
+  --c-linie-dunkel: #c7c9c7;
+  --c-band: #efba36;
+  --c-band-text: #142641;
+  --f-ruhig: rgb(233 231 223 / 0.72);
+  --f-betont: rgb(255 254 249 / 0.86);
+  --f-tief: rgb(227 231 230 / 0.9);
+  --f-kopf: rgb(245 243 237 / 0.94);
+  color-scheme: light;
+}
+
+@layer base {
+  html {
+    /*
+     * Bewusst KEIN scroll-behavior: smooth auf html. In V2 führte es dazu, dass nach einem Seitenwechsel die neue Seite
+     * zuerst an der alten Bildlaufposition erschien und sichtbar nach oben scrollte. Routenwechsel setzen die Position
+     * jetzt sofort (src/components/layout/RoutenScroll.tsx). Sprungmarken innerhalb einer Seite scrollen weich über
+     * die Klasse .sanft (siehe unten).
+     */
+    scroll-behavior: auto;
+    scroll-padding-top: 8rem;
+    -webkit-text-size-adjust: 100%;
+    background: var(--color-grund);
+  }
+  html.sanft {
+    scroll-behavior: smooth;
+  }
+
+  /* Kein Hintergrund auf body: er würde die Faserwellen (negativer z-index) verdecken. Die Farbe liegt auf html. */
+  body {
+    @apply font-sans text-text antialiased;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    text-rendering: optimizeLegibility;
+    /*
+     * Kein overflow-x: hidden auf body: das würde die haftende Kopfzeile (position: sticky) ausser Kraft setzen.
+     * Seitlichen Überlauf unterbindet html mit overflow-x: clip (kein Scrollcontainer, sticky bleibt intakt).
+     */
+  }
+  html {
+    overflow-x: clip;
+  }
+
+  /* Punktraster über der ganzen Seite (V2) */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -20;
+    background-image: radial-gradient(circle, color-mix(in srgb, var(--color-linie) 50%, transparent) 1px, transparent 1px);
+    background-size: 38px 38px;
+    pointer-events: none;
+  }
+
+  @media (min-width: 1024px) {
+    body {
+      font-size: 1.125rem;
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-titel text-balance;
+    letter-spacing: -0.01em;
+    line-height: 1.08;
+    hyphens: auto;
+    overflow-wrap: break-word;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    @apply bg-marke text-text-dunkel;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-marke);
+    outline-offset: 3px;
+  }
+
+  /* Animationen des Startbereichs (Hero.tsx) */
+  .hero-zeile {
+    opacity: 0;
+    transform: translateY(110%);
+    animation: zeile-auf 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .hero-auf {
+    opacity: 0;
+    animation: auf 0.7s forwards;
+  }
+  .hero-balken {
+    width: 0;
+    animation: balken 1.1s 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  @keyframes zeile-auf {
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes auf {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes balken {
+    to {
+      width: 55%;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-zeile,
+    .hero-auf {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+    .hero-balken {
+      width: 55%;
+      animation: none;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* EINBLENDEN BEIM SCROLLEN (src/components/ui/Einblenden.tsx) */
+  .js-einblenden [data-einblenden]:not([data-einblenden='sofort'], [data-einblenden='sichtbar']) {
+    opacity: 0;
+  }
+  .js-einblenden [data-einblenden='sichtbar'] {
+    animation: einblenden-scroll 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(var(--einblenden-index, 0) * 90ms);
+  }
+  @keyframes einblenden-scroll {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @media print, (prefers-reduced-motion: reduce) {
+    .js-einblenden [data-einblenden] {
+      opacity: 1 !important;
+      animation: none !important;
+    }
+  }
+
+  /*
+   * SEITENBREITE: Inhaltskante für Kopfzeile, Abschnitte und Fusszeile identisch (V3: "Innenkante am Logo ausgerichtet").
+   * Maximal 2400 px wie V2, Rand 24 / 32 / 48 px.
+   */
+  .container-seite {
+    @apply mx-auto w-full max-w-[2400px] px-6 sm:px-8 lg:px-12;
+  }
+
+  .lesebreite {
+    max-width: 72ch;
+  }
+
+  /* Vertikale Abstände: nur diese drei verwenden */
+  .abschnitt {
+    @apply py-16 lg:py-24;
+  }
+  .abschnitt-kompakt {
+    @apply py-12 lg:py-16;
+  }
+  .abschnitt-gross {
+    @apply py-20 lg:py-32;
+  }
+
+  /*
+   * ABSCHNITTSFLÄCHEN (V3-Idee, V2-Farben): vollbreit, halbtransparent, abgestuft.
+   * ruhig  = leicht abgesetzt (Leistungen, Team)
+   * betont = deutlicher abgesetzt (Referenzen, Produkte)
+   * tief   = dunkelste Stufe (Kennzahlen, Fusszeile)
+   * Ohne Klasse bleibt der Abschnitt transparent, die Animation ist voll sichtbar (Hero, Arbeitsweise, Kontaktaufruf).
+   */
+  .flaeche-ruhig {
+    background: var(--f-ruhig);
+    border-block: 1px solid color-mix(in srgb, var(--color-linie) 70%, transparent);
+  }
+  .flaeche-betont {
+    background: var(--f-betont);
+    border-block: 1px solid color-mix(in srgb, var(--color-linie) 80%, transparent);
+  }
+  .flaeche-tief {
+    background: var(--f-tief);
+    border-block: 1px solid color-mix(in srgb, var(--color-linie) 80%, transparent);
+  }
+  .flaeche-ruhig + .flaeche-ruhig,
+  .flaeche-betont + .flaeche-betont,
+  .flaeche-ruhig + .flaeche-betont,
+  .flaeche-betont + .flaeche-ruhig,
+  .flaeche-tief + .flaeche-ruhig,
+  .flaeche-ruhig + .flaeche-tief {
+    border-top: 0;
+  }
+
+  /* Gelbes Band (V3) für Kontaktaufruf und Kennzahlen-Varianten. Text darauf immer dunkel. */
+  .band-gelb {
+    background: var(--color-band);
+    color: var(--color-band-text);
+  }
+
+  /* Überzeile mit Schrägstrich (V2) */
+  .ueberzeile {
+    @apply mb-4 inline-flex items-center gap-3 text-xs font-medium tracking-[0.42em] text-marke uppercase;
+  }
+  .ueberzeile::before {
+    content: '/';
+    @apply font-titel font-bold;
+  }
+  .band-gelb .ueberzeile {
+    color: var(--color-band-text);
+    opacity: 0.8;
+  }
+
+  /* Überzeile im Startbereich: leuchtender Punkt */
+  .ueberzeile-punkt {
+    @apply mb-6 inline-flex items-center gap-3 text-xs font-medium tracking-[0.4em] text-marke uppercase;
+  }
+  .ueberzeile-punkt::before {
+    content: '';
+    @apply size-1.5 rounded-full bg-marke;
+    box-shadow: 0 0 10px var(--color-marke);
+    animation: blinken 2s 1s ease-in-out infinite;
+  }
+  @keyframes blinken {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.3;
+    }
+  }
+
+  /*
+   * TITEL: Versalien und Grössen wie in V2 (Freigabe Kundschaft 7.10.2026).
+   */
+  .titel-hero {
+    @apply font-bold uppercase;
+    font-size: clamp(3.2rem, 10.5vw, 12rem);
+    line-height: 0.86;
+    letter-spacing: -0.02em;
+  }
+  .titel-1 {
+    @apply font-bold uppercase;
+    font-size: clamp(2.6rem, 6vw, 6rem);
+    line-height: 0.92;
+    letter-spacing: -0.015em;
+  }
+  .titel-2 {
+    @apply font-bold uppercase;
+    font-size: clamp(2rem, 4.5vw, 4rem);
+    line-height: 0.92;
+  }
+  .titel-3 {
+    @apply text-lg font-semibold tracking-[0.04em] uppercase lg:text-xl 3xl:text-2xl;
+    line-height: 1.15;
+  }
+  .einleitung {
+    @apply text-lg text-text-leise lg:text-xl 3xl:text-2xl;
+    line-height: 1.6;
+  }
+
+  .text-kompakt {
+    @apply text-[0.95rem] leading-7 text-text-leise;
+  }
+
+  /* Konturschrift und Farbverlauf für einzelne Wörter in Titeln (V2) */
+  .kontur {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--color-text);
+    paint-order: stroke fill;
+  }
+  .verlauf {
+    background: linear-gradient(90deg, var(--color-marke), var(--color-marke-hell) 60%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  :root[data-theme='hell'] .verlauf,
+  :root[data-theme='hell'] .band-gelb .verlauf {
+    background: linear-gradient(90deg, #865800, #a86f00 60%);
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  /*
+   * KNÖPFE (V2): Bernstein-Verlauf mit abgeschnittener Ecke (primär), Geisterknopf (sekundär).
+   * Feste Bernstein-Werte, damit der Knopf in beiden Modi und auf dem gelben Band gleich wirkt.
+   */
+  .knopf-primaer {
+    @apply inline-flex min-h-12 items-center justify-center gap-3 px-7 py-3 font-titel text-sm font-bold tracking-[0.18em] uppercase transition-opacity duration-200 hover:opacity-85 disabled:cursor-not-allowed disabled:opacity-60 lg:min-h-14 lg:px-9;
+    color: #060d22;
+    background: linear-gradient(100deg, #f0a800, #f0d200);
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+    box-shadow: 0 0 24px rgb(240 168 0 / 0.22);
+  }
+  .knopf-sekundaer,
+  .knopf-hell {
+    @apply inline-flex min-h-12 items-center justify-center gap-3 border border-marke/40 px-7 py-3 font-titel text-sm font-semibold tracking-[0.18em] text-marke uppercase transition-colors duration-200 hover:border-marke hover:bg-marke/8 lg:min-h-14 lg:px-9;
+  }
+  /* Auf dem gelben Band: Primärknopf dunkel statt gelb auf gelb, Sekundärknopf dunkle Kontur */
+  .band-gelb .knopf-primaer {
+    background: linear-gradient(100deg, #08112e, #1e2d78);
+    color: #f0d200;
+    box-shadow: 0 10px 30px rgb(8 17 46 / 0.25);
+  }
+  .band-gelb .knopf-sekundaer {
+    color: var(--color-band-text);
+    border-color: color-mix(in srgb, var(--color-band-text) 45%, transparent);
+  }
+  .band-gelb .knopf-sekundaer:hover {
+    border-color: var(--color-band-text);
+    background: color-mix(in srgb, var(--color-band-text) 8%, transparent);
+  }
+  .pille {
+    @apply inline-flex min-h-10 items-center border border-linie px-4 py-2 text-xs font-medium tracking-[0.2em] text-text-leise uppercase transition-colors hover:border-marke hover:text-marke;
+  }
+
+  .formular-label {
+    @apply mb-2 block text-xs font-semibold tracking-[0.16em] text-text-leise uppercase;
+  }
+  .formular-feld {
+    @apply block w-full border border-linie bg-flaeche-dunkel px-4 py-3 text-base text-text transition-colors outline-none placeholder:text-text-leise/70 focus:border-marke focus:ring-2 focus:ring-marke/25;
+  }
+
+  /* LOGOSLIDER (V3): endlose Schleife, Pause beim Überfahren, steht bei "Bewegung reduzieren" still */
+  .logos-laufschrift-spur {
+    animation-name: laufschrift;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+  .logos-laufschrift:hover .logos-laufschrift-spur,
+  .logos-laufschrift:focus-within .logos-laufschrift-spur {
+    animation-play-state: paused;
+  }
+  @keyframes laufschrift {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  /*
+   * Referenzlogos (V3-Lösung): dunkel = einfarbige Silhouette als CSS-Maske in Textfarbe,
+   * hell = Originalfarben. Beide Varianten liegen im selben festen Rahmen, keine weissen Kacheln.
+   */
+  .logo-rahmen {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .logo-silhouette {
+    position: absolute;
+    inset: 0;
+    background: var(--color-text);
+    opacity: 0.8;
+    mask-position: center;
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    transition: opacity 0.3s;
+  }
+  .logo-rahmen:hover .logo-silhouette {
+    opacity: 1;
+  }
+  .logo-farbig {
+    display: none;
+  }
+  :root[data-theme='hell'] .logo-silhouette:not(.immer) {
+    display: none;
+  }
+  :root[data-theme='hell'] .logo-farbig {
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    mix-blend-mode: multiply;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme='dunkel']) .logo-silhouette:not(.immer) {
+      display: none;
+    }
+    :root:not([data-theme='dunkel']) .logo-farbig {
+      display: block;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      mix-blend-mode: multiply;
+    }
+  }
+
+  /* Eingebettete Karte (V3): im Darkmode abgedunkelt, im Lightmode normal */
+  .karte-rahmen iframe {
+    filter: invert(0.9) hue-rotate(180deg) saturate(0.6) brightness(0.9);
+  }
+  :root[data-theme='hell'] .karte-rahmen iframe {
+    filter: none;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme='dunkel']) .karte-rahmen iframe {
+      filter: none;
+    }
+  }
+
+  /* Fliesstext aus Markdoc */
+  .fliesstext {
+    @apply text-text;
+  }
+  .fliesstext > * + *,
+  .fliesstext :where(p, ul, ol, blockquote, figure, table) + :where(p, ul, ol, blockquote, figure, table, h2, h3, h4) {
+    margin-top: 1.25em;
+  }
+  .fliesstext h2 {
+    @apply mt-14 text-2xl font-bold uppercase lg:text-3xl;
+  }
+  .fliesstext h3 {
+    @apply mt-10 text-xl font-semibold uppercase lg:text-2xl;
+  }
+  .fliesstext h4 {
+    @apply mt-8 text-lg font-semibold uppercase;
+  }
+  .fliesstext a {
+    @apply font-medium text-marke underline underline-offset-4 hover:text-marke-hell;
+  }
+  .fliesstext ul {
+    @apply list-disc space-y-2 pl-6 marker:text-marke;
+  }
+  .fliesstext ol {
+    @apply list-decimal space-y-2 pl-6 marker:text-marke;
+  }
+  .fliesstext blockquote {
+    @apply border-l-4 border-marke pl-6 text-xl text-text-leise italic;
+  }
+  .fliesstext hr {
+    @apply my-10 border-linie;
+  }
+  .fliesstext .abbildung {
+    @apply my-10 block;
+  }
+  .fliesstext .abbildung img {
+    @apply block w-full rounded-[var(--radius-karte)];
+  }
+  .fliesstext .abbildung-text {
+    @apply mt-3 block text-sm text-text-leise;
+  }
+  .fliesstext .tabelle-scroll {
+    @apply overflow-x-auto;
+  }
+  .fliesstext table {
+    @apply w-full border-collapse text-left text-base;
+  }
+  .fliesstext th {
+    @apply border-b-2 border-marke py-3 pr-6 font-semibold;
+  }
+  .fliesstext td {
+    @apply border-b border-linie py-3 pr-6 align-top;
+  }
+}
+
+/*
+ * FASER-WASSERZEICHEN (V3, FiberWatermark) im gelben Kontaktband.
+ * Auf Gelb laufen die Fasern in Nachtblau, die Lichtimpulse hell. Drift und Impulse stehen bei "Bewegung reduzieren" still.
+ */
+@layer components {
+  .band-gelb.mit-wasserzeichen {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .band-gelb.mit-wasserzeichen > :not(.faser-wasserzeichen) {
+    position: relative;
+    z-index: 1;
+  }
+  .faser-wasserzeichen {
+    position: absolute;
+    pointer-events: none;
+    user-select: none;
+    width: min(74vw, 920px);
+    top: -40%;
+    right: max(-100px, calc((100% - 2400px) / 2 - 80px));
+    opacity: 0.24;
+    transform: rotate(-24deg);
+    animation: wasserzeichen-drift 26s ease-in-out infinite alternate;
+  }
+  .faser-wasserzeichen svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .faser-fluss {
+    --fluss-start: #273574;
+    --fluss-ende: #08112e;
+    --fluss-paket: #fff0bc;
+    --fluss-halo: #fff0bc;
+    --fluss-dauer: 6s;
+  }
+  .fluss-start { stop-color: var(--fluss-start); }
+  .fluss-ende { stop-color: var(--fluss-ende); }
+  .fluss-halo { stop-color: var(--fluss-halo); }
+  .fluss-paket {
+    fill: none;
+    stroke: var(--fluss-paket);
+    stroke-width: 20;
+    animation: faser-datenfluss var(--fluss-dauer) linear infinite;
+    animation-delay: var(--fluss-verzug);
+  }
+  .fluss-paket-schweif { stroke-dasharray: 19 181; opacity: 0.48; }
+  .fluss-paket-kern { stroke-dasharray: 5 195; }
+  .fluss-ankunft {
+    opacity: 0.1;
+    animation: faser-ankunft var(--fluss-dauer) linear infinite;
+    animation-delay: var(--fluss-verzug);
+  }
+  .fluss-spitze { fill: var(--fluss-paket); }
+  @media (max-width: 760px) {
+    .faser-wasserzeichen { width: 110vw; right: -48%; top: 5%; opacity: 0.14; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .fluss-paket, .fluss-ankunft, .faser-wasserzeichen { animation: none; }
+    .fluss-paket { opacity: 0; }
+    .fluss-ankunft { opacity: 0.3; }
+  }
+}
+@keyframes wasserzeichen-drift {
+  to { transform: translate(22px, 18px) rotate(-12deg); }
+}
+@keyframes faser-datenfluss {
+  0% { stroke-dashoffset: 20; }
+  80%, 100% { stroke-dashoffset: -105; }
+}
+@keyframes faser-ankunft {
+  0%, 62%, 100% { opacity: 0.08; }
+  77%, 84% { opacity: 1; }
+  94% { opacity: 0.2; }
+}

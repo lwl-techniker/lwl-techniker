@@ -1,0 +1,53 @@
+{
+  "name": "lwl-techniker-v4",
+  "version": "4.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.18 <25"
+  },
+  "scripts": {
+    "dev": "next dev -p 3104",
+    "predev": "node scripts/erzeuge-formulare.mjs && node scripts/erzeuge-datenblaetter.mjs",
+    "prebuild": "node scripts/erzeuge-formulare.mjs && node scripts/erzeuge-datenblaetter.mjs && node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/pruefe-konfiguration.mjs --build && node scripts/pruefe-texte.mjs --build",
+    "build": "next build",
+    "start": "next start -p 3104",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "test": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test \"tests/*.test.mjs\"",
+    "test:browser": "node tests/browser.mjs",
+    "formulare": "node scripts/erzeuge-formulare.mjs",
+    "datenblaetter": "node scripts/erzeuge-datenblaetter.mjs",
+    "pruefen:konfiguration": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/pruefe-konfiguration.mjs",
+    "pruefen:texte": "node scripts/pruefe-texte.mjs",
+    "pruefen:bilder": "node scripts/pruefe-bilder.mjs",
+    "pruefen": "npm run formulare && npm run datenblaetter && npm run pruefen:konfiguration && npm run pruefen:texte && npm run pruefen:bilder && npm run typecheck && npm run lint && npm test",
+    "verify:repository": "node scripts/verify-write-target.mjs",
+    "bilder:optimieren": "node scripts/optimiere-bilder.mjs"
+  },
+  "dependencies": {
+    "@keystatic/core": "0.6.9",
+    "@keystatic/next": "5.0.5",
+    "@markdoc/markdoc": "0.4.0",
+    "clsx": "2.1.1",
+    "lucide-react": "1.46.0",
+    "mupdf": "^1.28.1",
+    "next": "16.3.5",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "server-only": "0.0.1",
+    "tailwind-merge": "3.7.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.63.0",
+    "@tailwindcss/postcss": "4.3.3",
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.5",
+    "sharp": "0.35.4",
+    "tailwindcss": "4.3.3",
+    "typescript": "^5"
+  }
+}

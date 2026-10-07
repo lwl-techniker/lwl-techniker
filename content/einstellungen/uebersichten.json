@@ -1,0 +1,290 @@
+{
+  "leistungen": {
+    "ueberzeile": "Leistungen",
+    "titel": "Glasfaserinstallationen, Messtechnik und LWL-Produkte",
+    "einleitung": "Unsere LWL-Techniker spleissen, messen und installieren Glasfaseranlagen in der ganzen Schweiz. Dazu liefern wir vorkonfektionierte Kabel und passive Komponenten aus eigener Entwicklung.",
+    "seo": {
+      "titel": "Leistungen in der Glasfasertechnik",
+      "beschreibung": "Muffenspleissungen, FTTH-Installation, Rechenzentren, Verkehrstechnik, Inhouse-Installationen, Fehlerbehebung, LWL-Produkte und Schulungen."
+    }
+  },
+  "referenzen": {
+    "ueberzeile": "Referenzen",
+    "titel": "Projekte in der ganzen Schweiz",
+    "einleitung": "Eine Auswahl unserer Einsätze für Netzbetreiber, Gemeinden und Unternehmen.",
+    "logos": {
+      "titel": "Unsere Kunden und Referenzen",
+      "laufschrift": false,
+      "logos": [
+        {
+          "name": "SwissLife Arena",
+          "logo": "/bilder/statisch/logos/swisslife-arena.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/swisslife-arena.webp"
+        },
+        {
+          "name": "Tertianum",
+          "logo": "/bilder/statisch/logos/tertianium.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/tertianium.webp"
+        },
+        {
+          "name": "The Circle Zürich",
+          "logo": "/bilder/statisch/logos/the-circle-zuerich.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/the-circle-zuerich.webp"
+        },
+        {
+          "name": "Tiffany & Co.",
+          "logo": "/bilder/statisch/logos/tiffany-and-co.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/tiffany-and-co.webp"
+        },
+        {
+          "name": "UBS",
+          "logo": "/bilder/statisch/logos/ubs.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/ubs.webp"
+        },
+        {
+          "name": "UPC",
+          "logo": "/bilder/statisch/logos/upc.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/upc.webp"
+        },
+        {
+          "name": "Universitätsspital Zürich",
+          "logo": "/bilder/statisch/logos/usz.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/usz.webp"
+        },
+        {
+          "name": "Luzerner Kantonalbank",
+          "logo": "/bilder/statisch/logos/luzerner-kantonalbank.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/luzerner-kantonalbank.webp"
+        },
+        {
+          "name": "Shopping Arena",
+          "logo": "/bilder/statisch/logos/shopping-arena.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/shopping-arena.webp"
+        },
+        {
+          "name": "Swisspro",
+          "logo": "/bilder/statisch/logos/swisspro.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/swisspro.webp"
+        },
+        {
+          "name": "Louis Vuitton",
+          "logo": "/bilder/statisch/logos/lv.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/lv.webp"
+        },
+        {
+          "name": "ISA Bodywear",
+          "logo": "/bilder/statisch/logos/isa-bodywear.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/isa-bodywear.webp"
+        },
+        {
+          "name": "McLaren",
+          "logo": "/bilder/statisch/logos/mclaren.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/mclaren.webp"
+        },
+        {
+          "name": "Migros",
+          "logo": "/bilder/statisch/logos/migros.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/migros.webp"
+        },
+        {
+          "name": "Mövenpick",
+          "logo": "/bilder/statisch/logos/moevenpick.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/moevenpick.webp"
+        },
+        {
+          "name": "Olma Messen St. Gallen",
+          "logo": "/bilder/statisch/logos/olma-messen.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/olma-messen.webp"
+        },
+        {
+          "name": "Privatklinik Bethanien",
+          "logo": "/bilder/statisch/logos/privatklinik-bethanien.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/privatklinik-bethanien.webp"
+        },
+        {
+          "name": "Privera",
+          "logo": "/bilder/statisch/logos/privera.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/privera.webp"
+        },
+        {
+          "name": "Raiffeisen",
+          "logo": "/bilder/statisch/logos/raiffeisen.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/raiffeisen.webp"
+        },
+        {
+          "name": "Rieter",
+          "logo": "/bilder/statisch/logos/rieter.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/rieter.webp"
+        },
+        {
+          "name": "SBB CFF FFS",
+          "logo": "/bilder/statisch/logos/sbb.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/sbb.webp"
+        },
+        {
+          "name": "Schibli Elektrotechnik",
+          "logo": "/bilder/statisch/logos/schibli.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/schibli.webp"
+        },
+        {
+          "name": "Sunrise",
+          "logo": "/bilder/statisch/logos/sunrise.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/sunrise.webp"
+        },
+        {
+          "name": "Swisscom",
+          "logo": "/bilder/statisch/logos/swisscom.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/swisscom.webp"
+        },
+        {
+          "name": "AXA",
+          "logo": "/bilder/statisch/logos/axa.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/axa.webp"
+        },
+        {
+          "name": "Baumann Kölliker Gruppe",
+          "logo": "/bilder/statisch/logos/baumann-koelliker-gruppe.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/baumann-koelliker-gruppe.webp"
+        },
+        {
+          "name": "Biotta",
+          "logo": "/bilder/statisch/logos/biotta.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/biotta.webp"
+        },
+        {
+          "name": "Bundesamt für Strassen ASTRA",
+          "logo": "/bilder/statisch/logos/astra.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/astra.webp"
+        },
+        {
+          "name": "Burkhalter",
+          "logo": "/bilder/statisch/logos/burkhalter.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/burkhalter.webp"
+        },
+        {
+          "name": "Cablex",
+          "logo": "/bilder/statisch/logos/cablex.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/cablex.webp"
+        },
+        {
+          "name": "Conny-Land",
+          "logo": "/bilder/statisch/logos/conny-land.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/conny-land.webp"
+        },
+        {
+          "name": "Coop",
+          "logo": "/bilder/statisch/logos/coop.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/coop.webp"
+        },
+        {
+          "name": "Credit Suisse",
+          "logo": "/bilder/statisch/logos/credit-suisse.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/credit-suisse.webp"
+        },
+        {
+          "name": "EMS-Chemie",
+          "logo": "/bilder/statisch/logos/ems-chemie.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/ems-chemie.webp"
+        },
+        {
+          "name": "Equans",
+          "logo": "/bilder/statisch/logos/equans.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/equans.webp"
+        },
+        {
+          "name": "ETH Zürich",
+          "logo": "/bilder/statisch/logos/eth-zuerich.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/eth-zuerich.webp"
+        },
+        {
+          "name": "Flughafen Zürich",
+          "logo": "/bilder/statisch/logos/flughafen-zuerich.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/flughafen-zuerich.webp"
+        },
+        {
+          "name": "Globus",
+          "logo": "/bilder/statisch/logos/globus.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/globus.webp"
+        },
+        {
+          "name": "Green Datacenter",
+          "logo": "/bilder/statisch/logos/green-datacenter.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/green-datacenter.webp"
+        },
+        {
+          "name": "Groupe Mutuel",
+          "logo": "/bilder/statisch/logos/group-mutuel.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/group-mutuel.webp"
+        },
+        {
+          "name": "Hermès",
+          "logo": "/bilder/statisch/logos/hermes.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/hermes.webp"
+        },
+        {
+          "name": "Hirslanden",
+          "logo": "/bilder/statisch/logos/hirslanden.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/hirslanden.webp"
+        },
+        {
+          "name": "Kummler+Matter",
+          "logo": "/bilder/statisch/logos/kummler-matter.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/kummler-matter.webp"
+        },
+        {
+          "name": "Kunsthaus Zürich",
+          "logo": "/bilder/statisch/logos/kunsthaus-zuerich.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/kunsthaus-zuerich.webp"
+        },
+        {
+          "name": "NEP Switzerland",
+          "logo": "/bilder/statisch/logos/nep.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/nep.webp"
+        },
+        {
+          "name": "Swiss Football League",
+          "logo": "/bilder/statisch/logos/swiss-football-league.png",
+          "logoFarbig": "/bilder/statisch/logos-farbig/swiss-football-league.webp"
+        }
+      ]
+    },
+    "seo": {
+      "titel": "Referenzen",
+      "beschreibung": "FTTH-Projekte, Verkehrstechnik auf Nationalstrassen und Inhouse-Installationen für Unternehmen."
+    },
+    "allgemeinTitel": "Verbindungen, die Vertrauen schaffen",
+    "allgemeinEinleitung": "Unsere Referenzen reichen von Unternehmen und öffentlichen Einrichtungen bis zu Verkehrs-, Sport- und Gebäudeinfrastruktur. Hier finden Sie die Referenzlogos aus unserem bisherigen Auftritt. Konkrete Aufgaben und ausgeführte Leistungen zeigen wir in den dokumentierten Projektbeispielen.",
+    "allgemeinHinweis": "Glasfaseranschlüsse, Gebäudeverkabelung, Verkehrsprojekte und Technik am Spielfeldrand: Unsere Projektbeispiele zeigen, in welchem Kontext wir arbeiten. Die Logos stehen für das Referenzumfeld und sind keine Aussage über einen bestimmten Auftragsumfang oder eine aktuelle Partnerschaft."
+  },
+  "jobs": {
+    "ueberzeile": "Stellen",
+    "titel": "Offene Stellen",
+    "einleitung": "Offene Stellen erscheinen hier, sobald wir eine Stelle ausschreiben. Initiativbewerbungen senden Sie an info@lwl-techniker.ch.",
+    "seo": {
+      "titel": "Offene Stellen",
+      "beschreibung": "Aktuelle Stellen bei der LWL-Techniker Schweiz GmbH in St. Gallen."
+    }
+  },
+  "produkte": {
+    "ueberzeile": "Produkte",
+    "titel": "Produkte und Datenblätter",
+    "einleitung": "Vorkonfektionierte Kabel, passive Komponenten und Zubehör für Ihre Glasfaseranlage. Die technischen Angaben stehen im jeweiligen PDF-Datenblatt, das Sie direkt öffnen oder herunterladen können.",
+    "anfrageHinweis": "Preise, Ausführungen und Verfügbarkeit klären wir mit Ihrer Anfrage. Nennen Sie uns die benötigte Ausführung und Menge.",
+    "archivHinweis": "Die Datenblätter stammen aus unserem Sortiment und können frühere Kontaktangaben enthalten. Für Beratung und Bestellung gelten die Kontaktdaten auf dieser Website.",
+    "seo": {
+      "titel": "LWL-Produkte und Datenblätter",
+      "beschreibung": "Glasfaserkabel, FTTH-Dosen, Spleissboxen, 19-Zoll-Komponenten, Patchkabel, Transceiver und Zubehör mit PDF-Datenblättern zum Download."
+    }
+  },
+  "team": {
+    "ueberzeile": "Team",
+    "titel": "Geschäftsleitung und Technik",
+    "einleitung": "Die Geschäftsleitung und unser Technikteam: persönlich ansprechbar, gemeinsam für Ihr Projekt im Einsatz.",
+    "leitungTitel": "Geschäftsleitung",
+    "technikTitel": "Technik",
+    "seo": {
+      "titel": "Geschäftsleitung und Technik",
+      "beschreibung": "Lernen Sie die Geschäftsleitung und das Technikteam der LWL-Techniker Schweiz GmbH kennen. Ihre Ansprechpersonen sind direkt erreichbar."
+    }
+  }
+}

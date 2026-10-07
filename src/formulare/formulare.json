@@ -1,0 +1,20 @@
+{
+  "kontakt": {
+    "emailBetreff": "Neue Anfrage über die Website",
+    "felder": [
+      { "name": "name", "typ": "text", "label": "Vorname und Name", "pflicht": true, "autocomplete": "name", "breite": "halb" },
+      { "name": "firma", "typ": "text", "label": "Firma", "pflicht": false, "autocomplete": "organization", "breite": "halb" },
+      { "name": "email", "typ": "email", "label": "E-Mail", "pflicht": true, "autocomplete": "email", "breite": "halb" },
+      { "name": "telefon", "typ": "tel", "label": "Telefon", "pflicht": false, "autocomplete": "tel", "breite": "halb" },
+      { "name": "betreff", "typ": "auswahl", "label": "Worum geht es?", "pflicht": true, "breite": "voll" },
+      { "name": "nachricht", "typ": "textbereich", "label": "Ihre Nachricht", "pflicht": true, "breite": "voll" },
+      {
+        "name": "datenschutz",
+        "typ": "zustimmung",
+        "label": "Ich bin einverstanden, dass meine Angaben zur Bearbeitung der Anfrage gespeichert werden.",
+        "pflicht": true,
+        "breite": "voll"
+      }
+    ]
+  }
+}

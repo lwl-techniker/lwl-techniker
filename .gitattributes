@@ -1,0 +1,13 @@
+# Einheitliche Zeilenenden (LF). Keystatic schreibt LF, auch unter Windows.
+# Ohne diese Datei entstehen bei jedem Speichern im CMS Änderungen an allen Zeilen.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.avif binary
+*.ico binary
+*.gif binary
+*.woff binary
+*.woff2 binary

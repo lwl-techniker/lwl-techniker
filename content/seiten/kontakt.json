@@ -1,0 +1,27 @@
+{
+  "titel": "Kontakt",
+  "inSitemap": true,
+  "seo": {
+    "titel": "Kontakt",
+    "beschreibung": "Kontaktieren Sie die LWL-Techniker Schweiz GmbH in St. Gallen für Offerten, Notfalleinsätze, Produkte oder Schulungen."
+  },
+  "bloecke": [
+    {
+      "discriminant": "kontaktformular",
+      "value": {
+        "titel": "Sprechen wir über Ihr Projekt",
+        "text": "Beschreiben Sie Ihr Anliegen in wenigen Sätzen. Wir melden uns so rasch wie möglich.\n\nBei Störungen im Glasfasernetz erreichen Sie uns am schnellsten telefonisch.",
+        "betreffOptionen": [
+          "Offerte für eine Installation",
+          "Störung oder Notfall",
+          "Produkte und Datenblätter",
+          "Schulung",
+          "Allgemeine Frage"
+        ],
+        "bestaetigung": "Wir haben Ihre Anfrage erhalten und melden uns so rasch wie möglich.",
+        "kontaktdatenZeigen": true,
+        "karteZeigen": true
+      }
+    }
+  ]
+}

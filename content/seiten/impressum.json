@@ -1,0 +1,15 @@
+{
+  "titel": "Impressum",
+  "inSitemap": false,
+  "seo": {
+    "titel": "Impressum"
+  },
+  "bloecke": [
+    {
+      "discriminant": "fliesstext",
+      "value": {
+        "titel": "Impressum"
+      }
+    }
+  ]
+}

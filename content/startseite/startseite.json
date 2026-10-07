@@ -1,0 +1,146 @@
+{
+  "seo": {},
+  "bloecke": [
+    {
+      "discriminant": "hero",
+      "value": {
+        "ueberzeile": "Glasfasertechnik aus St. Gallen",
+        "titel": "Wir bringen\nLicht\nans Ziel.",
+        "text": "Die LWL-Techniker Schweiz GmbH spleisst, misst und installiert Glasfaseranlagen für Netzbetreiber, Gemeinden und Unternehmen in der ganzen Schweiz. Dazu liefern wir vorkonfektionierte LWL-Kabel und passive Komponenten.",
+        "knopfPrimaer": {
+          "text": "Projekt besprechen",
+          "link": "/kontakt"
+        },
+        "knopfSekundaer": {
+          "text": "Leistungen ansehen",
+          "link": "/leistungen"
+        },
+        "variante": "vollbild",
+        "hoehe": "gross"
+      }
+    },
+    {
+      "discriminant": "kennzahlen",
+      "value": {
+        "eintraege": [
+          {
+            "wert": "1 Mio.+",
+            "bezeichnung": "Meter Kabel verlegt"
+          },
+          {
+            "wert": "1'000+",
+            "bezeichnung": "Projekte umgesetzt"
+          },
+          {
+            "wert": "automatisch:datenblaetter",
+            "bezeichnung": "Datenblätter für Ihre Planung"
+          }
+        ],
+        "darstellung": "dunkel"
+      }
+    },
+    {
+      "discriminant": "leistungen",
+      "value": {
+        "ueberzeile": "Leistungen",
+        "titel": "Unsere Expertise",
+        "text": "Von der Muffenspleissung über den FTTH-Anschluss bis zur Verkabelung im Rechenzentrum. Jede Installation schliessen wir mit Messung und Protokoll ab.",
+        "anzahl": "alle",
+        "linkText": "Alle Leistungen"
+      }
+    },
+    {
+      "discriminant": "ablauf",
+      "value": {
+        "ueberzeile": "Arbeitsweise",
+        "titel": "Von Planung bis Übergabe",
+        "schritte": [
+          {
+            "titel": "Beratung und Begehung",
+            "text": "Wir klären mit Ihnen Umfang, Termine und Material, bei Bedarf direkt vor Ort bei Ihnen oder Ihrer Kundschaft."
+          },
+          {
+            "titel": "Installation und Kabelzug",
+            "text": "Unser Montageteam verlegt und montiert die LWL-Komponenten, im Gebäude, in Muffen oder im Aussenbereich."
+          },
+          {
+            "titel": "Spleissung und Montage",
+            "text": "Wir spleissen die Fasern in Muffen, Spleissboxen und Kabelendverschlüssen und bestücken Verteiler und Racks."
+          },
+          {
+            "titel": "Messung und Übergabe",
+            "text": "Wir messen alle Fasern mit dem OTDR, dokumentieren die Anlage und übergeben Ihnen das Abnahmeprotokoll."
+          }
+        ]
+      }
+    },
+    {
+      "discriminant": "referenzen",
+      "value": {
+        "ueberzeile": "Referenzen",
+        "titel": "Ausgewählte Projekte",
+        "anzahl": "4",
+        "linkText": "Alle Referenzen"
+      }
+    },
+    {
+      "discriminant": "logoslider",
+      "value": {
+        "titel": "Eine Auswahl unserer Referenzen"
+      }
+    },
+    {
+      "discriminant": "textMitBild",
+      "value": {
+        "ueberzeile": "Ausrüstung",
+        "titel": "Eigener Maschinenpark für Spleiss- und Messarbeiten",
+        "text": "Unsere LWL-Techniker verfügen über mehrjährige Erfahrung in der Spleiss- und Messtechnik und führen auch nicht alltägliche Installationen sauber aus. Die Messung und Protokollierung gehört bei jedem Auftrag dazu.\n\nWir arbeiten mit einem zeitgemässen Maschinenpark mit Spleiss- und OTDR-Messgeräten. Die Geräte werden regelmässig gereinigt und gewartet.",
+        "bild": "/bilder/startseite/bloecke/4/value/bild.jpg",
+        "bildAlt": "Techniker steckt Glasfaser-Patchkabel in einem Netzwerkschrank",
+        "bildPosition": "rechts",
+        "knopf": {
+          "text": "Firma kennenlernen",
+          "link": "/ueber-uns"
+        }
+      }
+    },
+    {
+      "discriminant": "datenblaetter",
+      "value": {
+        "ueberzeile": "Produkte",
+        "titel": "Das richtige Bauteil für Ihre Verbindung",
+        "text": "Vorkonfektionierte Kabel, passive Komponenten und individuelle Entwicklungen. Die technischen Angaben stehen direkt im PDF-Datenblatt.",
+        "produkte": [
+          "patchkabel-lc-auf-lc-singlemode",
+          "ftth-dose-4-fach-eco",
+          "19-zoll-kabelendverschluss-1-he-aluminium",
+          "lwl-spleissbox-mini"
+        ],
+        "linkText": "Alle Datenblätter"
+      }
+    },
+    {
+      "discriminant": "teamAuszug",
+      "value": {
+        "ueberzeile": "Team",
+        "titel": "Fachwissen hat ein Gesicht",
+        "text": "Direkte Ansprechpersonen, eigenes qualifiziertes Personal und die Bereitschaft, auch komplexe Aufgaben vor Ort zu lösen.",
+        "bereich": "leitung",
+        "linkText": "Das gesamte Team"
+      }
+    },
+    {
+      "discriminant": "ctaBand",
+      "value": {
+        "ueberzeile": "Kontakt",
+        "titel": "Ihre nächste\nVerbindung.",
+        "text": "Eine Installation, eine technische Frage oder ein konkreter Materialbedarf: Erzählen Sie uns, was Sie vorhaben.",
+        "knopf": {
+          "text": "Projekt besprechen",
+          "link": "/kontakt"
+        },
+        "telefonZeigen": true
+      }
+    }
+  ]
+}

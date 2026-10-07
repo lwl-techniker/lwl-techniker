@@ -1,0 +1,33 @@
+# Netlify erkennt Next.js automatisch und installiert den OpenNext Adapter.
+# Den Adapter NICHT als Plugin fixieren, Netlify hält ihn aktuell.
+#
+# Umgebungsvariablen für V4 (in Netlify setzen, nicht hier):
+#   SITE_URL        kanonische Adresse, z. B. https://www.lwl-techniker.ch (Standard: https://lwl-techniker-v4.netlify.app)
+#   SITE_INDEXABLE  "true" nur, wenn die produktive Seite von Google erfasst werden darf
+#   KEYSTATIC_*     vier Werte der GitHub-App von V4 (siehe .env.example), nie die Werte von V2 oder V3
+
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22.23.2"
+  NEXT_TELEMETRY_DISABLED = "1"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+  for = "/__forms.html"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+
+[[headers]]
+  for = "/dokumente/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"

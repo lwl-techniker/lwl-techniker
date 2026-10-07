@@ -1,0 +1,32 @@
+{
+  "firmenname": "LWL-Techniker Schweiz GmbH",
+  "kurzbeschreibung": "Glasfaserinstallationen, Spleiss- und Messtechnik sowie LWL-Produkte aus St. Gallen. Unsere Montageteams sind in der ganzen Schweiz im Einsatz.",
+  "logo": "/bilder/firma/logo.png",
+  "logohell": "/bilder/firma/logohell.png",
+  "telefon": "+41 78 920 80 00",
+  "whatsapp": "+41 79 225 34 74",
+  "email": "info@lwl-techniker.ch",
+  "strasse": "Langgasse 136",
+  "plz": "9008",
+  "ort": "St. Gallen",
+  "kanton": "SG",
+  "land": "CH",
+  "oeffnungszeiten": [],
+  "socialMedia": [
+    {
+      "plattform": "linkedin",
+      "url": "https://www.linkedin.com/in/lulzim-selimi-555474168/"
+    },
+    {
+      "plattform": "facebook",
+      "url": "https://www.facebook.com/DieGlasfaser/"
+    },
+    {
+      "plattform": "instagram",
+      "url": "https://www.instagram.com/lwltechnik/"
+    }
+  ],
+  "seoTitel": "LWL-Techniker Schweiz, Glasfasertechnik in St. Gallen",
+  "seoBeschreibung": "Glasfaserinstallationen, Muffenspleissungen, FTTH-Ausbau, Messungen und LWL-Produkte. LWL-Techniker Schweiz GmbH aus St. Gallen, schweizweit im Einsatz.",
+  "ogbild": "/bilder/firma/ogbild.jpg"
+}

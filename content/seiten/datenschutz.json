@@ -1,0 +1,15 @@
+{
+  "titel": "Datenschutz",
+  "inSitemap": false,
+  "seo": {
+    "titel": "Datenschutzerklärung"
+  },
+  "bloecke": [
+    {
+      "discriminant": "fliesstext",
+      "value": {
+        "titel": "Datenschutzerklärung"
+      }
+    }
+  ]
+}

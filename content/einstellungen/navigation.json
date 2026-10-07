@@ -1,0 +1,175 @@
+{
+  "hauptmenue": [
+    {
+      "text": "Leistungen",
+      "link": "/leistungen",
+      "unterpunkte": [
+        {
+          "text": "Alle Leistungen",
+          "link": "/leistungen",
+          "hervorgehoben": true
+        },
+        {
+          "text": "Muffenspleissungen",
+          "link": "/leistungen/muffenspleissungen",
+          "beschreibung": "Spleissen in Muffen, Verteilern und Kabelendverschlüssen, mit Messung und Protokoll",
+          "hervorgehoben": false
+        },
+        {
+          "text": "FTTH-Installation",
+          "link": "/leistungen/ftth-installation",
+          "beschreibung": "Glasfaseranschlüsse bis in Wohnungen und Geschäftshäuser",
+          "hervorgehoben": false
+        },
+        {
+          "text": "Serverräume und Rechenzentren",
+          "link": "/leistungen/serverraeume-und-rechenzentren",
+          "beschreibung": "Strukturierte Verkabelung für Rechenzentren und Serverräume",
+          "hervorgehoben": false
+        },
+        {
+          "text": "Verkehrstechnik und Autobahnprojekte",
+          "link": "/leistungen/verkehrstechnik-und-autobahnprojekte",
+          "beschreibung": "Montage und Inbetriebnahme auf Nationalstrassen, in Tunnels und Gemeinden",
+          "hervorgehoben": false
+        },
+        {
+          "text": "Inhouse-Installationen",
+          "link": "/leistungen/inhouse-installationen",
+          "beschreibung": "LWL-Komponenten und Provider-Anbindungen im Gebäude",
+          "hervorgehoben": false
+        },
+        {
+          "text": "Fehlerlokalisation und Notfalleinsätze",
+          "link": "/leistungen/fehlerlokalisation-und-notfalleinsaetze",
+          "beschreibung": "Störungen im Glasfasernetz finden und beheben, Begehungen vor Ort",
+          "hervorgehoben": false
+        },
+        {
+          "text": "LWL-Produkte und Produktentwicklung",
+          "link": "/leistungen/lwl-produkte-und-produktentwicklung",
+          "beschreibung": "Vorkonfektionierte Kabel, Patchkabel, Verteiler und Sonderanfertigungen",
+          "hervorgehoben": false
+        },
+        {
+          "text": "Schulungen",
+          "link": "/leistungen/schulungen",
+          "beschreibung": "Grundlagen und Installationsschulungen bei Ihnen vor Ort",
+          "hervorgehoben": false
+        }
+      ]
+    },
+    {
+      "text": "Produkte",
+      "link": "/produkte",
+      "unterpunkte": [
+        {
+          "text": "Alle Datenblätter",
+          "link": "/produkte",
+          "beschreibung": "Katalog mit Suche, Vorschau und PDF-Download",
+          "hervorgehoben": true
+        },
+        {
+          "text": "Produktentwicklung",
+          "link": "/leistungen/lwl-produkte-und-produktentwicklung",
+          "beschreibung": "Sonderanfertigungen und vorkonfektionierte Kabel",
+          "hervorgehoben": false
+        },
+        {
+          "text": "Datenblätter und Downloads",
+          "link": "/downloads",
+          "beschreibung": "Alle PDFs nach Kategorie zum Herunterladen",
+          "hervorgehoben": true
+        }
+      ]
+    },
+    {
+      "text": "Referenzen",
+      "link": "/referenzen",
+      "unterpunkte": [
+        {
+          "text": "Projektbeispiele",
+          "link": "/referenzen",
+          "beschreibung": "Dokumentierte Projekte mit Bildern und Ablauf",
+          "hervorgehoben": false
+        },
+        {
+          "text": "Allgemeine Referenzen",
+          "link": "/referenzen/allgemein",
+          "beschreibung": "Alle Referenzlogos im Überblick",
+          "hervorgehoben": false
+        }
+      ]
+    },
+    {
+      "text": "Über uns",
+      "link": "/ueber-uns",
+      "unterpunkte": [
+        {
+          "text": "Unsere Haltung",
+          "link": "/ueber-uns",
+          "beschreibung": "Philosophie, Werte und Ausrüstung",
+          "hervorgehoben": false
+        },
+        {
+          "text": "Geschäftsleitung und Team",
+          "link": "/team",
+          "beschreibung": "Ihre Ansprechpersonen in St. Gallen",
+          "hervorgehoben": false
+        }
+      ]
+    }
+  ],
+  "knopf": {
+    "text": "Kontakt",
+    "link": "/kontakt"
+  },
+  "fusszeile": [
+    {
+      "text": "Leistungen",
+      "link": "/leistungen"
+    },
+    {
+      "text": "Produkte und Datenblätter",
+      "link": "/produkte"
+    },
+    {
+      "text": "Datenblätter und Downloads",
+      "link": "/downloads"
+    },
+    {
+      "text": "Referenzen",
+      "link": "/referenzen"
+    },
+    {
+      "text": "Über uns",
+      "link": "/ueber-uns"
+    },
+    {
+      "text": "Team",
+      "link": "/team"
+    },
+    {
+      "text": "Offene Stellen",
+      "link": "/jobs"
+    },
+    {
+      "text": "Kontakt",
+      "link": "/kontakt"
+    }
+  ],
+  "rechtliches": [
+    {
+      "text": "Impressum",
+      "link": "/impressum"
+    },
+    {
+      "text": "Datenschutz",
+      "link": "/datenschutz"
+    },
+    {
+      "text": "AGB",
+      "link": "/agb"
+    }
+  ]
+}

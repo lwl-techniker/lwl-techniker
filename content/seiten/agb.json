@@ -1,0 +1,15 @@
+{
+  "titel": "AGB",
+  "inSitemap": false,
+  "seo": {
+    "titel": "Allgemeine Geschäftsbedingungen"
+  },
+  "bloecke": [
+    {
+      "discriminant": "fliesstext",
+      "value": {
+        "titel": "AGB"
+      }
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "titel": "Über uns",
+  "inSitemap": true,
+  "seo": {
+    "titel": "Über uns",
+    "beschreibung": "Team, Philosophie und Arbeitsweise der LWL-Techniker Schweiz GmbH in St. Gallen, Fachbetrieb für Glasfasertechnik und Telekommunikation."
+  },
+  "bloecke": [
+    {
+      "discriminant": "hero",
+      "value": {
+        "ueberzeile": "Über uns",
+        "titel": "Gute Verbindungen bleiben",
+        "text": "Langjährige Zusammenarbeit beginnt mit Nähe: zuhören, erreichbar sein und Verantwortung übernehmen. So verstehen wir unsere Arbeit bei LWL-Techniker Schweiz.",
+        "knopfPrimaer": {},
+        "knopfSekundaer": {},
+        "variante": "vollbild",
+        "hoehe": "kompakt"
+      }
+    },
+    {
+      "discriminant": "textMitBild",
+      "value": {
+        "ueberzeile": "Unsere Haltung",
+        "titel": "Persönlich nah, langfristig verbunden",
+        "text": "Wir denken über den einzelnen Auftrag hinaus. Bestehende Anlagen, Abläufe und Menschen zu kennen, schafft die Grundlage für eine Zusammenarbeit, die über Jahre trägt.\n\nPersönlicher Kontakt gehört für uns dazu: Wir besprechen Anforderungen direkt, erklären technische Entscheidungen verständlich und begleiten unsere Kundschaft von der ersten Frage bis zur Übergabe.\n\nNachhaltigkeit bedeutet für uns, sorgfältig mit Material, Geräten und der Umwelt umzugehen. Wir setzen auf langlebige Lösungen, Wartung und Reparatur statt vorschnellen Ersatz.",
+        "bild": "/bilder/seiten/ueber-uns/bloecke/0/value/bild.jpg",
+        "bildAlt": "Zwei Monteure besprechen einen Auftrag anhand eines Klemmbretts",
+        "bildPosition": "rechts",
+        "knopf": {}
+      }
+    },
+    {
+      "discriminant": "vorteile",
+      "value": {
+        "ueberzeile": "Werte",
+        "titel": "Was unsere Arbeit zusammenhält",
+        "eintraege": [
+          {
+            "titel": "Langfristig zusammenarbeiten",
+            "text": "Wir pflegen bestehende Partnerschaften. Vertrauen, Verlässlichkeit und gegenseitiger Respekt stehen dabei im Mittelpunkt."
+          },
+          {
+            "titel": "Nah an unseren Kunden",
+            "text": "Direkte Ansprechpersonen, offene Gespräche und Lösungen, die zum tatsächlichen Bedarf passen. Auch wenn die Aufgabe komplex wird."
+          },
+          {
+            "titel": "Technisch auf der Höhe",
+            "text": "Unser Team bringt über 20 Jahre Erfahrung in der Glasfasertechnik mit, bildet sich laufend weiter und arbeitet nach den anerkannten Regeln der Technik."
+          },
+          {
+            "titel": "Langlebig planen",
+            "text": "Eine gute Installation soll lange nutzbar bleiben. Deshalb denken wir Wartung und spätere Erweiterungen von Anfang an mit."
+          },
+          {
+            "titel": "Die Umwelt mitdenken",
+            "text": "Material bewusst einsetzen, Geräte möglichst reparieren und Abfälle trennen: Verantwortung zeigt sich für uns in den täglichen Entscheidungen."
+          },
+          {
+            "titel": "Persönliche Ansprechpartner",
+            "text": "Sie erreichen uns direkt, ohne Umweg über eine Zentrale. Geschäftsleitung und Technik sind telefonisch und per E-Mail erreichbar."
+          }
+        ]
+      }
+    },
+    {
+      "discriminant": "teamAuszug",
+      "value": {
+        "ueberzeile": "Team",
+        "titel": "Ihre Ansprechpersonen",
+        "text": "Die Geschäftsleitung in St. Gallen. Sie erreichen uns direkt, ohne Umweg über eine Zentrale.",
+        "bereich": "leitung",
+        "linkText": "Das gesamte Team"
+      }
+    },
+    {
+      "discriminant": "textMitBild",
+      "value": {
+        "ueberzeile": "Ausrüstung",
+        "titel": "Präzision braucht das passende Werkzeug",
+        "text": "Wir arbeiten mit einem zeitgemässen Maschinenpark mit Spleiss- und OTDR-Messgeräten. Die Geräte werden regelmässig gereinigt und gewartet.\n\nUnsere Techniker messen und kontrollieren jede Kabelanlage und erstellen das Abnahmeprotokoll. Die Messung und Protokollierung gehört bei jedem Auftrag dazu.",
+        "bild": "/bilder/seiten/ueber-uns/bloecke/1/value/bild.jpg",
+        "bildAlt": "Mitarbeiterin lötet ein Bauteil am Arbeitsplatz in der Werkstatt",
+        "bildPosition": "links",
+        "knopf": {
+          "text": "Spleiss- und Messtechnik",
+          "link": "/leistungen/muffenspleissungen"
+        }
+      }
+    },
+    {
+      "discriminant": "ctaBand",
+      "value": {
+        "ueberzeile": "Kontakt",
+        "titel": "Lernen Sie uns kennen.",
+        "text": "Rufen Sie uns an oder schreiben Sie uns. Gerne besprechen wir Ihr Vorhaben persönlich.",
+        "knopf": {
+          "text": "Kontakt aufnehmen",
+          "link": "/kontakt"
+        },
+        "telefonZeigen": true
+      }
+    }
+  ]
+}
