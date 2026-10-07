@@ -74,7 +74,7 @@ export default async function ReferenzSeite({ params }: Props) {
               <div className="mt-12">
                 <h2 className="text-[0.68rem] font-medium tracking-[0.28em] text-marke uppercase">Video vom Einsatz</h2>
                 <div className="mt-4">
-                  <Video src={r.video} poster={r.videoposter ?? r.titelbild ?? null} beschreibung={r.videotext} hochformat />
+                  <Video src={r.video} poster={r.videoposter ?? r.titelbild ?? null} beschreibung={r.videotext} hochformat={r.videoformat === 'hoch'} />
                 </div>
               </div>
             ) : null}
