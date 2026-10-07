@@ -1,4 +1,5 @@
 import { Zaehler } from '@/components/ui/Zaehler';
+import { ZaehlerGruppe } from '@/components/ui/ZaehlerGruppe';
 import { holeDatenblaetter } from '@/lib/cms';
 import { cn } from '@/lib/cn';
 import { sauberText } from '@/lib/text';
@@ -20,6 +21,7 @@ export async function Kennzahlen({ daten: d }: { daten: BlockDaten<'kennzahlen'>
     <section className={cn('relative overflow-hidden', gelb ? 'band-gelb' : 'flaeche-tief')}>
       {!gelb ? <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_120%,rgba(240,168,0,0.08)_0%,transparent_65%)]" aria-hidden /> : null}
       <div className="container-seite relative">
+        <ZaehlerGruppe>
         <dl className={cn('grid', eintraege.length === 2 ? 'grid-cols-2' : eintraege.length === 4 ? 'grid-cols-2 md:grid-cols-4' : 'grid-cols-1 sm:grid-cols-3')}>
           {eintraege.map((e, i) => (
             <div
@@ -38,6 +40,7 @@ export async function Kennzahlen({ daten: d }: { daten: BlockDaten<'kennzahlen'>
             </div>
           ))}
         </dl>
+        </ZaehlerGruppe>
       </div>
     </section>
   );

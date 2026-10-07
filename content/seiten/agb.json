@@ -1,8 +1,9 @@
 {
   "titel": "AGB",
-  "inSitemap": false,
+  "inSitemap": true,
   "seo": {
-    "titel": "Allgemeine Geschäftsbedingungen"
+    "titel": "Allgemeine Geschäftsbedingungen",
+    "beschreibung": "AGB der LWL-Techniker Schweiz GmbH für Glasfaserinstallationen, Spleiss- und Messarbeiten, LWL-Produkte und Schulungen. Gültig ab 7. Oktober 2026."
   },
   "bloecke": [
     {

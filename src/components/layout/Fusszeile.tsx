@@ -110,8 +110,14 @@ export function Fusszeile({ einstellungen: e, navigation: n }: { einstellungen: 
         </div>
 
         <div className="mt-14 flex flex-col gap-5 border-t border-linie pt-6 text-[0.68rem] tracking-[0.16em] text-text-leise uppercase md:flex-row md:items-center md:justify-between">
-          <p>
-            © {jahr} {e.firmenname}
+          <p className="flex flex-wrap items-center gap-x-4 gap-y-1">
+            <span>
+              © {jahr} {e.firmenname}
+            </span>
+            {/* Dezenter Hinweis auf die Umsetzung der Website (Wunsch Kundschaft) */}
+            <a href="https://infraone.ch" target="_blank" rel="noopener noreferrer" className="inline-block py-1 normal-case tracking-normal hover:text-text">
+              Gemacht mit <span aria-label="Herz">❤️</span> von InfraOne
+            </a>
           </p>
           <ul className="flex flex-wrap items-center gap-x-6 gap-y-3">
             {n.rechtliches.map((l) => (

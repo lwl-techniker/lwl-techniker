@@ -245,7 +245,7 @@ try {
   assert.equal(await sichtbar.first().evaluate((el) => getComputedStyle(el).opacity), '1', 'Bewegung reduzieren: eingeblendetes Element voll sichtbar');
   await ruhig.locator('dd .verlauf, dd.verlauf').first().scrollIntoViewIfNeeded();
   await ruhig.waitForTimeout(1500);
-  assert.deepEqual(await ruhig.locator('dd span[aria-hidden]').allTextContents(), ['1 Mio.+', "1'000+", '40'], 'Bewegung reduzieren: Zähler erreichen die Endwerte');
+  assert.deepEqual(await ruhig.locator('dd span[aria-hidden]').allTextContents(), ['1 Mio.+', "1'000+", '30+'], 'Bewegung reduzieren: Zähler erreichen die Endwerte');
   const slider = await ruhig.locator('.logos-laufschrift-spur').evaluate((el) => {
     const cs = getComputedStyle(el);
     return { zustand: cs.animationPlayState, dauer: parseFloat(cs.animationDuration), basis: parseFloat(cs.getPropertyValue('--laufschrift-dauer')) };

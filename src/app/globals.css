@@ -83,6 +83,8 @@
   --f-betont: rgb(18 32 72 / 0.42);
   --f-tief: rgb(6 13 34 / 0.55);
   --f-kopf: rgb(8 17 46 / 0.92);
+  /* Untermenü-Panels: etwas dichter als die Kopfzeile, damit die Texte über der Animation gut lesbar bleiben */
+  --f-menue: rgb(8 17 46 / 0.97);
   color-scheme: dark;
 }
 
@@ -106,6 +108,7 @@
     --f-betont: rgb(255 254 249 / 0.55);
     --f-tief: rgb(227 231 230 / 0.65);
     --f-kopf: rgb(245 243 237 / 0.94);
+    --f-menue: rgb(245 243 237 / 0.985);
     color-scheme: light;
   }
 }
@@ -129,6 +132,7 @@
   --f-betont: rgb(255 254 249 / 0.55);
   --f-tief: rgb(227 231 230 / 0.65);
   --f-kopf: rgb(245 243 237 / 0.94);
+    --f-menue: rgb(245 243 237 / 0.985);
   color-scheme: light;
 }
 
@@ -314,7 +318,8 @@
    * Maximal 2400 px wie V2, Rand 24 / 32 / 48 px.
    */
   .container-seite {
-    @apply mx-auto w-full max-w-[2400px] px-6 sm:px-8 lg:px-12;
+    /* Desktop-Rand 88 px (Wunsch Kundschaft 7. Oktober 2026: je rund 1 cm weniger Breite links und rechts) */
+    @apply mx-auto w-full max-w-[2400px] px-6 sm:px-8 lg:px-[5.5rem];
   }
 
   .lesebreite {
@@ -662,17 +667,19 @@
     position: absolute;
     pointer-events: none;
     user-select: none;
-    width: min(74vw, 920px);
-    top: -40%;
-    right: max(-100px, calc((100% - 2400px) / 2 - 80px));
+    height: 92%;
+    width: auto;
+    top: 50%;
+    translate: 0 -50%;
+    right: max(2.5rem, calc((100% - 2400px) / 2 + 2.5rem));
     opacity: 0.24;
-    transform: rotate(-24deg);
+    transform: rotate(-12deg);
     animation: wasserzeichen-drift 26s ease-in-out infinite alternate;
   }
   .faser-wasserzeichen svg {
     display: block;
-    width: 100%;
-    height: auto;
+    height: 100%;
+    width: auto;
   }
   .faser-fluss {
     --fluss-start: #273574;
@@ -700,7 +707,7 @@
   }
   .fluss-spitze { fill: var(--fluss-paket); }
   @media (max-width: 760px) {
-    .faser-wasserzeichen { width: 110vw; right: -48%; top: 5%; opacity: 0.14; }
+    .faser-wasserzeichen { height: 78%; right: -12%; opacity: 0.14; }
   }
   @media (prefers-reduced-motion: reduce) {
     .faser-wasserzeichen { animation: none; }
@@ -708,7 +715,7 @@
   }
 }
 @keyframes wasserzeichen-drift {
-  to { transform: translate(22px, 18px) rotate(-12deg); }
+  to { transform: translate(-14px, 10px) rotate(-6deg); }
 }
 @keyframes faser-datenfluss {
   0% { stroke-dashoffset: 20; }

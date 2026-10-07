@@ -131,7 +131,17 @@ export function Kopfzeile({ firmenname, logoHell, logoDunkel, telefon, ort, menu
               const id = `untermenue-${punkt.link.replace(/\W+/g, '')}`;
               const breit = punkt.unterpunkte.length > 4;
               return (
-                <div key={punkt.link} className="relative">
+                <div
+                  key={punkt.link}
+                  className="relative"
+                  // Mit der Maus öffnet das Untermenü beim Überfahren (nur auf Geräten mit Mauszeiger, Tastatur und Touch bleiben beim Klick)
+                  onMouseEnter={() => {
+                    if (hatUntermenue && window.matchMedia('(hover: hover)').matches) setOffen(punkt.link);
+                  }}
+                  onMouseLeave={() => {
+                    if (hatUntermenue && window.matchMedia('(hover: hover)').matches) setOffen((aktuell) => (aktuell === punkt.link ? null : aktuell));
+                  }}
+                >
                   {hatUntermenue ? (
                     <button
                       type="button"
@@ -161,14 +171,11 @@ export function Kopfzeile({ firmenname, logoHell, logoDunkel, telefon, ort, menu
                     </Link>
                   )}
                   {hatUntermenue ? (
+                    // Äusserer Rahmen mit pt-3: die Lücke zwischen Menüpunkt und Panel gehört zum Menü, sonst schliesst es beim Überfahren der Lücke
+                    <div id={id} hidden={!aufgeklappt} className={cn('absolute top-full z-10 pt-3', breit ? 'right-[-8rem] w-[min(48rem,calc(100vw-4rem))]' : 'left-0 w-[24rem]')}>
                     <div
-                      id={id}
-                      hidden={!aufgeklappt}
-                      className={cn(
-                        'absolute top-full mt-3 max-h-[calc(100dvh-8rem)] overflow-y-auto border border-marke/25 border-t-2 border-t-marke p-5 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)] backdrop-blur-xl',
-                        breit ? 'right-[-8rem] w-[min(48rem,calc(100vw-4rem))]' : 'left-0 w-[24rem]'
-                      )}
-                      style={{ background: 'var(--f-kopf)' }}
+                      className="max-h-[calc(100dvh-8rem)] overflow-y-auto border border-marke/25 border-t-2 border-t-marke p-5 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)] backdrop-blur-xl"
+                      style={{ background: 'var(--f-menue)' }}
                     >
                       <p className="mb-3 text-xs font-medium tracking-[0.3em] text-marke uppercase">{punkt.text}</p>
                       <ul className={cn('grid gap-x-6', breit && 'grid-cols-2')}>
@@ -195,6 +202,7 @@ export function Kopfzeile({ firmenname, logoHell, logoDunkel, telefon, ort, menu
                           </li>
                         ))}
                       </ul>
+                    </div>
                     </div>
                   ) : null}
                 </div>

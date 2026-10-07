@@ -241,6 +241,37 @@ export default config({
         kurzbeschreibung: langtext('Kurzbeschreibung', { pflicht: true, max: 220, beschreibung: 'Erscheint auf der Kachel in Übersichten.' }),
         bild: bild('Bild', 'leistungen', { pflicht: true }),
         bildAlt: alttext(true),
+        merkmale: fields.array(
+          fields.object({
+            symbol: fields.select({
+              label: 'Symbol',
+              options: [
+                { label: 'Spleissen (Kabel)', value: 'spleiss' },
+                { label: 'Messung (Kurve)', value: 'messung' },
+                { label: 'Protokoll (Dokument mit Haken)', value: 'protokoll' },
+                { label: 'Standort (Pin)', value: 'standort' },
+                { label: 'Rack (Server)', value: 'rack' },
+                { label: 'Team (Personen)', value: 'team' },
+                { label: 'Zeit (Uhr)', value: 'zeit' },
+                { label: 'Werkzeug (Schraubenschlüssel)', value: 'werkzeug' },
+                { label: 'Gebäude', value: 'gebaeude' },
+                { label: 'Lieferung (Paket)', value: 'lieferung' },
+                { label: 'Schulung (Hut)', value: 'schulung' },
+                { label: 'Telefon', value: 'telefon' },
+                { label: 'Suche (Lupe)', value: 'suche' },
+                { label: 'Haken (Schild)', value: 'haken' },
+              ],
+              defaultValue: 'haken',
+            }),
+            text: text('Merkmal', { pflicht: true, max: 90, beschreibung: 'Ein Satzteil, z. B. "Spleissen in Muffen, Spleissboxen und Kabelendverschlüssen".' }),
+          }),
+          {
+            label: 'Auf einen Blick (3 bis 6 Merkmale)',
+            description: 'Erscheint auf der Detailseite neben dem Bild und läuft beim Scrollen mit. Nur Aussagen, die auch im Text stehen.',
+            itemLabel: (p) => p.fields.text.value || 'Merkmal',
+            validation: { length: { max: 6 } },
+          }
+        ),
         seo: seo(),
         inhalt: fliesstext('Inhalt', 'leistungen'),
       },
