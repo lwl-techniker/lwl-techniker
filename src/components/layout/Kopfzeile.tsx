@@ -105,7 +105,7 @@ export function Kopfzeile({ firmenname, logoHell, logoDunkel, telefon, ort, menu
         <div className="container-seite flex min-h-[5rem] items-center justify-between gap-6 lg:min-h-[7rem]">
           <Link href="/" className="flex shrink-0 items-center" aria-label={`${firmenname}, zur Startseite`} onClick={() => navigieren('/')}>
             {logoHell || logoDunkel ? (
-              <MarkenLogo logoHell={logoHell} logoDunkel={logoDunkel} alt={firmenname} width={724} height={302} eager className="h-12 w-auto sm:h-14 lg:h-[5.25rem] 3xl:h-24" />
+              <MarkenLogo logoHell={logoHell} logoDunkel={logoDunkel} alt={firmenname} width={724} height={302} eager sizes="(min-width: 2200px) 230px, (min-width: 1024px) 202px, (min-width: 640px) 134px, 115px" className="h-12 w-auto sm:h-14 lg:h-[5.25rem] 3xl:h-24" />
             ) : (
               <span className="font-titel text-base font-bold tracking-[0.06em] uppercase">{firmenname}</span>
             )}

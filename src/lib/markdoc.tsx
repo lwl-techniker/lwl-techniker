@@ -89,6 +89,22 @@ export async function markdocAlsHtml(wert: MarkdocWert): Promise<string> {
   return html.replace(/^<article>/, '').replace(/<\/article>$/, '');
 }
 
+/** Reiner Text eines Markdoc-Feldes (für llms.txt und Zusammenfassungen): HTML ohne Tags, Absätze durch Leerzeilen getrennt. */
+export async function markdocAlsText(wert: MarkdocWert): Promise<string> {
+  const html = await markdocAlsHtml(wert);
+  return html
+    .replace(/<\/(p|h[1-6]|li|tr|blockquote)>/g, '\n\n')
+    .replace(/<li>/g, '- ')
+    .replace(/<[^>]+>/g, '')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}
+
 /** Nimmt den Wert eines Keystatic Markdoc-Feldes (auch die Lazy-Funktion) und gibt React zurück. */
 export async function renderMarkdoc(wert: MarkdocWert): Promise<React.ReactNode> {
   if (!wert) return null;

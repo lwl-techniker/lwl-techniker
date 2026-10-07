@@ -5,6 +5,8 @@ import { ReferenzKarte, rasterFuerKacheln } from '@/components/karten/Karten';
 import { holeReferenzen, holeUebersichten } from '@/lib/cms';
 import { metadaten } from '@/lib/seo';
 import { Logos } from '@/components/bloecke/Logos';
+import { JsonLd } from '@/components/seo/JsonLd';
+import { referenzenAlsListe } from '@/lib/strukturierte-daten';
 
 export async function generateMetadata() {
   const { referenzen: u } = await holeUebersichten();
@@ -26,6 +28,7 @@ export default async function ReferenzenSeite() {
           <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" aria-hidden />
         </Link>
       </Seitenkopf>
+      <JsonLd daten={referenzenAlsListe(referenzen)} />
       {u.logos.logos.length > 0 ? <Logos daten={u.logos} /> : null}
       <section className="abschnitt">
         {referenzen.length === 0 ? <p className="container-seite einleitung">Die Referenzen werden zurzeit zusammengestellt.</p> : null}

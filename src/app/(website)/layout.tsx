@@ -8,7 +8,7 @@ import { Einblenden } from '@/components/ui/Einblenden';
 import { Faserwellen } from '@/components/ui/Faserwellen';
 import { holeEinstellungen, holeNavigation, holeProduktKategorien } from '@/lib/cms';
 import { sauberText } from '@/lib/text';
-import { DOMAIN } from '@/site.config';
+import { organisationUndWebsite } from '@/lib/strukturierte-daten';
 
 export async function generateMetadata(): Promise<Metadata> {
   const e = await holeEinstellungen();
@@ -44,28 +44,8 @@ export default async function WebsiteLayout({ children }: { children: React.Reac
       return { text: p.text, link: p.link, unterpunkte };
     });
 
-  const organisation = {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    '@id': `${DOMAIN}/#organisation`,
-    name: e.firmenname,
-    description: sauberText(e.kurzbeschreibung),
-    url: DOMAIN,
-    telephone: e.telefon,
-    email: e.email,
-    logo: e.logo ? new URL(e.logo, DOMAIN).toString() : undefined,
-    image: e.ogbild ? new URL(e.ogbild, DOMAIN).toString() : undefined,
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: e.strasse,
-      postalCode: e.plz,
-      addressLocality: e.ort,
-      addressRegion: e.kanton || undefined,
-      addressCountry: e.land,
-    },
-    areaServed: { '@type': 'Country', name: 'Schweiz' },
-    sameAs: e.socialMedia.map((s) => s.url),
-  };
+  // Organisation und Website als Graph; Unterseiten verweisen per @id darauf (src/lib/strukturierte-daten.ts)
+  const organisation = organisationUndWebsite(e);
 
   return (
     <>

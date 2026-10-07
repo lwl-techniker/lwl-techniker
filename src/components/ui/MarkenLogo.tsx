@@ -13,13 +13,15 @@ type Props = {
   height: number;
   className?: string;
   eager?: boolean;
+  /** Dargestellte Breite je Umbruchpunkt, damit der Browser nur die passende Grösse lädt (nicht die 2x-Variante der Originalbreite) */
+  sizes?: string;
 };
 
 /**
  * Logo, das automatisch zwischen der hellen und dunklen Variante wechselt, passend zum
  * Erscheinungsbild (Kopf- und Fusszeile sind im hellen Erscheinungsbild hell statt dunkel).
  */
-export function MarkenLogo({ logoHell, logoDunkel, alt, width, height, className, eager }: Props) {
+export function MarkenLogo({ logoHell, logoDunkel, alt, width, height, className, eager, sizes }: Props) {
   const theme = useAktivesTheme();
   const logo = theme === 'hell' ? (logoDunkel ?? logoHell) : (logoHell ?? logoDunkel);
   if (!logo) return null;
@@ -33,6 +35,7 @@ export function MarkenLogo({ logoHell, logoDunkel, alt, width, height, className
       loading={eager ? 'eager' : undefined}
       fetchPriority={eager ? 'high' : undefined}
       unoptimized={logo.endsWith('.svg')}
+      sizes={sizes}
       className={className}
     />
   );

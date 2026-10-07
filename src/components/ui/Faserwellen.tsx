@@ -11,8 +11,9 @@ import { holeAktivesTheme, THEMA_GEAENDERT } from '@/lib/theme';
  * entlanglaufen, und am Faserende blitzt das Licht kurz auf. Ein Leuchtsaum um die Bänder atmet langsam.
  * Liegt fest hinter der ganzen Seite, auf der Startseite füllt der Startbereich den Bildschirm.
  *
- * Rücksicht: Bei "Bewegung reduzieren" läuft die Animation langsamer, mit weniger Lichtpulsen und ohne Aufziehen
- * (sanfter statt aus, Entscheid der Kundschaft vom 7. Oktober 2026). Im Hintergrund-Tab pausiert die Animation.
+ * Rücksicht: Bei "Bewegung reduzieren" bleibt das Bild wie in V2, nur die Lichtpulse kommen halb so oft und
+ * das Atmen des Leuchtsaums ist ruhiger (sanfter statt aus, Entscheid der Kundschaft vom 7. Oktober 2026).
+ * Im Hintergrund-Tab pausiert die Animation.
  * Die Zeichenfläche ist für Screenreader unsichtbar.
  *
  * Leistung: Auf Rechnern ohne Grafikbeschleunigung (Remotedesktop auf einer VM) begrenzt der Software-Compositor
@@ -86,7 +87,7 @@ export function Faserwellen() {
     let pulse: Puls[] = [];
     let blitze: Aufblitzen[] = [];
     let t = 0;
-    let aufbau = ruhig ? AUFBAU_ENDE : 0;
+    let aufbau = 0;
     let naechsterSchub = 0;
     let anfrage = 0;
     let aktiv = true;
@@ -169,13 +170,12 @@ export function Faserwellen() {
      */
     const pulsTempo = () => {
       const r = Math.random();
-      const sanft = ruhig ? 0.5 : 1;
-      if (r < 0.12) return zufall(0.0012, 0.0022) * sanft; // sehr langsam
-      if (r > 0.88) return zufall(0.012, 0.02) * sanft; // sehr schnell
-      return zufall(0.0025, 0.005) * sanft; // normal
+      if (r < 0.12) return zufall(0.0012, 0.0022); // sehr langsam
+      if (r > 0.88) return zufall(0.012, 0.02); // sehr schnell
+      return zufall(0.0025, 0.005); // normal
     };
 
-    /** Ein Schub: mehrere Fasern senden fast gleichzeitig einen Puls, mit stark unterschiedlichem Tempo. Bei "Bewegung reduzieren" seltener und kleiner. */
+    /** Ein Schub: mehrere Fasern senden fast gleichzeitig einen Puls, mit stark unterschiedlichem Tempo. Bei "Bewegung reduzieren" halb so oft. */
     const schub = () => {
       const anzahl = Math.round(ruhig ? zufall(2, 4) : zufall(4, 8));
       for (let i = 0; i < anzahl && pulse.length < 70; i++) {
@@ -187,11 +187,11 @@ export function Faserwellen() {
     const zeichnen = (bewegt: boolean) => {
       ctx.clearRect(0, 0, breite, hoehe);
       if (bewegt) {
-        t += ruhig ? 0.006 : 0.012;
+        t += 0.012;
         if (aufbau < AUFBAU_ENDE) aufbau += 0.006;
       }
-      // Atmen des ganzen Bildes
-      const atem = 0.5 + 0.5 * Math.sin(t * 1.3);
+      // Atmen des ganzen Bildes, bei "Bewegung reduzieren" ruhiger
+      const atem = 0.5 + (ruhig ? 0.25 : 0.5) * Math.sin(t * 1.3);
       const hellFaktor = hell ? 1.4 : 1;
       const gelb = hell ? '214,158,0' : '240,214,0';
       const orange = hell ? '204,96,8' : '240,128,16';

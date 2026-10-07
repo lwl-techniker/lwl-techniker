@@ -7,6 +7,8 @@ import { holeReferenz, holeReferenzen, holeUebersichten } from '@/lib/cms';
 import { monatJahr } from '@/lib/datum';
 import { renderMarkdoc } from '@/lib/markdoc';
 import { metadaten } from '@/lib/seo';
+import { JsonLd } from '@/components/seo/JsonLd';
+import { referenzAlsArtikel } from '@/lib/strukturierte-daten';
 
 export const dynamicParams = false;
 
@@ -40,6 +42,7 @@ export default async function ReferenzSeite({ params }: Props) {
 
   return (
     <>
+      <JsonLd daten={referenzAlsArtikel(r)} />
       <Seitenkopf
         ueberzeile={r.kategorie || undefined}
         titel={r.titel}

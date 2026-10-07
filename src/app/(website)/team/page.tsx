@@ -4,6 +4,8 @@ import { Seitenkopf } from '@/components/ui/Seitenkopf';
 import { holeEinstellungen, holeTeam, holeUebersichten } from '@/lib/cms';
 import { metadaten } from '@/lib/seo';
 import { sauberText } from '@/lib/text';
+import { JsonLd } from '@/components/seo/JsonLd';
+import { teamAlsPersonen } from '@/lib/strukturierte-daten';
 
 export async function generateMetadata() {
   const { team: u } = await holeUebersichten();
@@ -27,6 +29,7 @@ export default async function TeamSeite() {
           { text: u.titel, href: '/team' },
         ]}
       />
+      <JsonLd daten={teamAlsPersonen(personen)} />
       {leitung.length > 0 ? (
         <section className="abschnitt" data-team="leitung">
           <div className="container-seite">

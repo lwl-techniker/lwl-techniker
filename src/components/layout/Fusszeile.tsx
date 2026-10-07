@@ -58,7 +58,7 @@ export function Fusszeile({ einstellungen: e, navigation: n }: { einstellungen: 
         <div className="grid gap-12 md:grid-cols-[1.3fr_1fr_0.8fr] md:gap-10 lg:gap-16">
           <div className="max-w-md">
             {e.logohell || e.logo ? (
-              <MarkenLogo logoHell={e.logohell ?? null} logoDunkel={e.logo ?? null} alt={e.firmenname} width={724} height={302} className="h-12 w-auto lg:h-14" />
+              <MarkenLogo logoHell={e.logohell ?? null} logoDunkel={e.logo ?? null} alt={e.firmenname} width={724} height={302} sizes="(min-width: 1024px) 134px, 115px" className="h-12 w-auto lg:h-14" />
             ) : (
               <p className="font-titel text-xl font-bold tracking-[0.06em] uppercase">{e.firmenname}</p>
             )}

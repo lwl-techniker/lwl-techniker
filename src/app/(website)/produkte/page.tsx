@@ -5,6 +5,8 @@ import { Seitenkopf } from '@/components/ui/Seitenkopf';
 import { holeDatenblaetter, holeEinstellungen, holeProduktKategorien, holeUebersichten } from '@/lib/cms';
 import { metadaten } from '@/lib/seo';
 import { sauberText } from '@/lib/text';
+import { JsonLd } from '@/components/seo/JsonLd';
+import { produkteAlsListe } from '@/lib/strukturierte-daten';
 
 export async function generateMetadata() {
   const { produkte: u } = await holeUebersichten();
@@ -25,6 +27,7 @@ export default async function ProdukteSeite() {
       <Seitenkopf ueberzeile={u.ueberzeile} titel={u.titel} einleitung={u.einleitung} pfad={[{ text: u.titel, href: '/produkte' }]}>
         {u.anfrageHinweis ? <p className="mt-6 max-w-3xl text-sm text-text-leise">{sauberText(u.anfrageHinweis)}</p> : null}
       </Seitenkopf>
+      <JsonLd daten={produkteAlsListe(eintraege)} />
       <section className="abschnitt">
         <div className="container-seite">
           <p className="mb-8 text-xs tracking-[0.2em] text-text-leise uppercase">

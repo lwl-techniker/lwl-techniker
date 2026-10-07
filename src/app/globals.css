@@ -78,10 +78,10 @@
   --c-linie-dunkel: #1e2d78;
   --c-band: #f0a800;
   --c-band-text: #08112e;
-  /* Abschnittsflächen (dunkel): abgestufte Navy-Töne, halbtransparent über der Animation */
-  --f-ruhig: rgb(13 24 60 / 0.62);
-  --f-betont: rgb(18 32 72 / 0.78);
-  --f-tief: rgb(6 13 34 / 0.82);
+  /* Abschnittsflächen (dunkel): abgestufte Navy-Töne, stark durchscheinend, damit die V2-Faserwellen wie in V2 sichtbar bleiben (7. Oktober 2026) */
+  --f-ruhig: rgb(13 24 60 / 0.3);
+  --f-betont: rgb(18 32 72 / 0.42);
+  --f-tief: rgb(6 13 34 / 0.55);
   --f-kopf: rgb(8 17 46 / 0.92);
   color-scheme: dark;
 }
@@ -102,9 +102,9 @@
     --c-linie-dunkel: #c7c9c7;
     --c-band: #efba36;
     --c-band-text: #142641;
-    --f-ruhig: rgb(233 231 223 / 0.72);
-    --f-betont: rgb(255 254 249 / 0.86);
-    --f-tief: rgb(227 231 230 / 0.9);
+    --f-ruhig: rgb(233 231 223 / 0.42);
+    --f-betont: rgb(255 254 249 / 0.55);
+    --f-tief: rgb(227 231 230 / 0.65);
     --f-kopf: rgb(245 243 237 / 0.94);
     color-scheme: light;
   }
@@ -125,9 +125,9 @@
   --c-linie-dunkel: #c7c9c7;
   --c-band: #efba36;
   --c-band-text: #142641;
-  --f-ruhig: rgb(233 231 223 / 0.72);
-  --f-betont: rgb(255 254 249 / 0.86);
-  --f-tief: rgb(227 231 230 / 0.9);
+  --f-ruhig: rgb(233 231 223 / 0.42);
+  --f-betont: rgb(255 254 249 / 0.55);
+  --f-tief: rgb(227 231 230 / 0.65);
   --f-kopf: rgb(245 243 237 / 0.94);
   color-scheme: light;
 }

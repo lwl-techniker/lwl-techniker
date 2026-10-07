@@ -21,7 +21,7 @@ Beide Quellen wurden nur gelesen. Lesekopien im V4-Arbeitsbereich unter `.refere
 | Buttons | V2 | `.knopf-primaer` (Bernstein-Verlauf, abgeschnittene Ecke), `.knopf-sekundaer` (Geisterknopf). Auf dem gelben Band wird der Primärknopf dunkel, Form und Typografie bleiben. |
 | Hero | V2 ohne Bild | Startseite: Vollbild-Hero mit Slogan "Wir bringen Licht ans Ziel.", Einleitung, Primär- und Sekundärknopf. Kein Heroimage, keine Hero-Grafik, keine V3-Beschriftungszeilen. |
 | Hintergrund | V2 | `Faserwellen.tsx` (Canvas, fest hinter der Seite, gelb bis orange in beiden Modi, pointer-events: none). Bei "Bewegung reduzieren" läuft die Animation langsamer und mit weniger Lichtpulsen weiter (siehe Abschnitt "Bewegung reduzieren"). |
-| Abschnittsflächen | V3-Idee | `.flaeche-ruhig`, `.flaeche-betont`, `.flaeche-tief`: vollbreit, halbtransparent, abgestuft; Hero, Arbeitsweise und Text-mit-Bild bleiben transparent. Keine weissen Blöcke im Darkmode. |
+| Abschnittsflächen | V3-Idee | `.flaeche-ruhig`, `.flaeche-betont`, `.flaeche-tief`: vollbreit, stark durchscheinend (dunkel 30, 42, 55 Prozent; hell 42, 55, 65 Prozent), abgestuft; Hero, Arbeitsweise und Text-mit-Bild bleiben transparent. Seit dem 7. Oktober 2026 so transparent, dass die Faserwellen wie in V2 (dort alle Abschnitte transparent) durch die ganze Seite sichtbar bleiben; Kontraste mit axe in beiden Modi geprüft. Keine weissen Blöcke im Darkmode. |
 | Seitenstruktur | V3 | Startseite: Hero, Kennzahlen, vier Leistungsbereiche mit Bild (Block `leistungsbereiche`, Texte aus dem V3-Abschnitt "Glasfaser verbindet. Wir machen sie nutzbar.", Link "Alle Leistungen"), Arbeitsweise, Referenzen, Logoslider, Ausrüstung, Datenblätter, Geschäftsleitung, gelbes Kontaktband. Alle acht Leistungen stehen auf `/leistungen`. Über uns: Haltung, Werte, Geschäftsleitung, Ausrüstung, Kontaktband. Eigene Routen `/team`, `/referenzen/allgemein`. |
 | Header und Menüs | V3 | `Kopfzeile.tsx`: haftende Leiste, Untermenüs per Klick auf den Text, zweispaltig ab fünf Einträgen, Produktkategorien automatisch, Escape mit Fokusrückgabe, Klick ausserhalb, mobiles `<dialog>`-Menü. Gestaltung mit V2-Tokens. Menütexte 0.85 bis 1.25 rem (lg bis 3xl) und Theme-Schalter 44 bis 52 px, passend zum vergrösserten Logo (7. Oktober 2026). Untermenü Produkte: "Alle Produkte" (wie V3), Produktentwicklung, Kategorien, zuletzt "Datenblätter und Downloads". |
 | Footer | V3 | `Fusszeile.tsx`: Marke mit Leitsatz, Adresse, Linkgruppe, Rechtliches und Social-Media-Symbole (SVG inline). |
@@ -74,7 +74,7 @@ Entscheid der Kundschaft: Die Animationen gehören zum Markenauftritt, bei "Bewe
 
 | Element | Normal | Bewegung reduzieren |
 | --- | --- | --- |
-| Faserwellen (`Faserwellen.tsx`) | Aufziehen beim Laden, Lichtpulse in Schüben von 4 bis 8 | Kein Aufziehen, halbes Tempo, Schübe von 2 bis 4 in grösseren Abständen, Pulse halb so schnell |
+| Faserwellen (`Faserwellen.tsx`) | Aufziehen beim Laden, Lichtpulse in Schüben von 4 bis 8, Leuchtsaum atmet | Bild und Tempo wie V2, Schübe von 2 bis 4 in doppeltem Abstand, Atmen halb so stark |
 | Startbereich (`globals.css`, `hero-zeile`, `hero-auf`, `hero-balken`) | Zeilen steigen auf, Balken wächst | Nur Überblendung (`auf-ruhig`), Balken wächst in 0.8 s |
 | Einblenden beim Scrollen (`Einblenden.tsx`) | Überblendung mit Verschiebung, gestaffelt | Überblendung ohne Verschiebung, ohne Staffelung (`einblenden-ruhig`) |
 | Zähler (`Zaehler.tsx`) | zählt 1.7 s hoch | zählt 0.9 s hoch |
@@ -83,5 +83,18 @@ Entscheid der Kundschaft: Die Animationen gehören zum Markenauftritt, bei "Bewe
 | Blinkpunkt der Überzeile | 2 s | 4 s |
 
 Der frühere globale Block `* { animation-duration: 0.01ms !important }` ist entfernt. Geprüft in `tests/browser.mjs`, Abschnitt "Bewegung reduzieren" (Kontext mit `reducedMotion: 'reduce'`).
+
+Codevergleich mit V2 (7. Oktober 2026): `Faserwellen.tsx`, `Einblenden.tsx` und die Hero-Animationen in `globals.css` waren in V4 vor den Anpassungen byteidentisch mit V2 (`f2127e0`). Beide Versionen liefen auf demselben PC nebeneinander (V2 auf Port 3000, V4 auf 3104, `.qa/vergleich/v2-v4.mjs`): Canvas-Helligkeit und Gelbanteil sind gleich. Der sichtbare Unterschied waren die Abschnittsflächen, die in V4 die Faserwellen zu 62 bis 82 Prozent abdeckten (V2: alle Abschnitte transparent). Die Flächen sind jetzt deutlich durchscheinender (siehe Matrix).
+
+## Suchmaschinen, KI-Suche und strukturierte Daten
+
+| Element | Umsetzung |
+| --- | --- |
+| Metadaten (`src/lib/seo.ts`) | Titel mit Firmenname, Beschreibung, Canonical, Open Graph mit Bildgrösse, Twitter Card `summary_large_image`, Robots `max-image-preview:large`, `applicationName`, `authors`, `publisher`, Format-Erkennung. |
+| Strukturierte Daten (`src/lib/strukturierte-daten.ts`) | Layout: `Organization` + `LocalBusiness` und `WebSite` als Graph mit `@id`. Unterseiten: `BreadcrumbList` (Seitenkopf), `Service` je Leistung, `ItemList` auf `/leistungen`, `/referenzen`, `/produkte` (Produkte mit Kategorie und PDF als `DigitalDocument`), `Article` je Referenz, `Person` im Team, `JobPosting` je Stelle. Nur sichtbare Angaben, keine Bewertungen, Preise oder Öffnungszeiten. |
+| Sprachmodelle | `/llms.txt` (Übersicht mit Links) und `/llms-full.txt` (vollständige Texte der Leistungen, Referenzen und Stellen), beim Build aus dem CMS erzeugt (`src/lib/llms.ts`). |
+| robots.txt | Produktiv: alle Suchmaschinen und KI-Crawler (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, Applebot-Extended, CCBot und weitere) dürfen die öffentlichen Seiten lesen; `/keystatic`, `/api/` und `/__forms.html` gesperrt. Vorschauen bleiben komplett gesperrt (`SITE_INDEXABLE`). |
+| Favicon und Manifest | `icon.svg` aus V3 (Faserschwung auf Nachtblau), daraus erzeugt `icon.png` (32 px), `apple-icon.png` (180 px), `public/icons/icon-192.png` und `icon-512.png`; `manifest.webmanifest` über `src/app/manifest.ts`. |
+| Sitemap | Alle öffentlichen Routen inklusive `/downloads`, Leistungen, Referenzen, Stellen und freigegebene Seiten; 28 Adressen, alle mit HTTP 200 geprüft. |
 
 Bildrate auf dem PC der Kundschaft: Ohne GPU (SwiftShader oder Microsoft Basic Render Driver) erreicht Chrome bei 2560 px rund 20 bis 25 Bilder pro Sekunde, auch ohne Canvas, Blur und Punktraster (Messung `.qa/engpass.mjs`, siehe `docs/15`). Eine kleinere Zeichenauflösung des Canvas brachte keinen messbaren Gewinn und wurde darum nicht eingebaut. Wer am Remotedesktop volle Animationen will, schaltet im Remotedesktop-Client unter "Leistung" die Option "Menü- und Fensteranimation" ein und startet Chrome danach neu.

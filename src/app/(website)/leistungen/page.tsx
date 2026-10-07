@@ -2,6 +2,8 @@ import { Seitenkopf } from '@/components/ui/Seitenkopf';
 import { LeistungKarte, rasterFuerKacheln } from '@/components/karten/Karten';
 import { holeLeistungen, holeUebersichten } from '@/lib/cms';
 import { metadaten } from '@/lib/seo';
+import { JsonLd } from '@/components/seo/JsonLd';
+import { leistungenAlsListe } from '@/lib/strukturierte-daten';
 
 export async function generateMetadata() {
   const { leistungen: u } = await holeUebersichten();
@@ -14,6 +16,7 @@ export default async function LeistungenSeite() {
   return (
     <>
       <Seitenkopf ueberzeile={u.ueberzeile} titel={u.titel} einleitung={u.einleitung} pfad={[{ text: u.titel, href: '/leistungen' }]} />
+      <JsonLd daten={leistungenAlsListe(leistungen)} />
       <section className="abschnitt">
         {leistungen.length === 0 ? <p className="container-seite einleitung">Die Leistungen werden zurzeit beschrieben.</p> : null}
         <div className={`container-seite ${rasterFuerKacheln(leistungen.length)}`}>

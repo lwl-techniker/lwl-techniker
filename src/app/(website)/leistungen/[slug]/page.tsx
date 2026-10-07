@@ -6,6 +6,8 @@ import { LeistungKarte } from '@/components/karten/Karten';
 import { holeLeistung, holeLeistungen, holeUebersichten } from '@/lib/cms';
 import { renderMarkdoc } from '@/lib/markdoc';
 import { metadaten } from '@/lib/seo';
+import { JsonLd } from '@/components/seo/JsonLd';
+import { leistungAlsService } from '@/lib/strukturierte-daten';
 
 export const dynamicParams = false;
 
@@ -31,6 +33,7 @@ export default async function LeistungSeite({ params }: Props) {
 
   return (
     <>
+      <JsonLd daten={leistungAlsService(l)} />
       <Seitenkopf
         titel={l.titel}
         einleitung={l.kurzbeschreibung}
@@ -52,7 +55,7 @@ export default async function LeistungSeite({ params }: Props) {
       {weitere.length > 0 ? (
         <section className="abschnitt border-t border-linie">
           <div className="container-seite">
-            <div className="mb-10 flex items-end justify-between gap-6">
+            <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
               <h2 className="titel-2">Weitere Leistungen</h2>
               <Link href="/leistungen" className="font-semibold hover:text-marke">
                 Alle Leistungen
