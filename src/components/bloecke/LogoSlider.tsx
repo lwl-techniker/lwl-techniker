@@ -11,7 +11,7 @@ import type { BlockDaten } from './BlockRenderer';
  *
  * - zwei Durchläufe, die zweite Schleife ist für Screenreader unsichtbar
  * - feste Rahmen pro Logo, Silhouette im dunklen, Originalfarben im hellen Modus (ReferenzLogo)
- * - Pause beim Überfahren und bei Tastaturfokus, steht bei "Bewegung reduzieren" still
+ * - Pause beim Überfahren und bei Tastaturfokus, läuft bei "Bewegung reduzieren" mit halbem Tempo (globals.css)
  * - verlinkt auf die Übersichtsseite mit allen Logos
  */
 export async function LogoSlider({ daten: d }: { daten: BlockDaten<'logoslider'> }) {
@@ -40,7 +40,7 @@ export async function LogoSlider({ daten: d }: { daten: BlockDaten<'logoslider'>
         </Link>
       </div>
       <Link href="/referenzen/allgemein" aria-label="Alle Referenzlogos ansehen" tabIndex={-1} className="logos-laufschrift block [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]">
-        <div className="logos-laufschrift-spur flex w-max" style={{ animationDuration: `${dauer}s` }}>
+        <div className="logos-laufschrift-spur flex w-max" style={{ '--laufschrift-dauer': `${dauer}s` } as React.CSSProperties}>
           {reihe(false)}
           {reihe(true)}
         </div>

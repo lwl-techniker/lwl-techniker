@@ -11,10 +11,12 @@ import { useEffect } from 'react';
  *
  * Geschwister mit data-einblenden (z. B. Kacheln in einem Raster) werden automatisch gestaffelt.
  * Eigene Staffelung: style={{ '--einblenden-index': i } as React.CSSProperties}
+ *
+ * Bei "Bewegung reduzieren" übernimmt globals.css eine reine Überblendung ohne Verschiebung (sanfter statt aus).
  */
 export function Einblenden() {
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+    if (!('IntersectionObserver' in window)) return;
 
     const beobachter = new IntersectionObserver(
       (eintraege) => {

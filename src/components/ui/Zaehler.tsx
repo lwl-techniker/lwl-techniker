@@ -9,7 +9,8 @@ import { useEffect, useRef } from 'react';
  *   "1'000+"      Schweizer Tausendertrennzeichen, Zusatz "+"
  *   "1 Mio.+"     Dezimalzahl mit Einheit und Zusatz (die Zahl vor der Einheit wird animiert)
  *   "24 h"        Zahl mit Einheit
- * Screenreader bekommen immer den stabilen Endwert. Ohne JavaScript oder bei "Bewegung reduzieren" steht sofort der Endwert.
+ * Screenreader bekommen immer den stabilen Endwert. Ohne JavaScript steht sofort der Endwert,
+ * bei "Bewegung reduzieren" zählt die Zahl kürzer hoch (sanfter statt aus).
  */
 export function Zaehler({ wert }: { wert: string }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -17,7 +18,8 @@ export function Zaehler({ wert }: { wert: string }) {
 
   useEffect(() => {
     const el = ref.current;
-    if (!el || !treffer || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!el || !treffer) return;
+    const ruhig = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const zahlText = treffer[1].replace(/['’]/g, '');
     const ende = Number(zahlText);
     if (!Number.isFinite(ende)) return;
@@ -36,7 +38,7 @@ export function Zaehler({ wert }: { wert: string }) {
         if (!eintraege[0].isIntersecting || gestartet) return;
         gestartet = true;
         beobachter.disconnect();
-        const dauer = 1700;
+        const dauer = ruhig ? 900 : 1700;
         const start = performance.now();
         const schritt = (jetzt: number) => {
           const t = Math.min((jetzt - start) / dauer, 1);

@@ -11,8 +11,13 @@ import { holeAktivesTheme, THEMA_GEAENDERT } from '@/lib/theme';
  * entlanglaufen, und am Faserende blitzt das Licht kurz auf. Ein Leuchtsaum um die Bänder atmet langsam.
  * Liegt fest hinter der ganzen Seite, auf der Startseite füllt der Startbereich den Bildschirm.
  *
- * Rücksicht: Bei "Bewegung reduzieren" wird ein einzelnes, ruhiges Bild gezeichnet.
- * Im Hintergrund-Tab pausiert die Animation. Die Zeichenfläche ist für Screenreader unsichtbar.
+ * Rücksicht: Bei "Bewegung reduzieren" läuft die Animation langsamer, mit weniger Lichtpulsen und ohne Aufziehen
+ * (sanfter statt aus, Entscheid der Kundschaft vom 7. Oktober 2026). Im Hintergrund-Tab pausiert die Animation.
+ * Die Zeichenfläche ist für Screenreader unsichtbar.
+ *
+ * Leistung: Auf Rechnern ohne Grafikbeschleunigung (Remotedesktop auf einer VM) begrenzt der Software-Compositor
+ * des Browsers die Bildrate auf rund 25 Bilder pro Sekunde, unabhängig von der Zeichenfläche (Messung 7. Oktober 2026,
+ * docs/15). Eine kleinere Zeichenauflösung brachte dort nichts und wurde darum nicht eingebaut.
  */
 type Faser = {
   band: number;
@@ -164,24 +169,25 @@ export function Faserwellen() {
      */
     const pulsTempo = () => {
       const r = Math.random();
-      if (r < 0.12) return zufall(0.0012, 0.0022); // sehr langsam
-      if (r > 0.88) return zufall(0.012, 0.02); // sehr schnell
-      return zufall(0.0025, 0.005); // normal
+      const sanft = ruhig ? 0.5 : 1;
+      if (r < 0.12) return zufall(0.0012, 0.0022) * sanft; // sehr langsam
+      if (r > 0.88) return zufall(0.012, 0.02) * sanft; // sehr schnell
+      return zufall(0.0025, 0.005) * sanft; // normal
     };
 
-    /** Ein Schub: mehrere Fasern senden fast gleichzeitig einen Puls, mit stark unterschiedlichem Tempo */
+    /** Ein Schub: mehrere Fasern senden fast gleichzeitig einen Puls, mit stark unterschiedlichem Tempo. Bei "Bewegung reduzieren" seltener und kleiner. */
     const schub = () => {
-      const anzahl = Math.round(zufall(4, 8));
+      const anzahl = Math.round(ruhig ? zufall(2, 4) : zufall(4, 8));
       for (let i = 0; i < anzahl && pulse.length < 70; i++) {
         pulse.push({ faser: Math.floor(Math.random() * fasern.length), pos: -0.02 - Math.random() * 0.06, tempo: pulsTempo(), staerke: zufall(0.5, 1) });
       }
-      naechsterSchub = t + zufall(2, 3.6);
+      naechsterSchub = t + (ruhig ? zufall(4, 7) : zufall(2, 3.6));
     };
 
     const zeichnen = (bewegt: boolean) => {
       ctx.clearRect(0, 0, breite, hoehe);
       if (bewegt) {
-        t += 0.012;
+        t += ruhig ? 0.006 : 0.012;
         if (aufbau < AUFBAU_ENDE) aufbau += 0.006;
       }
       // Atmen des ganzen Bildes
@@ -309,26 +315,19 @@ export function Faserwellen() {
     };
 
     const sichtbarkeit = () => {
-      aktiv = document.visibilityState === 'visible' && !ruhig;
+      aktiv = document.visibilityState === 'visible';
       cancelAnimationFrame(anfrage);
       if (aktiv) anfrage = requestAnimationFrame(schleife);
     };
 
-    /** Beim Wechsel des Erscheinungsbilds (Schalter oder Geräteeinstellung) Farben neu lesen und, im ruhigen Standbild, sofort neu zeichnen */
+    /** Beim Wechsel des Erscheinungsbilds (Schalter oder Geräteeinstellung) Farben neu lesen; die Schleife zeichnet das nächste Bild damit */
     const themenwechsel = () => {
       hell = holeAktivesTheme() === 'hell';
       grundFarbe = leseFarbvariable('--color-grund', hell ? '244,245,250' : '8,17,46');
-      if (ruhig) zeichnen(false);
     };
 
     groesse();
-    if (ruhig) {
-      // Ruhiges Standbild mit einem Lichtschub mitten in den Bändern
-      for (let i = 0; i < 10; i++) pulse.push({ faser: Math.floor(Math.random() * fasern.length), pos: 0.45 + Math.random() * 0.15, tempo: 0, staerke: zufall(0.5, 1) });
-      zeichnen(false);
-    } else {
-      anfrage = requestAnimationFrame(schleife);
-    }
+    anfrage = requestAnimationFrame(schleife);
 
     const geraet = window.matchMedia('(prefers-color-scheme: light)');
     window.addEventListener('resize', groesse);

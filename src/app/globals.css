@@ -240,23 +240,30 @@
       width: 55%;
     }
   }
-  @media (prefers-reduced-motion: reduce) {
-    .hero-zeile,
-    .hero-auf {
+  /*
+   * BEWEGUNG REDUZIEREN: sanfter statt aus (Entscheid der Kundschaft, 7. Oktober 2026).
+   * Die Animationen gehören zum Markenauftritt. Windows meldet in Remotedesktop-Sitzungen oft "Animationen aus",
+   * und Chrome übersetzt das in prefers-reduced-motion. Darum laufen alle Bewegungen weiter, aber ohne Verschiebung,
+   * langsamer und mit weniger Lichtpulsen. Der Startbereich blendet nur ein, statt aufzusteigen.
+   */
+  @keyframes auf-ruhig {
+    from {
+      opacity: 0;
+    }
+    to {
       opacity: 1;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-zeile {
       transform: none;
-      animation: none;
+      animation: auf-ruhig 0.6s forwards;
+    }
+    .hero-auf {
+      animation: auf-ruhig 0.6s forwards;
     }
     .hero-balken {
-      width: 55%;
-      animation: none;
-    }
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
+      animation-duration: 0.8s;
     }
   }
 }
@@ -280,10 +287,25 @@
       transform: none;
     }
   }
-  @media print, (prefers-reduced-motion: reduce) {
+  @media print {
     .js-einblenden [data-einblenden] {
       opacity: 1 !important;
       animation: none !important;
+    }
+  }
+  /* Bewegung reduzieren: reine Überblendung ohne Verschiebung und ohne Staffelung, Elemente bleiben bis zum Sichtbarwerden ausgeblendet */
+  @keyframes einblenden-ruhig {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .js-einblenden [data-einblenden='sichtbar'] {
+      animation: einblenden-ruhig 0.45s ease-out both;
+      animation-delay: 0s;
     }
   }
 
@@ -374,6 +396,11 @@
     }
     50% {
       opacity: 0.3;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ueberzeile-punkt::before {
+      animation-duration: 4s;
     }
   }
 
@@ -469,11 +496,17 @@
     @apply block w-full border border-linie bg-flaeche-dunkel px-4 py-3 text-base text-text transition-colors outline-none placeholder:text-text-leise/70 focus:border-marke focus:ring-2 focus:ring-marke/25;
   }
 
-  /* LOGOSLIDER (V3): endlose Schleife, Pause beim Überfahren, steht bei "Bewegung reduzieren" still */
+  /* LOGOSLIDER (V3): endlose Schleife, Pause beim Überfahren, bei "Bewegung reduzieren" halbes Tempo (Dauer aus LogoSlider.tsx) */
   .logos-laufschrift-spur {
     animation-name: laufschrift;
+    animation-duration: var(--laufschrift-dauer, 60s);
     animation-timing-function: linear;
     animation-iteration-count: infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .logos-laufschrift-spur {
+      animation-duration: calc(var(--laufschrift-dauer, 60s) * 2);
+    }
   }
   .logos-laufschrift:hover .logos-laufschrift-spur,
   .logos-laufschrift:focus-within .logos-laufschrift-spur {
@@ -612,7 +645,8 @@
 
 /*
  * FASER-WASSERZEICHEN (V3, FiberWatermark) im gelben Kontaktband.
- * Auf Gelb laufen die Fasern in Nachtblau, die Lichtimpulse hell. Drift und Impulse stehen bei "Bewegung reduzieren" still.
+ * Auf Gelb laufen die Fasern in Nachtblau, die Lichtimpulse hell. Bei "Bewegung reduzieren" entfällt der Drift,
+ * die Impulse laufen halb so schnell weiter.
  */
 @layer components {
   .band-gelb.mit-wasserzeichen {
@@ -669,9 +703,8 @@
     .faser-wasserzeichen { width: 110vw; right: -48%; top: 5%; opacity: 0.14; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .fluss-paket, .fluss-ankunft, .faser-wasserzeichen { animation: none; }
-    .fluss-paket { opacity: 0; }
-    .fluss-ankunft { opacity: 0.3; }
+    .faser-wasserzeichen { animation: none; }
+    .faser-fluss { --fluss-dauer: 12s; }
   }
 }
 @keyframes wasserzeichen-drift {
