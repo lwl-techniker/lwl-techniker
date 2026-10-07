@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ImageOff } from 'lucide-react';
+import { ImageOff, Play } from 'lucide-react';
 import { AbschnittKopf } from '@/components/ui/AbschnittKopf';
 import { BildOhneBeschnitt } from '@/components/ui/BildOhneBeschnitt';
 import { holeReferenzenFuerStartseite } from '@/lib/cms';
@@ -43,6 +43,12 @@ export async function ReferenzenBlock({ daten: d }: { daten: BlockDaten<'referen
                 >
                   {String(i + 1).padStart(2, '0')}
                 </span>
+                {r.video ? (
+                  <span className="absolute right-4 bottom-4 inline-flex items-center gap-2 rounded-full bg-marke px-3 py-1.5 font-titel text-[0.68rem] font-bold tracking-[0.14em] text-text-dunkel uppercase shadow-[0_6px_20px_rgba(8,17,46,0.4)]">
+                    <Play className="size-3.5" fill="currentColor" strokeWidth={0} aria-hidden />
+                    Video
+                  </span>
+                ) : null}
               </div>
               <div className="flex flex-1 flex-col p-7 lg:p-8">
                 <h3 className="text-sm font-semibold tracking-[0.12em] uppercase">

@@ -55,7 +55,13 @@ export default async function ReferenzSeite({ params }: Props) {
       />
 
       <div className="container-seite pt-12 lg:pt-16">
-        {bilder.length > 0 ? (
+        {r.video ? (
+          // Video zuerst: Hochformat-Video als eigene Spalte neben der Galerie, Querformat über die ganze Breite
+          <div className={r.videoformat === 'hoch' ? 'grid gap-8 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:items-start lg:gap-12' : 'space-y-10'}>
+            <Video src={r.video} poster={r.videoposter ?? r.titelbild ?? null} beschreibung={r.videotext} hochformat={r.videoformat === 'hoch'} />
+            {bilder.length > 0 ? <Galerie bilder={bilder} /> : null}
+          </div>
+        ) : bilder.length > 0 ? (
           <Galerie bilder={bilder} />
         ) : (
           <div className="relative aspect-[16/9] overflow-hidden rounded-[var(--radius-karte)] bg-flaeche lg:aspect-[21/9]">
@@ -68,17 +74,7 @@ export default async function ReferenzSeite({ params }: Props) {
 
       <section className="abschnitt">
         <div className="container-seite grid gap-12 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] lg:gap-20">
-          <div>
-            <div className="fliesstext lesebreite">{inhalt}</div>
-            {r.video ? (
-              <div className="mt-12">
-                <h2 className="text-[0.68rem] font-medium tracking-[0.28em] text-marke uppercase">Video vom Einsatz</h2>
-                <div className="mt-4">
-                  <Video src={r.video} poster={r.videoposter ?? r.titelbild ?? null} beschreibung={r.videotext} hochformat={r.videoformat === 'hoch'} />
-                </div>
-              </div>
-            ) : null}
-          </div>
+          <div className="fliesstext lesebreite">{inhalt}</div>
           {fakten.length > 0 ? (
             <aside className="h-fit rounded-[var(--radius-karte)] bg-flaeche p-8 lg:sticky lg:top-32">
               <dl className="divide-y divide-linie">

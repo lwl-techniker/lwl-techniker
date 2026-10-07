@@ -32,10 +32,10 @@ Ordner `Kundenmaterial_2026-09-16` (sieben Success Stories als E-Mail-Texte mit 
 | 1 Fibrolaser (Juli 2026) | `sicherheitssystem-tunnel-kerenzerberg` | 5 | Titelbild und 4 Galeriebilder (2 neu am 7. Oktober 2026) | keines |
 | 2 Eishockey-WM, Swiss Life Arena (Juni 2026) | `swiss-life-arena-zuerich` (neu am 7. Oktober 2026, fehlte bisher) | 4 | Titelbild und 2 Galeriebilder; das IIHF-Logo (Bild 1) wird nicht verwendet (fremde Marke) | keines |
 | 3 FC St. Gallen (Mai 2026) | `kamera-tracking-stadion-fc-st-gallen` | 6 | Titelbild und 5 Galeriebilder (2 neu) | keines |
-| 4 Weissenstein-Tunnel (März 2026) | `weissenstein-tunnel-solothurn` | 3 (zwei davon nur 240 x 320 px) | Titelbild und 1 Galeriebild wie bisher; das Portalbild mit 240 px wurde wegen der Auflösung nicht übernommen | ja, 54 s, 3.4 MB |
-| 5 Kabelschaden Bagger (April 2026) | `notfalleinsatz-kabelschaden-bagger` | keine, nur Video | Titelbild aus dem Video (Standbild) | ja, 7 s, 0.6 MB |
+| 4 Weissenstein-Tunnel (März 2026) | `weissenstein-tunnel-solothurn` | 3 (zwei davon nur 240 x 320 px) | Titelbild und 1 Galeriebild wie bisher; das Portalbild mit 240 px wurde wegen der Auflösung nicht übernommen | ja, 54 s, 3.4 MB; steht auf der Referenzseite zuoberst neben der Galerie, Referenz auf der Startseite markiert, Kachel mit Video-Hinweis |
+| 5 Kabelschaden Bagger (April 2026) | `notfalleinsatz-kabelschaden-bagger` | keine, nur Video | Titelbild aus dem Video (Standbild) | nein, 7-Sekunden-Video auf Wunsch der Kundschaft nicht gezeigt |
 | 6 Thurgauer Gemeinden, Bischofszell (November 2025) | `glasfasernetz-thurgauer-gemeinden` | 4 | Titelbild und 3 Galeriebilder (alle neu) | keines |
-| 7 Ramsen SH (September 2025) | `ftth-netz-ramsen` | 4 | Titelbild und 3 Galeriebilder (alle neu) | ja, 7 s, 1.3 MB |
+| 7 Ramsen SH (September 2025) | `ftth-netz-ramsen` | 4 | Titelbild und 3 Galeriebilder (alle neu) | nein, 7-Sekunden-Video auf Wunsch der Kundschaft nicht gezeigt |
 
 Videos: Felder `video`, `videoposter` und `videotext` bei den Referenzen (`src/keystatic.config.ts`), Darstellung über `src/components/ui/Video.tsx` (Standbild mit Abspielsymbol, Laden erst beim Klick, `preload="none"`), strukturierte Daten als `VideoObject`. Komprimiert mit ffmpeg (H.264, höchstens 540 px breit, CRF 27 bis 30, Ton mono 48 bis 64 kbit/s), Originale bleiben im Kundenordner. Bilder auf höchstens 2000 px und unter 330 KB verkleinert (`sharp`, JPEG 80).
 
