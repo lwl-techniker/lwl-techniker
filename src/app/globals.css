@@ -667,13 +667,13 @@
     position: absolute;
     pointer-events: none;
     user-select: none;
-    height: 92%;
+    height: 80%;
     width: auto;
     top: 50%;
-    translate: 0 -50%;
     right: max(2.5rem, calc((100% - 2400px) / 2 + 2.5rem));
     opacity: 0.24;
-    transform: rotate(-12deg);
+    /* Zentrierung über transform (die Eigenschaft translate geht im Build verloren) */
+    transform: translateY(-50%) rotate(-8deg);
     animation: wasserzeichen-drift 26s ease-in-out infinite alternate;
   }
   .faser-wasserzeichen svg {
@@ -715,7 +715,7 @@
   }
 }
 @keyframes wasserzeichen-drift {
-  to { transform: translate(-14px, 10px) rotate(-6deg); }
+  to { transform: translate(-14px, calc(-50% + 8px)) rotate(-3deg); }
 }
 @keyframes faser-datenfluss {
   0% { stroke-dashoffset: 20; }
