@@ -40,12 +40,33 @@
       }
     },
     {
-      "discriminant": "leistungen",
+      "discriminant": "leistungsbereiche",
       "value": {
         "ueberzeile": "Leistungen",
-        "titel": "Unsere Expertise",
-        "text": "Von der Muffenspleissung über den FTTH-Anschluss bis zur Verkabelung im Rechenzentrum. Jede Installation schliessen wir mit Messung und Protokoll ab.",
-        "anzahl": "alle",
+        "titel": "Glasfaser verbindet.\nWir machen sie nutzbar.",
+        "text": "Vom Hausanschluss bis zum Rechenzentrum: Wir verlegen und verbinden Glasfasern, messen die Strecke und dokumentieren das Ergebnis. Für neue Netze und bestehende Anlagen.",
+        "bereiche": [
+          {
+            "titel": "Netze und Gemeinden",
+            "text": "FTTH-Anschlüsse bis ins Gebäude. Kabelinstallation und Spleissarbeiten für den Ausbau von Glasfasernetzen.",
+            "leistung": "ftth-installation"
+          },
+          {
+            "titel": "Gebäude und Unternehmen",
+            "text": "Glasfaser im Gebäude: vom Hausanschluss über die interne Verkabelung bis zu den einzelnen Anschlusspunkten.",
+            "leistung": "inhouse-installationen"
+          },
+          {
+            "titel": "Rechenzentren",
+            "text": "Strukturierte Glasfaserverkabelung in Serverräumen und Rechenzentren. Installiert, verbunden und messtechnisch geprüft.",
+            "leistung": "serverraeume-und-rechenzentren"
+          },
+          {
+            "titel": "Verkehr und Tunnel",
+            "text": "LWL-Installationen für Nationalstrassen und Tunnel. Verbindungen für die Kommunikations- und Betriebstechnik.",
+            "leistung": "verkehrstechnik-und-autobahnprojekte"
+          }
+        ],
         "linkText": "Alle Leistungen"
       }
     },

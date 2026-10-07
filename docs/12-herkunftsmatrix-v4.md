@@ -20,10 +20,10 @@ Beide Quellen wurden nur gelesen. Lesekopien im V4-Arbeitsbereich unter `.refere
 | Schriftgrössen | V3-Hierarchie | `titel-hero` 2.75 bis 7.25 rem (V2: bis 12 rem), `titel-1` bis 4.25 rem, `titel-2` bis 2.9 rem, Fliesstext 16/17 px. Siehe `globals.css`. |
 | Buttons | V2 | `.knopf-primaer` (Bernstein-Verlauf, abgeschnittene Ecke), `.knopf-sekundaer` (Geisterknopf). Auf dem gelben Band wird der Primärknopf dunkel, Form und Typografie bleiben. |
 | Hero | V2 ohne Bild | Startseite: Vollbild-Hero mit Slogan "Wir bringen Licht ans Ziel.", Einleitung, Primär- und Sekundärknopf. Kein Heroimage, keine Hero-Grafik, keine V3-Beschriftungszeilen. |
-| Hintergrund | V2 | `Faserwellen.tsx` (Canvas, fest hinter der Seite, gelb bis orange in beiden Modi, Reduced Motion = Standbild, pointer-events: none). |
+| Hintergrund | V2 | `Faserwellen.tsx` (Canvas, fest hinter der Seite, gelb bis orange in beiden Modi, pointer-events: none). Bei "Bewegung reduzieren" läuft die Animation langsamer und mit weniger Lichtpulsen weiter (siehe Abschnitt "Bewegung reduzieren"). |
 | Abschnittsflächen | V3-Idee | `.flaeche-ruhig`, `.flaeche-betont`, `.flaeche-tief`: vollbreit, halbtransparent, abgestuft; Hero, Arbeitsweise und Text-mit-Bild bleiben transparent. Keine weissen Blöcke im Darkmode. |
-| Seitenstruktur | V3 | Startseite: Hero, Logoslider, Kennzahlen, alle acht Leistungen, Arbeitsweise, Referenzen, Ausrüstung, Datenblätter, Geschäftsleitung, gelbes Kontaktband. Über uns: Haltung, Werte, Geschäftsleitung, Ausrüstung, Kontaktband. Eigene Routen `/team`, `/referenzen/allgemein`. |
-| Header und Menüs | V3 | `Kopfzeile.tsx`: haftende Leiste, Untermenüs per Klick auf den Text, zweispaltig ab fünf Einträgen, Produktkategorien automatisch, Escape mit Fokusrückgabe, Klick ausserhalb, mobiles `<dialog>`-Menü. Gestaltung mit V2-Tokens. |
+| Seitenstruktur | V3 | Startseite: Hero, Kennzahlen, vier Leistungsbereiche mit Bild (Block `leistungsbereiche`, Texte aus dem V3-Abschnitt "Glasfaser verbindet. Wir machen sie nutzbar.", Link "Alle Leistungen"), Arbeitsweise, Referenzen, Logoslider, Ausrüstung, Datenblätter, Geschäftsleitung, gelbes Kontaktband. Alle acht Leistungen stehen auf `/leistungen`. Über uns: Haltung, Werte, Geschäftsleitung, Ausrüstung, Kontaktband. Eigene Routen `/team`, `/referenzen/allgemein`. |
+| Header und Menüs | V3 | `Kopfzeile.tsx`: haftende Leiste, Untermenüs per Klick auf den Text, zweispaltig ab fünf Einträgen, Produktkategorien automatisch, Escape mit Fokusrückgabe, Klick ausserhalb, mobiles `<dialog>`-Menü. Gestaltung mit V2-Tokens. Menütexte 0.85 bis 1.25 rem (lg bis 3xl) und Theme-Schalter 44 bis 52 px, passend zum vergrösserten Logo (7. Oktober 2026). Untermenü Produkte: "Alle Produkte" (wie V3), Produktentwicklung, Kategorien, zuletzt "Datenblätter und Downloads". |
 | Footer | V3 | `Fusszeile.tsx`: Marke mit Leitsatz, Adresse, Linkgruppe, Rechtliches und Social-Media-Symbole (SVG inline). |
 | Lightmode | V3-Lösungen | Logo-Varianten (`MarkenLogo`), Referenzlogos (`ReferenzLogo`: Silhouette dunkel, Originalfarben hell, keine weissen Kacheln), Karte abgedunkelt nur im Darkmode, Kontrastwerte geprüft (axe). |
 | Logoslider | V3 | `LogoSlider.tsx` liest die zentrale Liste aus "Übersichtsseiten > Referenzen", feste Rahmen 36/44 x 14/16, Pause bei Hover und Fokus, Link zu `/referenzen/allgemein`. Dateien sind PNG (Silhouette) und WebP (Farbe), keine SVG. |
@@ -34,12 +34,12 @@ Beide Quellen wurden nur gelesen. Lesekopien im V4-Arbeitsbereich unter `.refere
 | Produkte | V3-Basis, PDF-geführt | Variante B: Datenblattkatalog mit Suche, Kategorien, automatischer Vorschau und Bild aus dem PDF, Download, Anfrage. Keine Detailseiten, keine separat gepflegten technischen Daten. |
 | Kontakt | V2 + Karte V3 | Block `kontaktformular` (Formular links, Kontakttafel rechts) plus `Karte.tsx` darunter, Adresse und Routenlink als Text, Datenschutzhinweis im Datenschutztext (V3). |
 | Rechtliches | V3-Texte | Impressum, Datenschutz (mit Google-Maps-Abschnitt) und AGB-Entwurf aus V3, gepflegt als V2-Seiten mit Fliesstext. |
-| CMS | V2-Modell | Keystatic mit Seitenbaukasten (Blöcke), erweitert um `logoslider`, `ctaBand`, `teamAuszug`, `datenblaetter`, Karte im Kontaktformular, Sammlung `team`, Datenblattfelder bei `produkte`. Schreibziel `infraoneit/lwl-techniker-v4`. |
+| CMS | V2-Modell | Keystatic mit Seitenbaukasten (Blöcke), erweitert um `logoslider`, `ctaBand`, `teamAuszug`, `datenblaetter`, `leistungsbereiche` (Bereiche mit Titel, Text, Leistung als Verknüpfung, optional eigenes Bild), Karte im Kontaktformular, Sammlung `team`, Datenblattfelder bei `produkte`. Schreibziel `lwl-techniker/lwl-techniker`. |
 
 ## Bewusst nicht übernommen
 
 - V2: schwebende Pill-Navigation, `scroll-behavior: smooth` auf `html` (Ursache des Hochscroll-Fehlers), weisse Logos im Lightmode, Lindi Selimi, Logo-Darstellungswahl "weiss/farbig" (der Farbmodus entscheidet jetzt).
-- V3: Lato und Geist Mono, separate Hero-Grafik, Faser-Wasserzeichen in Abschnitten (würden mit der V2-Animation konkurrieren), Produktdetailseiten mit manuell gepflegten Eigenschaften, Routen `/downloads` und `/produkte/[slug]` (Weiterleitung auf `/produkte`), gelbes Kennzahlenband (als Option im Block wählbar, Standard ist das dunkle V2-Band).
+- V3: Lato und Geist Mono, separate Hero-Grafik, Faser-Wasserzeichen in Abschnitten (würden mit der V2-Animation konkurrieren), Produktdetailseiten mit manuell gepflegten Eigenschaften, Route `/produkte/[slug]` (Weiterleitung auf `/produkte`; `/downloads` gibt es als Seite "Datenblätter und Downloads"), gelbes Kennzahlenband (als Option im Block wählbar, Standard ist das dunkle V2-Band).
 
 ## Architektur
 
@@ -65,3 +65,23 @@ Routing: `/`, `/leistungen`, `/leistungen/[slug]`, `/produkte` (mit `?kategorie=
 ## Routenwechsel (bekannter V2-Fehler)
 
 Ursache in V2: `html { scroll-behavior: smooth }`. Next.js setzt die Position bei Navigation auf 0, der Browser animiert das. V4: `scroll-behavior: auto`, `RoutenScroll.tsx` setzt die Position bei Pfadwechsel sofort (`behavior: 'instant'`), ausser bei Sprungmarken (#anker). Browser-Zurück bleibt dem Browser überlassen. Filterwechsel im Katalog ändern nur Suchparameter (`router.replace(..., { scroll: false })`). Erneuter Klick auf die aktuelle Route scrollt in der Kopfzeile sofort nach oben. Geprüft in `tests/browser.mjs`.
+
+## Bewegung reduzieren (sanfter statt aus)
+
+Befund vom 7. Oktober 2026 auf dem PC der Kundschaft (Windows-VM über Remotedesktop, Chrome 154, 2560 px, keine GPU): Im laufenden Chrome meldete `matchMedia('(prefers-reduced-motion: reduce)')` den Wert `true`. Chrome leitet diesen Wert unter Windows aus der Systemeinstellung "Animationseffekte" (`SPI_GETCLIENTAREAANIMATION`) ab; Remotedesktop setzt diese Einstellung beim Verbinden, wenn im Remotedesktop-Client "Menü- und Fensteranimation" ausgeschaltet ist (Standard bei automatischer Verbindungsqualität). Chrome übernimmt den Wert beim Start und behält ihn, bis Windows eine Änderung meldet. Ein frisch gestartetes Chrome in derselben Sitzung meldete `false`, Playwright emuliert standardmässig `no-preference`; deshalb fiel das in den Cloud-Prüfungen nicht auf. Der V4-Code hatte bei "Bewegung reduzieren" alle Animationen abgeschaltet (Standbild, keine Einblendungen, Zähler ohne Zählen), darum sah die Kundschaft keine einzige Animation.
+
+Entscheid der Kundschaft: Die Animationen gehören zum Markenauftritt, bei "Bewegung reduzieren" werden sie sanfter, nicht abgeschaltet.
+
+| Element | Normal | Bewegung reduzieren |
+| --- | --- | --- |
+| Faserwellen (`Faserwellen.tsx`) | Aufziehen beim Laden, Lichtpulse in Schüben von 4 bis 8 | Kein Aufziehen, halbes Tempo, Schübe von 2 bis 4 in grösseren Abständen, Pulse halb so schnell |
+| Startbereich (`globals.css`, `hero-zeile`, `hero-auf`, `hero-balken`) | Zeilen steigen auf, Balken wächst | Nur Überblendung (`auf-ruhig`), Balken wächst in 0.8 s |
+| Einblenden beim Scrollen (`Einblenden.tsx`) | Überblendung mit Verschiebung, gestaffelt | Überblendung ohne Verschiebung, ohne Staffelung (`einblenden-ruhig`) |
+| Zähler (`Zaehler.tsx`) | zählt 1.7 s hoch | zählt 0.9 s hoch |
+| Logoslider | Dauer aus `--laufschrift-dauer` | doppelte Dauer (halbes Tempo), Pause bei Hover und Fokus bleibt |
+| Faser-Wasserzeichen im gelben Band | Drift und Lichtimpulse | kein Drift, Impulse mit 12 s statt 6 s |
+| Blinkpunkt der Überzeile | 2 s | 4 s |
+
+Der frühere globale Block `* { animation-duration: 0.01ms !important }` ist entfernt. Geprüft in `tests/browser.mjs`, Abschnitt "Bewegung reduzieren" (Kontext mit `reducedMotion: 'reduce'`).
+
+Bildrate auf dem PC der Kundschaft: Ohne GPU (SwiftShader oder Microsoft Basic Render Driver) erreicht Chrome bei 2560 px rund 20 bis 25 Bilder pro Sekunde, auch ohne Canvas, Blur und Punktraster (Messung `.qa/engpass.mjs`, siehe `docs/15`). Eine kleinere Zeichenauflösung des Canvas brachte keinen messbaren Gewinn und wurde darum nicht eingebaut. Wer am Remotedesktop volle Animationen will, schaltet im Remotedesktop-Client unter "Leistung" die Option "Menü- und Fensteranimation" ein und startet Chrome danach neu.

@@ -17,11 +17,11 @@ export function ThemeSchalter({ className }: { className?: string }) {
     <button
       type="button"
       onClick={umschalten}
-      className={cn('inline-flex size-9 shrink-0 items-center justify-center rounded-full text-text-leise transition-colors hover:text-marke', className)}
+      className={cn('inline-flex size-11 shrink-0 items-center justify-center rounded-full text-text-leise transition-colors hover:text-marke lg:size-12 2xl:size-[3.25rem]', className)}
       aria-label={theme === 'hell' ? 'Dunkles Erscheinungsbild einschalten' : 'Helles Erscheinungsbild einschalten'}
       title={theme === 'hell' ? 'Dunkles Erscheinungsbild' : 'Helles Erscheinungsbild'}
     >
-      {theme === 'hell' ? <Moon className="size-[1.15rem]" aria-hidden /> : <Sun className="size-[1.15rem]" aria-hidden />}
+      {theme === 'hell' ? <Moon className="size-6 lg:size-7" aria-hidden /> : <Sun className="size-6 lg:size-7" aria-hidden />}
     </button>
   );
 }

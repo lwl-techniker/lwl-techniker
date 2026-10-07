@@ -161,6 +161,36 @@ export function seitenBloecke(bildOrdner: string) {
         }),
       },
 
+      leistungsbereiche: {
+        label: 'Leistungsbereiche (vier Karten mit Bild)',
+        itemLabel: (p) => p.fields.titel.value.replace(/\n/g, ' ') || 'Leistungsbereiche',
+        schema: fields.object({
+          ueberzeile: ueberzeile(),
+          titel: langtext('Titel', { pflicht: true, max: 90, beschreibung: 'Zeilenumbrüche werden übernommen. Das letzte Wort erscheint als Kontur.' }),
+          text: langtext('Einleitung', { max: 280 }),
+          bereiche: fields.array(
+            fields.object({
+              titel: text('Titel', { pflicht: true, max: 50, beschreibung: 'Einsatzbereich, z. B. "Netze und Gemeinden".' }),
+              text: langtext('Text', { pflicht: true, max: 200 }),
+              leistung: fields.relationship({
+                label: 'Leistung',
+                description: 'Die Karte verlinkt auf diese Leistung und zeigt deren Bild.',
+                collection: 'leistungen',
+                validation: { isRequired: true },
+              }),
+              bild: bild('Eigenes Bild (optional)', bildOrdner, { beschreibung: 'Leer lassen, dann wird das Bild der gewählten Leistung verwendet.' }),
+              bildAlt: alttext(),
+            }),
+            {
+              label: 'Bereiche (2 bis 4)',
+              itemLabel: (p) => p.fields.titel.value || 'Bereich',
+              validation: { length: { min: 2, max: 4 } },
+            }
+          ),
+          linkText: text('Text für Link zur Übersicht', { max: 40, standard: 'Alle Leistungen' }),
+        }),
+      },
+
       referenzen: {
         label: 'Referenzen (automatisch die neusten)',
         itemLabel: (p) => p.fields.titel.value || 'Referenzen',

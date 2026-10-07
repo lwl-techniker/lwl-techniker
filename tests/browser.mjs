@@ -38,6 +38,18 @@ try {
   assert.equal(await seite.locator('canvas').count(), 1, 'V2-Hintergrundanimation (Canvas) vorhanden');
   ok('Startseite: ein H1, Canvas-Animation vorhanden');
 
+  // Leistungsbereiche: vier Karten mit Bild auf der Startseite, alle acht Leistungen auf /leistungen
+  const bereiche = seite.locator('section:has(h2:has-text("Glasfaser verbindet")) li');
+  assert.equal(await bereiche.count(), 4, 'Startseite: vier Leistungsbereiche');
+  await bereiche.first().scrollIntoViewIfNeeded();
+  await seite.waitForTimeout(1500);
+  const bilderGeladen = await bereiche.locator('img').evaluateAll((imgs) => imgs.length >= 4 && imgs.every((i) => i.naturalWidth > 0));
+  assert.ok(bilderGeladen, 'Leistungsbereiche: alle Bilder geladen');
+  await seite.goto(`${base}/leistungen`, { waitUntil: 'networkidle' });
+  assert.equal(await seite.locator('main article').count(), 8, '/leistungen zeigt acht Leistungen');
+  ok('Leistungen: vier Bereiche mit Bild auf der Startseite, acht Leistungen auf /leistungen');
+  await seite.goto(`${base}/`, { waitUntil: 'networkidle' });
+
   // 1. Routenwechsel ohne Hochscrollen
   const ziele = [
     ['Leistungen', '/leistungen'],
@@ -203,6 +215,71 @@ try {
   assert.equal(await t.getByText('Lindi Selimi').count(), 0, 'Lindi Selimi erscheint nicht');
   ok('Team: 2 Leitung, 4 Technik, keine entfernte Person');
   await t.close();
+
+  // 8. Bewegung reduzieren: Animationen laufen sanfter weiter statt abgeschaltet zu werden
+  const ruhigKontext = await browser.newContext({ viewport: { width: 1440, height: 900 }, colorScheme: 'dark', reducedMotion: 'reduce' });
+  const ruhig = await ruhigKontext.newPage();
+  await ruhig.goto(`${base}/`, { waitUntil: 'networkidle' });
+  await ruhig.waitForTimeout(2500);
+  assert.equal(await ruhig.evaluate(() => matchMedia('(prefers-reduced-motion: reduce)').matches), true, 'Emulation von Bewegung reduzieren greift');
+  const canvasBewegt = await ruhig.evaluate(async () => {
+    const c = document.querySelector('canvas');
+    const ctx = c.getContext('2d');
+    const probe = () => {
+      const d = ctx.getImageData(0, 0, c.width, c.height).data;
+      let s = 0;
+      for (let i = 0; i < d.length; i += 4013) s += d[i] + d[i + 1] + d[i + 2];
+      return s;
+    };
+    const p1 = probe();
+    await new Promise((r) => setTimeout(r, 800));
+    return p1 !== probe();
+  });
+  assert.ok(canvasBewegt, 'Bewegung reduzieren: Faserwellen bewegen sich weiter');
+  assert.equal(await ruhig.locator('.hero-zeile').first().evaluate((el) => getComputedStyle(el).opacity), '1', 'Bewegung reduzieren: Hero-Zeile sichtbar');
+  assert.equal(await ruhig.evaluate(() => document.documentElement.classList.contains('js-einblenden')), true, 'Bewegung reduzieren: Einblenden aktiv');
+  await ruhig.evaluate(() => window.scrollTo({ top: 1500, behavior: 'instant' }));
+  await ruhig.waitForTimeout(1200);
+  const sichtbar = ruhig.locator('[data-einblenden="sichtbar"]');
+  assert.ok((await sichtbar.count()) > 0, 'Bewegung reduzieren: Elemente werden beim Scrollen sichtbar');
+  assert.equal(await sichtbar.first().evaluate((el) => getComputedStyle(el).opacity), '1', 'Bewegung reduzieren: eingeblendetes Element voll sichtbar');
+  await ruhig.locator('dd .verlauf, dd.verlauf').first().scrollIntoViewIfNeeded();
+  await ruhig.waitForTimeout(1500);
+  assert.deepEqual(await ruhig.locator('dd span[aria-hidden]').allTextContents(), ['1 Mio.+', "1'000+", '40'], 'Bewegung reduzieren: Zähler erreichen die Endwerte');
+  const slider = await ruhig.locator('.logos-laufschrift-spur').evaluate((el) => {
+    const cs = getComputedStyle(el);
+    return { zustand: cs.animationPlayState, dauer: parseFloat(cs.animationDuration), basis: parseFloat(cs.getPropertyValue('--laufschrift-dauer')) };
+  });
+  assert.equal(slider.zustand, 'running', 'Bewegung reduzieren: Logoslider läuft');
+  assert.ok(Math.abs(slider.dauer - slider.basis * 2) < 0.1, `Bewegung reduzieren: Logoslider mit halbem Tempo (${slider.dauer}s statt ${slider.basis}s)`);
+  ok('Bewegung reduzieren: Animationen laufen sanfter weiter (Canvas, Hero, Einblenden, Zähler, Logoslider)');
+  await ruhigKontext.close();
+
+  // 9. Kopfzeile: Menü einzeilig und ohne Überlauf bei allen Breiten
+  const kopfzeilenHoehen = [];
+  for (const [breite, hoehe, min, max] of [
+    [375, 800, 72, 100],
+    [1024, 900, 100, 140],
+    [1440, 900, 100, 140],
+    [1920, 900, 100, 140],
+    [2560, 1300, 100, 140],
+  ]) {
+    const k = await browser.newContext({ viewport: { width: breite, height: hoehe }, colorScheme: 'dark' });
+    const p = await k.newPage();
+    await p.goto(`${base}/`, { waitUntil: 'networkidle' });
+    const kopf = await p.locator('header').boundingBox();
+    assert.ok(kopf && kopf.height >= min && kopf.height <= max, `${breite} px: Kopfzeile ${kopf?.height} px hoch (erwartet ${min} bis ${max})`);
+    kopfzeilenHoehen.push(`${breite}: ${Math.round(kopf.height)}`);
+    const scrollBreite = await p.evaluate(() => document.documentElement.scrollWidth);
+    assert.ok(scrollBreite <= breite, `${breite} px: kein horizontaler Überlauf (${scrollBreite})`);
+    for (const el of await p.locator('header nav a, header nav button').all()) {
+      if (!(await el.isVisible())) continue;
+      const box = await el.boundingBox();
+      assert.ok(box && box.height < 60, `${breite} px: Menüpunkt "${(await el.textContent())?.trim()}" einzeilig (${box?.height} px)`);
+    }
+    await k.close();
+  }
+  ok(`Kopfzeile: einzeilig und ohne Überlauf bei 375, 1024, 1440, 1920, 2560 px (Höhen ${kopfzeilenHoehen.join(', ')})`);
 
   console.log(protokoll.join('\n'));
   console.log('\nBrowserprüfung bestanden.');

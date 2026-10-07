@@ -114,7 +114,7 @@ export function Kopfzeile({ firmenname, logoHell, logoDunkel, telefon, ort, menu
           <nav
             ref={navigation}
             aria-label="Hauptnavigation"
-            className="hidden items-center gap-1 xl:gap-2 lg:flex"
+            className="hidden items-center gap-0.5 xl:gap-2 2xl:gap-3 lg:flex"
             onKeyDown={(e) => {
               if (e.key !== 'Escape' || offen === null) return;
               const knopf = e.currentTarget.querySelector<HTMLButtonElement>('[aria-expanded="true"]');
@@ -136,7 +136,7 @@ export function Kopfzeile({ firmenname, logoHell, logoDunkel, telefon, ort, menu
                     <button
                       type="button"
                       className={cn(
-                        'inline-flex min-h-11 items-center border-b-2 border-transparent px-3 font-titel text-[0.8rem] font-semibold tracking-[0.16em] text-text-leise uppercase transition-colors hover:text-marke xl:px-4 xl:text-sm',
+                        'inline-flex min-h-12 items-center border-b-2 border-transparent px-2 font-titel text-[0.85rem] font-semibold tracking-[0.14em] text-text-leise uppercase transition-colors hover:text-marke xl:px-4 xl:text-base 2xl:px-5 2xl:text-[1.1rem] 3xl:text-xl',
                         (aufgeklappt || istAktiv(punkt.link)) && 'text-marke',
                         aufgeklappt && 'border-marke'
                       )}
@@ -153,7 +153,7 @@ export function Kopfzeile({ firmenname, logoHell, logoDunkel, telefon, ort, menu
                       onClick={() => navigieren(punkt.link)}
                       aria-current={istAktiv(punkt.link) ? 'page' : undefined}
                       className={cn(
-                        'inline-flex min-h-11 items-center border-b-2 border-transparent px-3 font-titel text-[0.8rem] font-semibold tracking-[0.16em] text-text-leise uppercase transition-colors hover:text-marke xl:px-4 xl:text-sm',
+                        'inline-flex min-h-12 items-center border-b-2 border-transparent px-2 font-titel text-[0.85rem] font-semibold tracking-[0.14em] text-text-leise uppercase transition-colors hover:text-marke xl:px-4 xl:text-base 2xl:px-5 2xl:text-[1.1rem] 3xl:text-xl',
                         istAktiv(punkt.link) && 'text-marke'
                       )}
                     >
@@ -166,11 +166,11 @@ export function Kopfzeile({ firmenname, logoHell, logoDunkel, telefon, ort, menu
                       hidden={!aufgeklappt}
                       className={cn(
                         'absolute top-full mt-3 max-h-[calc(100dvh-8rem)] overflow-y-auto border border-marke/25 border-t-2 border-t-marke p-5 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)] backdrop-blur-xl',
-                        breit ? 'right-[-8rem] w-[min(44rem,calc(100vw-4rem))]' : 'left-0 w-[22rem]'
+                        breit ? 'right-[-8rem] w-[min(48rem,calc(100vw-4rem))]' : 'left-0 w-[24rem]'
                       )}
                       style={{ background: 'var(--f-kopf)' }}
                     >
-                      <p className="mb-3 text-[0.68rem] font-medium tracking-[0.3em] text-marke uppercase">{punkt.text}</p>
+                      <p className="mb-3 text-xs font-medium tracking-[0.3em] text-marke uppercase">{punkt.text}</p>
                       <ul className={cn('grid gap-x-6', breit && 'grid-cols-2')}>
                         {punkt.unterpunkte.map((u, i) => (
                           <li key={u.link} className={cn(u.hervorgehoben && 'col-span-full')}>
@@ -178,17 +178,17 @@ export function Kopfzeile({ firmenname, logoHell, logoDunkel, telefon, ort, menu
                               href={u.link}
                               onClick={() => navigieren(u.link)}
                               className={cn(
-                                'group grid min-h-12 grid-cols-[1.75rem_1fr_1.25rem] items-center gap-3 border-t border-linie/70 py-3 text-sm transition-colors hover:text-marke focus-visible:text-marke',
+                                'group grid min-h-12 grid-cols-[1.75rem_1fr_1.25rem] items-center gap-3 border-t border-linie/70 py-3 text-base transition-colors hover:text-marke focus-visible:text-marke',
                                 u.hervorgehoben && 'font-semibold text-marke'
                               )}
                               aria-current={pfad === u.link ? 'page' : undefined}
                             >
-                              <span className="font-titel text-[0.68rem] font-bold tracking-[0.1em] text-marke" aria-hidden>
+                              <span className="font-titel text-[0.72rem] font-bold tracking-[0.1em] text-marke" aria-hidden>
                                 {String(i + 1).padStart(2, '0')}
                               </span>
                               <span>
                                 <span className="block leading-snug">{u.text}</span>
-                                {u.beschreibung ? <span className="mt-0.5 block text-xs leading-snug text-text-leise">{u.beschreibung}</span> : null}
+                                {u.beschreibung ? <span className="mt-0.5 block text-sm leading-snug text-text-leise">{u.beschreibung}</span> : null}
                               </span>
                               <ArrowUpRight className="size-4 text-text-leise transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-marke" aria-hidden />
                             </Link>
@@ -204,7 +204,7 @@ export function Kopfzeile({ firmenname, logoHell, logoDunkel, telefon, ort, menu
               href={kontakt.link}
               onClick={() => navigieren(kontakt.link)}
               aria-current={istAktiv(kontakt.link) ? 'page' : undefined}
-              className="ml-3 inline-flex min-h-11 items-center rounded-full bg-gradient-to-r from-[#f0a800] to-[#f0d200] px-6 font-titel text-[0.8rem] font-semibold tracking-[0.16em] text-[#060d22] uppercase shadow-[0_0_16px_rgba(240,168,0,0.25)] transition-opacity hover:opacity-85 xl:px-7 xl:text-sm"
+              className="ml-2 inline-flex min-h-12 items-center rounded-full bg-gradient-to-r from-[#f0a800] to-[#f0d200] px-5 font-titel text-[0.85rem] font-semibold tracking-[0.14em] text-[#060d22] uppercase shadow-[0_0_16px_rgba(240,168,0,0.25)] transition-opacity hover:opacity-85 xl:ml-3 xl:px-7 xl:text-base 2xl:min-h-[3.25rem] 2xl:px-8 2xl:text-[1.1rem] 3xl:text-xl"
             >
               {kontakt.text}
             </Link>
@@ -215,12 +215,12 @@ export function Kopfzeile({ firmenname, logoHell, logoDunkel, telefon, ort, menu
             <button
               ref={ausloeser}
               type="button"
-              className="inline-flex min-h-11 items-center gap-2 border border-marke/25 px-3 font-titel text-[0.72rem] font-semibold tracking-[0.18em] text-marke uppercase lg:hidden"
+              className="inline-flex min-h-12 items-center gap-2 border border-marke/25 px-3 font-titel text-[0.8rem] font-semibold tracking-[0.18em] text-marke uppercase lg:hidden"
               aria-haspopup="dialog"
               aria-label="Menü öffnen"
               onClick={dialogOeffnen}
             >
-              Menü <Menu className="size-5" aria-hidden />
+              Menü <Menu className="size-6" aria-hidden />
             </button>
           </div>
         </div>

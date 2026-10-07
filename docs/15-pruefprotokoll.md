@@ -1,6 +1,6 @@
 # V4: Prüfprotokoll
 
-Stand: 7. Oktober 2026, Arbeitsbereich Linux (Node 22.22, Chromium 1194 über Playwright). Alle Browserprüfungen liefen gegen den lokalen Produktionsbuild (`npm run build && npm start`, Port 3104). Keine fiktiven Prüfungen; die Skripte liegen im Repository (`tests/browser.mjs`) bzw. in `.qa/` (lokal, nicht versioniert).
+Stand: 7. Oktober 2026. Durchläufe 1 bis 5 im Arbeitsbereich Linux (Node 22.22, Chromium 1194 über Playwright), Durchläufe 6 bis 9 auf dem Windows-PC der Kundschaft (Windows 11, Node 24.15, Chrome 154 über `PLAYWRIGHT_CHROMIUM`). Alle Browserprüfungen liefen gegen den lokalen Produktionsbuild (`npm run build && npm start`, Port 3104). Keine fiktiven Prüfungen; die Skripte liegen im Repository (`tests/browser.mjs`) bzw. in `.qa/` (lokal, nicht versioniert).
 
 ## Durchläufe
 
@@ -15,6 +15,11 @@ Stand: 7. Oktober 2026, Arbeitsbereich Linux (Node 22.22, Chromium 1194 über Pl
 | 4 | Zu kleine Bedienelemente: Galerie-Punkte 10 x 10 px, Abschnittslinks 20 px hoch. | `.qa/viewports.mjs` | Galerie-Punkte mit 44-px-Klickfläche, Abschnittslinks und Routenlink mit Mindesthöhe 40/44 px. | Nur noch der unsichtbare Skip-Link (1 x 1 px, nur bei Fokus sichtbar) und Inline-Textlinks gemeldet. |
 | 4 | Startseite zeigte nur vier der acht Leistungen; V3-Struktur sieht die Leistungsnavigation mit allen acht vor. | Vergleich mit V3-Screenshot | Block "Leistungen" um Option "Alle Leistungen" ergänzt, Startseite nutzt sie. | Acht Zeilen. |
 | 5 | Gestalterischer Durchgang (zehn schwächste Stellen, siehe unten). | Screenshots | siehe unten | siehe unten |
+| 6 | Auf dem PC der Kundschaft (Windows-VM über Remotedesktop, Chrome 154, 2560 px, Dark Mode) lief keine Animation: weder Faserwellen noch Einblendungen, Hero, Zähler, Logoslider oder Wasserzeichen. | Messung im laufenden Chrome über die Chrome-Erweiterung: `prefers-reduced-motion: reduce` = true, `js-einblenden` fehlte, Hero-Animation `none`, Canvas ohne Schleife. Frisches Chrome ohne Emulation: false. Windows-API in der Sitzung: Animationen eingeschaltet, Remotesitzung = 1. Keine Konsolenfehler, IntersectionObserver vorhanden, Canvas 2560 x 1271, GPU "Microsoft Basic Render Driver". | Ursache: Chrome hatte beim Start in der Remotedesktop-Sitzung "Animationen aus" übernommen und meldet seither "Bewegung reduzieren"; V4 schaltete dann alles ab. Lösung: sanfter statt aus (`docs/12`, Abschnitt "Bewegung reduzieren"), globaler `0.01ms`-Block entfernt. | Browsertest Abschnitt 8 mit `reducedMotion: 'reduce'`: Canvas bewegt sich, Hero sichtbar, Einblenden aktiv, Zähler erreichen Endwerte, Logoslider läuft mit doppelter Dauer. Im Chrome der Kundschaft nach dem Build: `js-einblenden` gesetzt, Hero-Animation `auf-ruhig`, Logoslider 220 s. |
+| 6 | Bildrate der Faserwellen ohne GPU: 21 Bilder pro Sekunde bei 2560 px (DPR 1), 12.5 bei DPR 1.5, 25.5 bei 1920 px (`.qa/fps.mjs`, Chrome headless mit SwiftShader). | Messskripte `.qa/fps.mjs`, `.qa/engpass.mjs`, `.qa/bench.mjs` | Versuch mit adaptiver Zeichenauflösung (1, 0.75, 0.5): keine Verbesserung (20.5 statt 21). Engpass ist der Software-Compositor: ohne Canvas, Blur und Punktraster 25 bis 30 Bilder pro Sekunde; die Canvas-Befehle selbst kosten unter 3 ms pro Bild. Adaptive Auflösung wieder entfernt. | Keine Codeänderung an der Bildrate; Hinweis für Remotedesktop in `docs/12` und `docs/16`. |
+| 7 | Untermenü Produkte mit doppeltem Eintrag ("Alle Datenblätter" auf `/produkte` und "Datenblätter und Downloads" auf `/downloads`). | `content/einstellungen/navigation.json` | Erster Eintrag heisst wie in V3 "Alle Produkte" (`/produkte`), "Alle Datenblätter" entfernt, "Datenblätter und Downloads" bleibt der letzte Eintrag nach den Kategorien. | Desktop- und Mobilmenü: 17 Einträge, keine Duplikate (`.qa/sicht/screenshots.mjs`), Fusszeile unverändert. |
+| 8 | Menütexte (0.8 rem) und Theme-Schalter (36 px) zu klein neben dem vergrösserten Logo. | Screenshot Kopfzeile 2560 px | `Kopfzeile.tsx`: Menüpunkte 0.85 rem (lg), 1 rem (xl), 1.1 rem (2xl), 1.25 rem (3xl), Höhe 48 px; Kontaktknopf gleich gross; Untermenüeinträge 1 rem, Beschreibungen 0.875 rem, Panels 24/48 rem. `ThemeSchalter.tsx`: 44/48/52 px, Symbol 24/28 px. Mobiler Menüknopf 48 px. | Browsertest Abschnitt 9: Kopfzeile 81 px (375) und 113 px (1024 bis 2560), alle Menüpunkte einzeilig, kein Überlauf. Screenshots `.qa/sicht/kopfzeile-*.png`. |
+| 9 | Startseite zeigte alle acht Leistungen als Liste; gewünscht sind vier Bereiche mit Bild nach dem V3-Abschnitt "Glasfaser verbindet. Wir machen sie nutzbar." | V3 `content/settings/home.json` (`connectionAreas`) | Neuer Block `leistungsbereiche` (Schema, Komponente, BlockRenderer), Texte wörtlich aus V3 mit "und" statt "&", Bilder und Links über die verknüpfte Leistung, `TitelMitKontur` mit Zeilenumbrüchen. `/leistungen` unverändert mit acht Leistungen. | Inhaltstest "vier Leistungsbereiche", Browsertest: vier Karten mit geladenen Bildern, acht Artikel auf `/leistungen`. Screenshots `.qa/sicht/leistungsbereiche-*.png` bei 375, 1920, 2560 px in beiden Modi. |
 
 ## Gestalterischer Durchgang (zehn geprüfte Stellen)
 
@@ -44,6 +49,13 @@ Erneute Prüfung der fünf schwächsten Stellen danach: Kontaktseite (Karte läd
 - Mobil 390 px: Dialogmenü öffnet, Untermenü, Auswahl schliesst, Zielseite oben, Escape schliesst.
 - 320 px: kein horizontaler Überlauf auf fünf Routen.
 - Team: 2 Leitung, 4 Technik, Lindi Selimi nicht vorhanden.
+- Leistungsbereiche: vier Karten mit geladenen Bildern auf der Startseite, acht Leistungen auf `/leistungen`.
+- Bewegung reduzieren (Kontext `reducedMotion: 'reduce'`): Faserwellen bewegen sich, Hero-Zeile sichtbar, `js-einblenden` gesetzt, Elemente werden beim Scrollen sichtbar, Zähler erreichen "1 Mio.+", "1'000+", "40", Logoslider läuft mit doppelter Dauer.
+- Kopfzeile: einzeilig und ohne Überlauf bei 375, 1024, 1440, 1920 und 2560 px (Höhen 81 und 113 px).
+
+## Sichtprüfung auf dem PC der Kundschaft (7. Oktober 2026)
+
+`.qa/sicht/screenshots.mjs` mit dem installierten Chrome 154: Startseite, Kopfzeile, Leistungsbereiche und Produkte-Untermenü bei 375, 1920 und 2560 px, jeweils dunkel und hell (24 Bilder in `.qa/sicht/`), keine Konsolenfehler. Produkte-Untermenü: Alle Produkte, Produktentwicklung, 14 Kategorien, Datenblätter und Downloads.
 
 ## Viewports und Farbmodi (`.qa/viewports.mjs`)
 
@@ -53,10 +65,11 @@ Erneute Prüfung der fünf schwächsten Stellen danach: Kontaktseite (Karte läd
 
 - `npm run typecheck`: ohne Fehler.
 - `npm run lint`: ohne Fehler.
-- `npm test`: 24 Tests bestanden (Textregeln, Startseitenauswahl, neun V2-Referenzen, Team, Datenblatt-Index gegen PDFs, PDF-Prüfsummen gegen V2, Logoliste, Startseite ohne Heroimage, Schreibziel).
+- `npm test`: 25 Tests bestanden (Textregeln, Startseitenauswahl, neun V2-Referenzen, Team, Datenblatt-Index gegen PDFs, PDF-Prüfsummen gegen V2, Logoliste, Startseite ohne Heroimage, vier Leistungsbereiche, Schreibziel).
 - `node scripts/pruefe-texte.mjs`: keine Fehler, eine Warnung (Floskel "Mehrwert" im AGB-Entwurf aus V3, Rechtstext unverändert belassen).
-- `node scripts/pruefe-konfiguration.mjs`: ohne Fehler (Warnung "kein Git-Remote", solange das V4-Repository nicht verbunden ist).
-- `npm run build`: 35 Seiten statisch erzeugt, Keystatic-Routen dynamisch.
+- `node scripts/pruefe-konfiguration.mjs`: ohne Fehler.
+- `npm run verify:repository`: Remote `lwl-techniker/lwl-techniker` passt zu `GITHUB_REPO`, V2 und V3 geschützt.
+- `npm run build`: 36 Seiten statisch erzeugt, Keystatic-Routen dynamisch (Node 24.15 auf Windows, `engines` erlaubt 22.18 bis 24).
 
 ## PDF-Machbarkeit
 

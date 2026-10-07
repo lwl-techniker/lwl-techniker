@@ -15,12 +15,13 @@ Stand: 7. Oktober 2026. Keine dieser Fragen blockiert den Betrieb der Website; s
 | 9 | Datenblätter mit alter Adresse Romanshorn (32 von 40, Stand 02.09.19) | Unverändert übernommen, Hinweis unter dem Katalog ("können frühere Kontaktangaben enthalten"). | Bei Gelegenheit neue PDF-Fassungen hochladen; die Website aktualisiert Vorschau und Suche automatisch. |
 | 10 | Produkte ohne Datenblatt (LWL-Wandverteiler, LWL-Werkzeuge, LWL-Reinigungsmaterial) | Als "Auf Anfrage" im Katalog. | PDF nachreichen oder so belassen. |
 | 11 | Technikerporträts | Nur Lulzim Selimi und Arsel Thuma haben ein Foto; die vier Technikerinnen und Techniker erhalten einen neutralen Platzhalter. | Fotos liefern (800 x 1000 px) oder Platzhalter belassen. |
-| 12 | Veröffentlichung | Kein Push, kein Repository auf GitHub erstellt, kein Deployment. Schreibziel in `site.config.ts` ist `infraoneit/lwl-techniker-v4`. | Freigabe für Repository-Erstellung, Push, Netlify-Site und GitHub-App für Keystatic. |
+| 12 | Veröffentlichung | Repository `lwl-techniker/lwl-techniker` (Branch `main`) am 7. Oktober 2026 mit Freigabe der Kundschaft bestückt; Schreibziel in `site.config.ts` ist `lwl-techniker/lwl-techniker`, Push mit dem Konto webmaster@lwl-techniker.ch über einen eigenen Credential-Eintrag (`useHttpPath`). Kein Netlify-Deployment. | Freigabe für Netlify-Site und GitHub-App für Keystatic (vier `KEYSTATIC_*`-Werte, `.env.example`). |
+| 13 | Animationen am Remotedesktop | Bei "Bewegung reduzieren" laufen alle Animationen sanfter weiter (`docs/12`). Chrome meldet am Remotedesktop "Bewegung reduzieren", wenn im Remotedesktop-Client "Menü- und Fensteranimation" ausgeschaltet ist. Ohne GPU bleibt die Bildrate bei rund 20 bis 25 Bildern pro Sekunde. | Für volle Animationen am Arbeitsplatz: im Remotedesktop-Client unter "Leistung" die Option "Menü- und Fensteranimation" einschalten und Chrome neu starten. Sonst keine Aktion. |
 
-## Vor dem ersten Push (Checkliste)
+## Vor dem ersten Push (erledigt am 7. Oktober 2026)
 
-1. `C:\lwl-techniker-v4`: `git init`, `git remote add origin https://github.com/infraoneit/lwl-techniker-v4.git` (Repository zuerst leer auf GitHub anlegen).
-2. `npm run verify:repository` (Remote und `GITHUB_REPO` passen, V2/V3 geschützt).
-3. `npm ci`, `npm run pruefen`, `npm run build`.
-4. `git status`: keine `.env`, keine `.reference/`, keine `.qa/`.
-5. Erster Commit und Push nach ausdrücklicher Freigabe.
+1. `C:\lwl-techniker-v4`: `git init`, Branch `main`, Remote `https://lwl-techniker@github.com/lwl-techniker/lwl-techniker.git` (Benutzername in der Adresse und `credential.https://github.com.useHttpPath=true` im Repository, damit das Konto `infraoneit` für andere Repositories erhalten bleibt).
+2. `npm run verify:repository`: Remote und `GITHUB_REPO` passen, V2/V3 geschützt.
+3. `npm run pruefen`, `npm run build`, `npm run test:browser`: bestanden.
+4. `git ls-files`: keine `.env`, keine `.reference/`, keine `.qa/`, keine Zip-Archive, keine Logs (`*.zip` und `*.log` in `.gitignore`).
+5. Commit und Push mit Freigabe der Kundschaft vom 7. Oktober 2026.

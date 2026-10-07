@@ -6,6 +6,7 @@ import { Fliesstext } from './Fliesstext';
 import { Kennzahlen } from './Kennzahlen';
 import { Vorteile } from './Vorteile';
 import { LeistungenBlock } from './LeistungenBlock';
+import { Leistungsbereiche } from './Leistungsbereiche';
 import { ReferenzenBlock } from './ReferenzenBlock';
 import { JobsBlock } from './JobsBlock';
 import { Ablauf } from './Ablauf';
@@ -67,6 +68,8 @@ export function BlockRenderer({ bloecke, einstellungen, seitentitel, hatSeitenko
             return <Vorteile key={key} daten={block.value} />;
           case 'leistungen':
             return <LeistungenBlock key={key} daten={block.value} />;
+          case 'leistungsbereiche':
+            return <Leistungsbereiche key={key} daten={block.value} />;
           case 'referenzen':
             return <ReferenzenBlock key={key} daten={block.value} />;
           case 'jobs':

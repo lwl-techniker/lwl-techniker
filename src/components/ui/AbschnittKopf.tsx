@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/cn';
@@ -14,15 +15,33 @@ type Props = {
 
 /**
  * Titel in Versalien, das letzte Wort als Kontur (wie "UNSERE EXPERTISE" im Entwurf).
- * Bei nur einem Wort bleibt der Titel gefüllt.
+ * Bei nur einem Wort bleibt der Titel gefüllt. Zeilenumbrüche aus dem CMS bleiben erhalten,
+ * die Kontur liegt dann auf dem letzten Wort der letzten Zeile.
  */
 export function TitelMitKontur({ titel }: { titel: string }) {
-  const woerter = sauberText(titel).trim().split(/\s+/);
-  if (woerter.length < 2) return <>{woerter[0]}</>;
-  const letztes = woerter.pop();
+  const zeilen = sauberText(titel)
+    .split('\n')
+    .map((z) => z.trim())
+    .filter(Boolean);
   return (
     <>
-      {woerter.join(' ')} <span className="kontur">{letztes}</span>
+      {zeilen.map((zeile, i) => {
+        const woerter = zeile.split(/\s+/);
+        const letzteZeile = i === zeilen.length - 1;
+        const letztes = letzteZeile && woerter.length > 1 ? woerter.pop() : null;
+        return (
+          <Fragment key={i}>
+            {i > 0 ? <br /> : null}
+            {woerter.join(' ')}
+            {letztes ? (
+              <>
+                {' '}
+                <span className="kontur">{letztes}</span>
+              </>
+            ) : null}
+          </Fragment>
+        );
+      })}
     </>
   );
 }
