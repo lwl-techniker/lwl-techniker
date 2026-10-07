@@ -64,7 +64,7 @@
       "link": "/produkte",
       "unterpunkte": [
         {
-          "text": "Alle Datenblätter",
+          "text": "Alle Produkte",
           "link": "/produkte",
           "beschreibung": "Katalog mit Suche, Vorschau und PDF-Download",
           "hervorgehoben": true

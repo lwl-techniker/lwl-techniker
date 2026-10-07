@@ -14,18 +14,18 @@ Die Dokumente `docs/01` bis `docs/11` stammen aus der InfraOne-Vorlage (V2) und 
 
 ## Lokal
 
-Node 22.18 bis 22.x. `npm ci`, dann `npm run dev` (Port 3104, erzeugt vorher Formulare und Datenblatt-Index). Vorschau: http://localhost:3104, Keystatic: http://localhost:3104/keystatic (lokal direkt in Dateien).
+Node 22.18 bis 24.x. `npm ci`, dann `npm run dev` (Port 3104, erzeugt vorher Formulare und Datenblatt-Index) oder `start-dev.cmd` bzw. `start-vorschau.cmd` (Produktionsbuild). Vorschau: http://localhost:3104, Keystatic: http://localhost:3104/keystatic (lokal direkt in Dateien). Strg+C im Serverfenster beendet den Server.
 
 ## Qualität
 
 - `npm run pruefen`: Formulare, Datenblatt-Index, Konfiguration, Texte, Bilder, TypeScript, ESLint, Unit- und Inhaltstests.
 - `npm run build`: Produktionsbuild (prebuild erzeugt `public/__forms.html` und `src/generated/datenblaetter.json`).
-- `npm run test:browser`: Browserprüfung gegen eine laufende Website (`npm start`), Chromium über `PLAYWRIGHT_CHROMIUM` wählbar. Prüft Routenwechsel ohne Hochscrollen, Menüs, mobiles Menü, Farbmodus, Logos im Lightmode, axe, 320 px, Team.
-- `npm run verify:repository`: Schreibziel `infraoneit/lwl-techniker-v4`, V2 und V3 geschützt.
+- `npm run test:browser`: Browserprüfung gegen eine laufende Website (`npm start`), Chromium über `PLAYWRIGHT_CHROMIUM` wählbar. Prüft Routenwechsel ohne Hochscrollen, Menüs, mobiles Menü, Farbmodus, Logos im Lightmode, axe, 320 px, Team, Leistungsbereiche, Animationen bei "Bewegung reduzieren" und die Kopfzeile ohne Umbruch bei 375 bis 2560 px.
+- `npm run verify:repository`: Schreibziel `lwl-techniker/lwl-techniker`, V2 und V3 geschützt.
 
 ## Inhalte
 
-- `content/startseite`, `content/seiten`: Seitenbaukasten mit Blöcken (Hero, Logoslider, Kennzahlen, Leistungen, Ablauf, Referenzen, Text mit Bild, Datenblätter, Team, Kontaktband, Kontaktformular mit Karte, Fliesstext ...).
+- `content/startseite`, `content/seiten`: Seitenbaukasten mit Blöcken (Hero, Logoslider, Kennzahlen, Leistungen, Leistungsbereiche mit Bild, Ablauf, Referenzen, Text mit Bild, Datenblätter, Team, Kontaktband, Kontaktformular mit Karte, Fliesstext ...).
 - `content/leistungen`: acht Leistungen (Markdoc).
 - `content/referenzen`: neun Referenzen aus V2 plus VAR-Support aus V3.
 - `content/produkte`: 43 Produkte, davon 40 mit PDF-Datenblatt. Technische Angaben, Vorschau und Suchtext kommen automatisch aus dem PDF (`docs/14`).
@@ -38,4 +38,4 @@ Node 22.18 bis 22.x. `npm ci`, dann `npm run dev` (Port 3104, erzeugt vorher For
 
 ## Schutz von V2 und V3
 
-Einziges Schreibziel ist `infraoneit/lwl-techniker-v4`. V2 (`f2127e0`) und V3 (`ecf9333`) wurden nur gelesen; Lesekopien liegen in `.reference/` (gitignored). Kein Push, keine Repository-Erstellung und kein Deployment ohne ausdrückliche Freigabe.
+Einziges Schreibziel ist `lwl-techniker/lwl-techniker` (Konto webmaster@lwl-techniker.ch, eigener Credential-Eintrag über `useHttpPath`). V2 (`f2127e0`) und V3 (`ecf9333`) wurden nur gelesen; Lesekopien liegen in `.reference/` (gitignored). Kein Deployment ohne ausdrückliche Freigabe.

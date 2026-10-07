@@ -13,7 +13,7 @@ const wurzel = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const site = await import(pathToFileURL(path.join(wurzel, 'src', 'site.config.ts')).href);
 const fehler = [];
 
-if (site.GITHUB_REPO !== 'infraoneit/lwl-techniker-v4') fehler.push(`GITHUB_REPO ist "${site.GITHUB_REPO}", erwartet wird infraoneit/lwl-techniker-v4.`);
+if (site.GITHUB_REPO !== 'lwl-techniker/lwl-techniker') fehler.push(`GITHUB_REPO ist "${site.GITHUB_REPO}", erwartet wird lwl-techniker/lwl-techniker.`);
 for (const geschuetzt of site.GESCHUETZTE_REPOS ?? []) {
   if (site.GITHUB_REPO.toLowerCase() === geschuetzt.toLowerCase()) fehler.push(`GITHUB_REPO zeigt auf die geschützte Quelle ${geschuetzt}.`);
 }
@@ -22,7 +22,7 @@ let remote = '';
 try {
   remote = execSync('git remote get-url origin', { cwd: wurzel, stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim();
 } catch {
-  console.log('Kein Git-Remote "origin" gesetzt. Vor dem ersten Push: git remote add origin https://github.com/infraoneit/lwl-techniker-v4.git');
+  console.log('Kein Git-Remote "origin" gesetzt. Vor dem ersten Push: git remote add origin https://github.com/lwl-techniker/lwl-techniker.git');
 }
 if (remote) {
   for (const geschuetzt of site.GESCHUETZTE_REPOS ?? []) {

@@ -120,11 +120,25 @@ test('Startseite: Hero ohne Bild, ohne entfernte V3-Zeilen, Slogan vorhanden', (
   assert.ok(!text.includes('Unser Zeichen. Ihre Verbindung.'));
   assert.ok(!text.includes('Licht in Bewegung'));
   const typen = s.bloecke.map((b) => b.discriminant);
-  for (const t of ['logoslider', 'kennzahlen', 'leistungen', 'referenzen', 'datenblaetter', 'teamAuszug', 'ctaBand']) assert.ok(typen.includes(t), `Block ${t} fehlt`);
+  for (const t of ['logoslider', 'kennzahlen', 'leistungsbereiche', 'referenzen', 'datenblaetter', 'teamAuszug', 'ctaBand']) assert.ok(typen.includes(t), `Block ${t} fehlt`);
+});
+
+test('Startseite: vier Leistungsbereiche mit vorhandenen Leistungen', () => {
+  const s = json('content/startseite/startseite.json');
+  const block = s.bloecke.find((b) => b.discriminant === 'leistungsbereiche');
+  assert.ok(block, 'Block leistungsbereiche fehlt');
+  assert.equal(block.value.bereiche.length, 4, 'vier Bereiche');
+  const slugs = block.value.bereiche.map((b) => b.leistung);
+  assert.equal(new Set(slugs).size, 4, 'vier verschiedene Leistungen');
+  for (const b of block.value.bereiche) {
+    assert.ok(existsSync(path.join(wurzel, 'content', 'leistungen', `${b.leistung}.mdoc`)), `Leistung ${b.leistung} fehlt`);
+    assert.ok(!b.titel.includes('&') && !b.text.includes('&'), `${b.titel}: "und" statt "&"`);
+  }
+  assert.equal(block.value.titel.replace(/\n/g, ' '), 'Glasfaser verbindet. Wir machen sie nutzbar.');
 });
 
 test('Schreibziel: V4-Repository, V2 und V3 geschützt', () => {
   const site = lies('src/site.config.ts');
-  assert.ok(site.includes("GITHUB_REPO = 'infraoneit/lwl-techniker-v4'"));
+  assert.ok(site.includes("GITHUB_REPO = 'lwl-techniker/lwl-techniker'"));
   assert.ok(!/GITHUB_REPO = 'infraoneit\/lwl-techniker-v[23]'/.test(site));
 });

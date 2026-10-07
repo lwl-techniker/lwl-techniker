@@ -18,7 +18,7 @@ export const PROJEKT_NAME = 'LWL-Techniker Schweiz GmbH';
 export const DOMAIN = process.env.SITE_URL || 'https://lwl-techniker-v4.netlify.app';
 
 /** GitHub-Repository im Format besitzer/repo-name. Einziges Schreibziel des CMS. Niemals V2 oder V3 eintragen. */
-export const GITHUB_REPO = 'infraoneit/lwl-techniker-v4';
+export const GITHUB_REPO = 'lwl-techniker/lwl-techniker';
 
 /** Repositories, in die das CMS nie schreiben darf (Prüfung in scripts/verify-write-target.mjs). */
 export const GESCHUETZTE_REPOS = ['infraoneit/lwl-techniker-v2', 'infraoneit/lwl-techniker-v3'];
