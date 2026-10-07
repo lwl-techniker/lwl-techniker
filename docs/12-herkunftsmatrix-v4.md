@@ -74,7 +74,7 @@ Entscheid der Kundschaft: Die Animationen gehören zum Markenauftritt, bei "Bewe
 
 | Element | Normal | Bewegung reduzieren |
 | --- | --- | --- |
-| Faserwellen (`Faserwellen.tsx`) | Aufziehen beim Laden, Lichtpulse in Schüben von 4 bis 8, Leuchtsaum atmet | Bild und Tempo wie V2, Schübe von 2 bis 4 in doppeltem Abstand, Atmen halb so stark |
+| Faserwellen (`Faserwellen.tsx`) | Aufziehen beim Laden, Lichtpulse in Schüben von 4 bis 8, Leuchtsaum atmet | Unverändert wie V2 (Entscheid Kundschaft, 7. Oktober 2026, zweite Rückmeldung: die Pulse sollen so schnell und regelmässig laufen wie in V2) |
 | Startbereich (`globals.css`, `hero-zeile`, `hero-auf`, `hero-balken`) | Zeilen steigen auf, Balken wächst | Nur Überblendung (`auf-ruhig`), Balken wächst in 0.8 s |
 | Einblenden beim Scrollen (`Einblenden.tsx`) | Überblendung mit Verschiebung, gestaffelt | Überblendung ohne Verschiebung, ohne Staffelung (`einblenden-ruhig`) |
 | Zähler (`Zaehler.tsx`) | zählt 1.7 s hoch | zählt 0.9 s hoch |
@@ -83,6 +83,8 @@ Entscheid der Kundschaft: Die Animationen gehören zum Markenauftritt, bei "Bewe
 | Blinkpunkt der Überzeile | 2 s | 4 s |
 
 Der frühere globale Block `* { animation-duration: 0.01ms !important }` ist entfernt. Geprüft in `tests/browser.mjs`, Abschnitt "Bewegung reduzieren" (Kontext mit `reducedMotion: 'reduce'`).
+
+Tempo der Faserwellen: In V2 bewegen sich Pulse und Verdrillung pro gezeichnetem Bild. Auf dem PC der Kundschaft (rund 20 Bilder pro Sekunde ohne GPU) liefen sie damit dreimal langsamer als in der Cloud mit 60 Bildern pro Sekunde. V4 rechnet seit dem 7. Oktober 2026 zeitbasiert (Bezug 60 Bilder pro Sekunde, nach Pausen höchstens vier Bilder nachholen), die Geschwindigkeit ist damit auf jedem Rechner gleich, nur die Flüssigkeit unterscheidet sich.
 
 Codevergleich mit V2 (7. Oktober 2026): `Faserwellen.tsx`, `Einblenden.tsx` und die Hero-Animationen in `globals.css` waren in V4 vor den Anpassungen byteidentisch mit V2 (`f2127e0`). Beide Versionen liefen auf demselben PC nebeneinander (V2 auf Port 3000, V4 auf 3104, `.qa/vergleich/v2-v4.mjs`): Canvas-Helligkeit und Gelbanteil sind gleich. Der sichtbare Unterschied waren die Abschnittsflächen, die in V4 die Faserwellen zu 62 bis 82 Prozent abdeckten (V2: alle Abschnitte transparent). Die Flächen sind jetzt deutlich durchscheinender (siehe Matrix).
 

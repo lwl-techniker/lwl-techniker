@@ -11,9 +11,12 @@ import { holeAktivesTheme, THEMA_GEAENDERT } from '@/lib/theme';
  * entlanglaufen, und am Faserende blitzt das Licht kurz auf. Ein Leuchtsaum um die Bänder atmet langsam.
  * Liegt fest hinter der ganzen Seite, auf der Startseite füllt der Startbereich den Bildschirm.
  *
- * Rücksicht: Bei "Bewegung reduzieren" bleibt das Bild wie in V2, nur die Lichtpulse kommen halb so oft und
- * das Atmen des Leuchtsaums ist ruhiger (sanfter statt aus, Entscheid der Kundschaft vom 7. Oktober 2026).
+ * Rücksicht: Bei "Bewegung reduzieren" läuft die Animation unverändert wie in V2 (Entscheid der Kundschaft vom
+ * 7. Oktober 2026: Remotedesktop meldet den Wert fälschlich, die sanfteren Varianten gelten nur für die CSS-Animationen).
  * Im Hintergrund-Tab pausiert die Animation.
+ *
+ * Tempo: Alle Bewegungen sind zeitbasiert (Bezug 60 Bilder pro Sekunde). Auf Rechnern mit 20 Bildern pro Sekunde
+ * laufen Pulse und Verdrillung damit gleich schnell wie in V2 auf einem schnellen Rechner, nur weniger flüssig.
  * Die Zeichenfläche ist für Screenreader unsichtbar.
  *
  * Leistung: Auf Rechnern ohne Grafikbeschleunigung (Remotedesktop auf einer VM) begrenzt der Software-Compositor
@@ -76,7 +79,6 @@ export function Faserwellen() {
     const ctx = canvas?.getContext('2d');
     if (!canvas || !ctx) return;
 
-    const ruhig = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let breite = 0;
     let hoehe = 0;
     let mx = 0;
@@ -175,23 +177,25 @@ export function Faserwellen() {
       return zufall(0.0025, 0.005); // normal
     };
 
-    /** Ein Schub: mehrere Fasern senden fast gleichzeitig einen Puls, mit stark unterschiedlichem Tempo. Bei "Bewegung reduzieren" halb so oft. */
+    /** Ein Schub: mehrere Fasern senden fast gleichzeitig einen Puls, mit stark unterschiedlichem Tempo (wie V2) */
     const schub = () => {
-      const anzahl = Math.round(ruhig ? zufall(2, 4) : zufall(4, 8));
+      const anzahl = Math.round(zufall(4, 8));
       for (let i = 0; i < anzahl && pulse.length < 70; i++) {
         pulse.push({ faser: Math.floor(Math.random() * fasern.length), pos: -0.02 - Math.random() * 0.06, tempo: pulsTempo(), staerke: zufall(0.5, 1) });
       }
-      naechsterSchub = t + (ruhig ? zufall(4, 7) : zufall(2, 3.6));
+      naechsterSchub = t + zufall(2, 3.6);
     };
 
-    const zeichnen = (bewegt: boolean) => {
+    /** Zeichnet ein Bild; schritt = Anteil eines Bildes bei 60 Bildern pro Sekunde (0 = Standbild) */
+    const zeichnen = (schritt: number) => {
+      const bewegt = schritt > 0;
       ctx.clearRect(0, 0, breite, hoehe);
       if (bewegt) {
-        t += 0.012;
-        if (aufbau < AUFBAU_ENDE) aufbau += 0.006;
+        t += 0.012 * schritt;
+        if (aufbau < AUFBAU_ENDE) aufbau += 0.006 * schritt;
       }
-      // Atmen des ganzen Bildes, bei "Bewegung reduzieren" ruhiger
-      const atem = 0.5 + (ruhig ? 0.25 : 0.5) * Math.sin(t * 1.3);
+      // Atmen des ganzen Bildes
+      const atem = 0.5 + 0.5 * Math.sin(t * 1.3);
       const hellFaktor = hell ? 1.4 : 1;
       const gelb = hell ? '214,158,0' : '240,214,0';
       const orange = hell ? '204,96,8' : '240,128,16';
@@ -247,7 +251,7 @@ export function Faserwellen() {
       const schweifKopf = hell ? '200,120,0' : '255,230,120';
       const glutKern = hell ? '190,115,0' : '255,250,220';
       for (const pl of pulse) {
-        if (bewegt) pl.pos += pl.tempo;
+        if (bewegt) pl.pos += pl.tempo * schritt;
         const f = fasern[pl.faser];
         const kopf = Math.min(pl.pos, 1);
         // Pulse blenden am Anfang weich ein
@@ -282,7 +286,7 @@ export function Faserwellen() {
       for (const pl of pulse) if (pl.pos >= 1 && bewegt) blitze.push({ faser: pl.faser, leben: 1, staerke: pl.staerke });
       pulse = pulse.filter((pl) => pl.pos < 1);
       for (const b of blitze) {
-        if (bewegt) b.leben -= 0.02;
+        if (bewegt) b.leben -= 0.02 * schritt;
         if (b.leben <= 0) continue;
         setzePunkt(fasern[b.faser], 1);
         const radius = 9 + 20 * (1 - b.leben);
@@ -308,15 +312,20 @@ export function Faserwellen() {
       ctx.fillRect(0, 0, breite, hoehe);
     };
 
-    const schleife = () => {
+    // Zeitbasierte Schleife: Bildzeit in Bezug zu 60 Bildern pro Sekunde, nach Pausen höchstens vier Bilder nachholen (deckt 15 Bilder pro Sekunde ab)
+    let letztesBild = 0;
+    const schleife = (jetzt: number) => {
       if (!aktiv) return;
-      zeichnen(true);
+      const schritt = letztesBild ? Math.min(4, (jetzt - letztesBild) / (1000 / 60)) : 1;
+      letztesBild = jetzt;
+      zeichnen(schritt);
       anfrage = requestAnimationFrame(schleife);
     };
 
     const sichtbarkeit = () => {
       aktiv = document.visibilityState === 'visible';
       cancelAnimationFrame(anfrage);
+      letztesBild = 0;
       if (aktiv) anfrage = requestAnimationFrame(schleife);
     };
 

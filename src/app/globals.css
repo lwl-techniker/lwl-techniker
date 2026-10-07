@@ -667,7 +667,7 @@
     position: absolute;
     pointer-events: none;
     user-select: none;
-    height: 80%;
+    height: 94%;
     width: auto;
     top: 50%;
     right: max(2.5rem, calc((100% - 2400px) / 2 + 2.5rem));
@@ -707,7 +707,7 @@
   }
   .fluss-spitze { fill: var(--fluss-paket); }
   @media (max-width: 760px) {
-    .faser-wasserzeichen { height: 78%; right: -12%; opacity: 0.14; }
+    .faser-wasserzeichen { height: 86%; right: -14%; opacity: 0.14; }
   }
   @media (prefers-reduced-motion: reduce) {
     .faser-wasserzeichen { animation: none; }
