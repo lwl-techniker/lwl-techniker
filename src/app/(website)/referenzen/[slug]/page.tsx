@@ -1,6 +1,7 @@
 import { ImageOff } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import { Galerie } from '@/components/ui/Galerie';
+import { Video } from '@/components/ui/Video';
 import { Seitenkopf } from '@/components/ui/Seitenkopf';
 import { ReferenzKarte } from '@/components/karten/Karten';
 import { holeReferenz, holeReferenzen, holeUebersichten } from '@/lib/cms';
@@ -67,7 +68,17 @@ export default async function ReferenzSeite({ params }: Props) {
 
       <section className="abschnitt">
         <div className="container-seite grid gap-12 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] lg:gap-20">
-          <div className="fliesstext lesebreite">{inhalt}</div>
+          <div>
+            <div className="fliesstext lesebreite">{inhalt}</div>
+            {r.video ? (
+              <div className="mt-12">
+                <h2 className="text-[0.68rem] font-medium tracking-[0.28em] text-marke uppercase">Video vom Einsatz</h2>
+                <div className="mt-4">
+                  <Video src={r.video} poster={r.videoposter ?? r.titelbild ?? null} beschreibung={r.videotext} hochformat />
+                </div>
+              </div>
+            ) : null}
+          </div>
           {fakten.length > 0 ? (
             <aside className="h-fit rounded-[var(--radius-karte)] bg-flaeche p-8 lg:sticky lg:top-32">
               <dl className="divide-y divide-linie">

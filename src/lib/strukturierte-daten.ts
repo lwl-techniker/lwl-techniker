@@ -125,6 +125,17 @@ export function referenzAlsArtikel(r: Referenz) {
     publisher: { '@id': ORGANISATION_ID },
     about: r.kategorie ? { '@type': 'Thing', name: sauberText(r.kategorie) } : undefined,
     contentLocation: r.ort ? { '@type': 'Place', name: sauberText(r.ort) } : undefined,
+    video: r.video
+      ? {
+          '@type': 'VideoObject',
+          name: sauberText(r.videotext) || `Video: ${sauberText(r.titel)}`,
+          description: sauberText(r.videotext) || sauberText(r.kurzbeschreibung),
+          contentUrl: url(r.video),
+          thumbnailUrl: r.videoposter ? url(r.videoposter) : r.titelbild ? url(r.titelbild) : undefined,
+          uploadDate: r.datum || undefined,
+          inLanguage: 'de-CH',
+        }
+      : undefined,
   };
 }
 

@@ -323,6 +323,16 @@ export default config({
           }),
           { label: 'Weitere Bilder', itemLabel: (p) => p.fields.alt.value || 'Bild' }
         ),
+        video: fields.file({
+          label: 'Video (optional)',
+          description: 'MP4 (H.264), Hochformat oder Querformat, unter 5 MB. Wird erst beim Klick auf das Standbild geladen und bremst die Seite nicht. Grosse Dateien vorher komprimieren.',
+          directory: 'public/videos/referenzen',
+          publicPath: '/videos/referenzen/',
+        }),
+        videoposter: bild('Standbild für das Video', 'referenzen', {
+          hinweis: 'JPG, erscheint vor dem Abspielen mit einem Abspielsymbol. Ohne Standbild wird das Titelbild verwendet.',
+        }),
+        videotext: text('Beschreibung des Videos', { max: 160, beschreibung: 'Ein Satz, was im Video zu sehen ist (für Suchmaschinen und Screenreader).' }),
         seo: seo(),
         inhalt: fliesstext('Projektbeschrieb', 'referenzen'),
       },
