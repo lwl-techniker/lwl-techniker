@@ -87,7 +87,7 @@ export function Kontaktformular({ daten: d, einstellungen: e }: { daten: BlockDa
       {d.karteZeigen ? (
         <div className="container-seite mt-14 lg:mt-20">
           <h2 className="ueberzeile">Standort</h2>
-          <Karte name={e.firmenname} strasse={e.strasse} plz={e.plz} ort={e.ort} />
+          <Karte name={e.firmenname} strasse={e.strasse} plz={e.plz} ort={e.ort} googleProfil={e.googleProfil} />
         </div>
       ) : null}
     </section>

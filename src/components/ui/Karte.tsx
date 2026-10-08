@@ -8,6 +8,8 @@ type Props = {
   strasse: string;
   plz: string;
   ort: string;
+  /** Link zum Google-Unternehmensprofil ("Firma und Kontakt"); ohne Angabe eine Adresssuche in Google Maps */
+  googleProfil?: string | null;
 };
 
 /**
@@ -17,10 +19,11 @@ type Props = {
  * - Adresse und Routenlink zusätzlich als Text, damit die Information ohne Karte verfügbar bleibt
  * - Die Einbindung ist in der Datenschutzerklärung unter "Eingebettete Karte" beschrieben.
  */
-export function Karte({ name, strasse, plz, ort }: Props) {
+export function Karte({ name, strasse, plz, ort, googleProfil }: Props) {
   const [geladen, setGeladen] = useState(false);
   const adresse = `${strasse}, ${plz} ${ort}, Schweiz`;
   const abfrage = encodeURIComponent(adresse);
+  const routenLink = googleProfil || `https://www.google.com/maps/search/?api=1&query=${abfrage}`;
   return (
     <div>
       <div className="karte-rahmen h-[clamp(280px,42vw,460px)] overflow-hidden rounded-[var(--radius-karte)] border border-linie bg-flaeche">
@@ -48,7 +51,7 @@ export function Karte({ name, strasse, plz, ort }: Props) {
         {name}, {adresse}
         {' · '}
         <a
-          href={`https://www.google.com/maps/search/?api=1&query=${abfrage}`}
+          href={routenLink}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex min-h-10 items-center gap-1 py-2 text-marke underline underline-offset-4 hover:text-marke-hell"

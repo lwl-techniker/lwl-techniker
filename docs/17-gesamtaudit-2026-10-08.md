@@ -76,7 +76,7 @@ Stärken: Ein Graph mit `Organization` und `LocalBusiness` (gemeinsame `@id`), `
 
 Verbesserungen:
 
-1. **LocalBusiness ohne `geo`, `openingHoursSpecification`, `hasMap`, `foundingDate`, `vatID`, `numberOfEmployees`.** Alle Werte sind bekannt (UID CHE-302.905.008 steht im Impressum, Adresse Langgasse 136). Diese Felder sind die wichtigsten für Google Maps, Bing Places und KI-Antworten zu "Glasfaserfirma St. Gallen". Empfehlung: Felder in "Einstellungen > Firma" ergänzen (Öffnungszeiten existieren schon, Liste ist leer) und im Graph ausgeben. Aufwand: 2 Stunden.
+1. **LocalBusiness ohne `geo`, `openingHoursSpecification`, `hasMap`, `foundingDate`, `vatID`, `numberOfEmployees`.** Alle Werte sind bekannt (UID CHE-302.905.008 steht im Impressum, Adresse Langgasse 134). Diese Felder sind die wichtigsten für Google Maps, Bing Places und KI-Antworten zu "Glasfaserfirma St. Gallen". Empfehlung: Felder in "Einstellungen > Firma" ergänzen (Öffnungszeiten existieren schon, Liste ist leer) und im Graph ausgeben. Aufwand: 2 Stunden.
 2. **Service ohne `hasOfferCatalog` und ohne `areaServed` auf Kantonsebene.** Empfehlung: `areaServed` als Liste der Kantone (SG, TG, AR, AI, ZH, SH, GL, GR, FL) plus "Schweiz". Aufwand: 1 Stunde.
 3. **Kein `WebPage`-Knoten** je Seite mit `isPartOf`, `primaryImageOfPage`, `dateModified`. Hilft KI-Suchsystemen bei der Aktualität. Aufwand: 1 Stunde.
 4. **Teamseite: Personen ohne `knowsAbout` und ohne Verknüpfung zu LinkedIn** (`sameAs`), Über uns ohne Personenknoten. Aufwand: 1 Stunde.
@@ -195,7 +195,7 @@ Mit Massnahmen 1 bis 6 steigt die Gesamtwertung nach dieser Skala auf etwa 94. D
 
 | Nr. | Massnahme | Stand |
 |---|---|---|
-| 2 | LocalBusiness vervollständigt: geo (OpenStreetMap), Öffnungszeiten Mo bis Fr 07:00 bis 17:00 (aus dem Google-Profil), hasMap, UID, Personenzahl aus dem Team, Einsatzgebiet "Deutschschweiz und Liechtenstein" (auch im Service je Leistung). WebPage-Knoten mit dateModified und primaryImageOfPage auf allen Seiten. | umgesetzt; Gründungsjahr und Google-Profil-Link als CMS-Felder vorbereitet (docs/16 Nr. 18) |
+| 2 | LocalBusiness vervollständigt: geo (OpenStreetMap), Öffnungszeiten Mo bis Fr 07:00 bis 17:00 (aus dem Google-Profil), hasMap, UID, Personenzahl aus dem Team, Einsatzgebiet "Deutschschweiz und Liechtenstein" (auch im Service je Leistung). WebPage-Knoten mit dateModified und primaryImageOfPage auf allen Seiten. | umgesetzt; Google-Profil-Link eingetragen, Gründungsjahr bewusst leer (docs/16 Nr. 18), Adresse auf Langgasse 134 korrigiert (Nr. 17) |
 | 3 | Titelvorlage auf Kurznamen "LWL-Techniker" umgestellt, 13 SEO-Titel gekürzt und mit Region versehen, Beschreibungen für /kunden, /jobs, Impressum und Datenschutz eigenständig. | umgesetzt, längster Titel jetzt 64 Zeichen |
 | 5 | Sitemap lastmod und dateModified aus der Git-Historie (`scripts/aktualisiert.mjs`, `content/aktualisiert.json`). | umgesetzt |
 | 6 | llms-full.txt um Über uns, Kunden, Produkte je Kategorie mit PDF-Links und Team ergänzt; llms.txt mit Einsatzgebiet, Erreichbarkeit und UID. | umgesetzt |

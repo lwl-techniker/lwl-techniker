@@ -15,8 +15,8 @@ export const WEBSITE_ID = `${DOMAIN}/#website`;
 
 const url = (pfad: string) => new URL(pfad, DOMAIN).toString();
 
-/** Koordinaten des Firmensitzes Langgasse 136, 9008 St. Gallen (OpenStreetMap, Oktober 2026). Bei Umzug anpassen. */
-const GEO = { latitude: 47.4438526, longitude: 9.3962406 };
+/** Koordinaten des Firmensitzes Langgasse 134, 9008 St. Gallen (OpenStreetMap, Oktober 2026, wie im Google-Unternehmensprofil). Bei Umzug anpassen. */
+const GEO = { latitude: 47.4436505, longitude: 9.3960517 };
 
 const WOCHENTAGE = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'];
 const TAG_SCHEMA = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
