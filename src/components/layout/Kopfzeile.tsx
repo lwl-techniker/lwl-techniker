@@ -37,6 +37,8 @@ export function Kopfzeile({ firmenname, logoHell, logoDunkel, telefon, menue, ko
   const pfad = usePathname();
   const [offen, setOffen] = useState<string | null>(null);
   const [mobilOffen, setMobilOffen] = useState<string | null>(null);
+  // Logo im Dialog nur bei offenem Dialog rendern: Lighthouse misst sonst das versteckte Bild mit falschem Seitenverhältnis
+  const [dialogOffen, setDialogOffen] = useState(false);
   const dialog = useRef<HTMLDialogElement>(null);
   const ausloeser = useRef<HTMLButtonElement>(null);
   const navigation = useRef<HTMLElement>(null);
@@ -46,12 +48,14 @@ export function Kopfzeile({ firmenname, logoHell, logoDunkel, telefon, menue, ko
     if (d?.open) d.close();
     document.body.style.overflow = '';
     setMobilOffen(null);
+    setDialogOffen(false);
     if (fokusZurueck) ausloeser.current?.focus({ preventScroll: true });
   }, []);
 
   const dialogOeffnen = () => {
     dialog.current?.showModal();
     document.body.style.overflow = 'hidden';
+    setDialogOffen(true);
   };
 
   /** Klick auf einen Link: Menüs schliessen; bei gleicher Route sofort nach oben */
@@ -249,13 +253,14 @@ export function Kopfzeile({ firmenname, logoHell, logoDunkel, telefon, menue, ko
         }}
         onClose={() => {
           document.body.style.overflow = '';
+          setDialogOffen(false);
         }}
       >
         {/* Aufbau wie V2: Kopfzeile mit Logo, Schalter und Schliessen-Symbol; Menüpunkte als Links, Untermenü über "Alle anzeigen"; Kontakt und Telefon als Knöpfe */}
         <div className="flex min-h-full flex-col overflow-y-auto px-5 pt-4 pb-10 sm:px-8">
           <div className="flex items-center justify-between gap-4">
             <Link href="/" className="flex shrink-0 items-center" aria-label={`${firmenname}, zur Startseite`} onClick={() => navigieren('/')}>
-              {logoHell || logoDunkel ? (
+              {dialogOffen && (logoHell || logoDunkel) ? (
                 <MarkenLogo logoHell={logoHell} logoDunkel={logoDunkel} alt={firmenname} width={724} height={302} sizes="115px" className="h-12 w-auto" />
               ) : (
                 <span className="font-titel text-base font-bold tracking-[0.06em] uppercase">{firmenname}</span>
