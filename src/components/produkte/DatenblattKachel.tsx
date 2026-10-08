@@ -27,7 +27,9 @@ export function DatenblattKachel({ eintrag: p, titelEbene = 'h3', sizes = KACHEL
   const anfrage = `/kontakt?produkt=${encodeURIComponent(sauberText(p.titel))}`;
 
   return (
-    <article data-einblenden className="group flex flex-col overflow-hidden rounded-[var(--radius-karte)] border border-linie bg-flaeche transition-colors duration-300 hover:border-marke/60">
+    // suppressHydrationWarning: Die Kacheln liegen im Katalog (Client-Komponente in Suspense), der im Entwicklungsmodus
+    // erst nach "load" hydriert. Bis dahin hat Einblenden.tsx data-einblenden bereits auf "sofort" gesetzt; das ist gewollt.
+    <article data-einblenden suppressHydrationWarning className="group flex flex-col overflow-hidden rounded-[var(--radius-karte)] border border-linie bg-flaeche transition-colors duration-300 hover:border-marke/60">
       <div className={cn('relative aspect-[4/3] overflow-hidden', istBild ? 'bg-white p-5' : 'bg-flaeche-dunkel')}>
         {visuell ? (
           <Image

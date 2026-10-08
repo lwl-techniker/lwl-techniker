@@ -190,3 +190,18 @@ Mit Massnahmen 1 bis 6 steigt die Gesamtwertung nach dieser Skala auf etwa 94. D
 - `.qa/perf.mjs`: LCP, CLS, TTFB und Übertragung nach Ressourcentyp, Desktop und Mobil.
 - Lighthouse über Chrome DevTools (Navigation, Desktop und Mobil).
 - `npm run pruefen`, `npm run build`, `npm run test:browser` (alle bestanden, Stand d05589d).
+
+## Stand der Umsetzung (8. Oktober 2026, Block B)
+
+| Nr. | Massnahme | Stand |
+|---|---|---|
+| 2 | LocalBusiness vervollständigt: geo (OpenStreetMap), Öffnungszeiten Mo bis Fr 07:00 bis 17:00 (aus dem Google-Profil), hasMap, UID, Personenzahl aus dem Team, Einsatzgebiet "Deutschschweiz und Liechtenstein" (auch im Service je Leistung). WebPage-Knoten mit dateModified und primaryImageOfPage auf allen Seiten. | umgesetzt; Gründungsjahr und Google-Profil-Link als CMS-Felder vorbereitet (docs/16 Nr. 18) |
+| 3 | Titelvorlage auf Kurznamen "LWL-Techniker" umgestellt, 13 SEO-Titel gekürzt und mit Region versehen, Beschreibungen für /kunden, /jobs, Impressum und Datenschutz eigenständig. | umgesetzt, längster Titel jetzt 64 Zeichen |
+| 5 | Sitemap lastmod und dateModified aus der Git-Historie (`scripts/aktualisiert.mjs`, `content/aktualisiert.json`). | umgesetzt |
+| 6 | llms-full.txt um Über uns, Kunden, Produkte je Kategorie mit PDF-Links und Team ergänzt; llms.txt mit Einsatzgebiet, Erreichbarkeit und UID. | umgesetzt |
+| 7 | Google Maps erst auf Klick, Datenschutzerklärung mit DSG, WhatsApp und Datenherausgabe. | umgesetzt, Text prüfen lassen (docs/16 Nr. 19) |
+| 8 | Content-Security-Policy (next.config.ts, eigene Regel für /keystatic), HSTS (netlify.toml), X-Powered-By entfernt. Akismet nur in der Netlify-Oberfläche möglich (docs/16 Nr. 20). | umgesetzt |
+| 9 | Logoslider | bewusst unverändert: kein Pausenknopf (Vorgabe der Kundschaft), DOM-Verkleinerung ohne messbaren Nutzen bei LCP 0.3 s |
+| 11 | Impressum und Datenschutz indexierbar (neuer Schalter "In Suchmaschinen anzeigen"), bleiben ausserhalb der Sitemap. | umgesetzt |
+| 12 | GitHub Actions | offen, Entscheid der Kundschaft (docs/16 Nr. 21) |
+| 13 | Anruf-Knopf in der Kopfzeile auf Mobil, Kontaktseite mit Erreichbarkeit und Angaben für Offerten, Jobs-Seite mit Initiativbewerbung, Startseite mit Block "Warum LWL-Techniker" (vier Punkte aus Über uns). | umgesetzt |

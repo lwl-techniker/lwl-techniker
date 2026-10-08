@@ -8,6 +8,7 @@ import { metadaten } from '@/lib/seo';
 import { sauberText } from '@/lib/text';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { referenzenAlsListe } from '@/lib/strukturierte-daten';
+import { aktualisiertVon } from '@/lib/aktualisiert';
 
 export async function generateMetadata() {
   const { referenzen: u } = await holeUebersichten();
@@ -23,7 +24,7 @@ export default async function ReferenzenSeite() {
 
   return (
     <>
-      <Seitenkopf ueberzeile={u.ueberzeile} titel={u.titel} einleitung={u.einleitung} pfad={[{ text: u.titel, href: '/referenzen' }]}>
+      <Seitenkopf aktualisiert={aktualisiertVon('content/einstellungen/uebersichten.json', 'content/referenzen')} ueberzeile={u.ueberzeile} titel={u.titel} einleitung={u.einleitung} pfad={[{ text: u.titel, href: '/referenzen' }]}>
         <Link href="/kunden" className="group mt-8 inline-flex min-h-11 items-center gap-2 font-titel text-sm font-semibold tracking-[0.16em] text-marke uppercase hover:text-marke-hell">
           Unsere Kunden ansehen
           <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" aria-hidden />

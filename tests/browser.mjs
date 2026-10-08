@@ -231,6 +231,17 @@ try {
   ok('Team: 2 Leitung, 4 Technik, keine entfernte Person');
   await t.close();
 
+  // 7b. Kontaktseite: Karte erst auf Klick, mobiler Anruf-Knopf
+  const kk = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  const kp = await kk.newPage();
+  await kp.goto(`${base}/kontakt`, { waitUntil: 'networkidle' });
+  assert.equal(await kp.locator('iframe').count(), 0, 'Vor dem Klick keine Karte von Google');
+  assert.ok(await kp.locator('header a[href^="tel:"]').first().isVisible(), 'Anruf-Knopf in der Kopfzeile sichtbar (Mobil)');
+  await kp.getByRole('button', { name: 'Karte laden' }).click();
+  await kp.locator('iframe[src*="google.com/maps"]').waitFor({ timeout: 10000 });
+  ok('Kontakt: Karte lädt erst auf Klick, Anruf-Knopf auf Mobil vorhanden');
+  await kk.close();
+
   // 8. Bewegung reduzieren: Animationen laufen sanfter weiter statt abgeschaltet zu werden
   const ruhigKontext = await browser.newContext({ viewport: { width: 1440, height: 900 }, colorScheme: 'dark', reducedMotion: 'reduce' });
   const ruhig = await ruhigKontext.newPage();

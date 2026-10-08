@@ -10,6 +10,7 @@ import { metadaten } from '@/lib/seo';
 import { sauberText } from '@/lib/text';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { leistungAlsService } from '@/lib/strukturierte-daten';
+import { aktualisiertVon } from '@/lib/aktualisiert';
 
 export const dynamicParams = false;
 
@@ -60,8 +61,8 @@ export default async function LeistungSeite({ params }: Props) {
 
   return (
     <>
-      <JsonLd daten={leistungAlsService(l)} />
-      <Seitenkopf
+      <JsonLd daten={leistungAlsService(l, e)} />
+      <Seitenkopf bild={l.bild} aktualisiert={aktualisiertVon(`content/leistungen/${slug}`)}
         titel={l.titel}
         einleitung={l.kurzbeschreibung}
         pfad={[

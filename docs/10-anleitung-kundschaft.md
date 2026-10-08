@@ -86,3 +86,18 @@ Das Team wird unter **Inhalte > Team** als eine Liste gepflegt.
 ## Hilfe
 
 Bei Fragen oder wenn etwas nach 5 Minuten noch nicht online ist: InfraOne IT Solutions kontaktieren. Es geht nichts verloren, jede Änderung ist gespeichert und kann wiederhergestellt werden.
+
+## Firmendaten für Google und KI-Suche
+
+Unter **Einstellungen > Firma und Kontakt** stehen seit 8. Oktober 2026 zusätzliche Felder. Sie erscheinen nicht sichtbar auf der Website, sondern in den Firmendaten, die Google, Bing und KI-Suchsysteme lesen:
+
+- **Kurzname für Seitentitel**: wird an jeden Seitentitel angehängt ("Muffenspleissungen | LWL-Techniker"). Kurz lassen, sonst schneidet Google die Titel ab.
+- **UID**: die Unternehmens-Identifikationsnummer wie im Impressum.
+- **Gründungsjahr**: vierstellig, leer lassen, wenn unbekannt.
+- **Einsatzgebiet**: Regionen mit Komma oder "und" getrennt, z. B. "Deutschschweiz und Liechtenstein".
+- **Google Business Profil (Link)**: der Link "Auf Google Maps ansehen" aus dem Unternehmensprofil. Wichtig: Name, Adresse und Telefon müssen im Profil und auf der Website identisch sein.
+- **Öffnungszeiten**: je Zeile Tage ("Montag bis Freitag") und Zeiten ("07:00 bis 17:00"). Diese Form wird automatisch für Google übersetzt; mehrere Zeitbereiche mit Komma trennen.
+
+Bei freien Seiten gibt es zwei Schalter: **In der Sitemap aufführen** (für Impressum und Datenschutz aus) und **In Suchmaschinen anzeigen** (nur ausschalten, wenn eine Seite in Google gar nicht erscheinen soll).
+
+Das Datum der letzten Änderung jeder Seite wird automatisch aus dem Speicherverlauf ermittelt. Es muss nirgends eingetragen werden.

@@ -5,6 +5,7 @@ import { Seitenkopf } from '@/components/ui/Seitenkopf';
 import { holeDatenblaetter, holeEinstellungen, holeProduktKategorien } from '@/lib/cms';
 import { metadaten } from '@/lib/seo';
 import { sauberText } from '@/lib/text';
+import { aktualisiertVon } from '@/lib/aktualisiert';
 
 export async function generateMetadata() {
   return metadaten({
@@ -31,7 +32,7 @@ export default async function DownloadsSeite() {
 
   return (
     <>
-      <Seitenkopf
+      <Seitenkopf aktualisiert={aktualisiertVon('content/produkte')}
         ueberzeile="Dokumentation"
         titel="Datenblätter und Downloads"
         einleitung={`${mitPdf.length} Originaldatenblätter als PDF, nach Kategorie geordnet. Mit Suche und Vorschau finden Sie dieselben Dokumente im Produktkatalog.`}

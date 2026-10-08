@@ -3,25 +3,36 @@ import { ChevronRight } from 'lucide-react';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { DOMAIN } from '@/site.config';
 import { absaetze, sauberText } from '@/lib/text';
+import { seiteAlsWebPage } from '@/lib/strukturierte-daten';
 import { TitelMitKontur } from './AbschnittKopf';
 
 type Pfadpunkt = { text: string; href: string };
 
-/** Kopfbereich für Übersichts- und Detailseiten mit Brotkrumen (inkl. BreadcrumbList für Google). */
+/**
+ * Kopfbereich für Übersichts- und Detailseiten mit Brotkrumen. Gibt BreadcrumbList und WebPage (mit
+ * dateModified aus der Git-Historie, Prop "aktualisiert") als strukturierte Daten aus.
+ */
 export function Seitenkopf({
   ueberzeile,
   titel,
   einleitung,
   pfad,
+  aktualisiert,
+  bild,
   children,
 }: {
   ueberzeile?: string;
   titel: string;
   einleitung?: string;
   pfad: Pfadpunkt[];
+  /** ISO-Zeitpunkt der letzten Änderung (src/lib/aktualisiert.ts) */
+  aktualisiert?: string;
+  /** Hauptbild der Seite für primaryImageOfPage */
+  bild?: string | null;
   children?: React.ReactNode;
 }) {
   const alle = [{ text: 'Startseite', href: '/' }, ...pfad];
+  const eigener = alle[alle.length - 1];
 
   return (
     <header className="border-b border-linie">
@@ -69,6 +80,7 @@ export function Seitenkopf({
           })),
         }}
       />
+      <JsonLd daten={seiteAlsWebPage({ pfad: eigener.href, titel, beschreibung: einleitung, aktualisiert, bild })} />
     </header>
   );
 }

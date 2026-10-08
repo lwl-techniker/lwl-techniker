@@ -254,15 +254,19 @@
     },
     "allgemeinTitel": "Verbindungen, die Vertrauen schaffen",
     "allgemeinEinleitung": "Unsere Kundschaft reicht von Unternehmen und öffentlichen Einrichtungen bis zu Betreibern von Verkehrs-, Sport- und Gebäudeinfrastruktur. Auf dieser Seite zeigen wir die Logos unserer Kunden und Auftraggeber. Konkrete Aufgaben und ausgeführte Leistungen dokumentieren wir in den Projektbeispielen.",
-    "allgemeinHinweis": "Glasfaseranschlüsse, Gebäudeverkabelung, Verkehrsprojekte und Technik am Spielfeldrand: Unsere Projektbeispiele zeigen, in welchem Kontext wir arbeiten. Die Logos stehen für das Referenzumfeld und sind keine Aussage über einen bestimmten Auftragsumfang oder eine aktuelle Partnerschaft."
+    "allgemeinHinweis": "Glasfaseranschlüsse, Gebäudeverkabelung, Verkehrsprojekte und Technik am Spielfeldrand: Unsere Projektbeispiele zeigen, in welchem Kontext wir arbeiten. Die Logos stehen für das Referenzumfeld und sind keine Aussage über einen bestimmten Auftragsumfang oder eine aktuelle Partnerschaft.",
+    "kundenSeo": {
+      "titel": "Unsere Kunden: Referenzlogos",
+      "beschreibung": "Logos unserer Kundschaft und Auftraggeber: Netzbetreiber, Gemeinden, Unternehmen, Sport- und Verkehrsinfrastruktur in der Deutschschweiz."
+    }
   },
   "jobs": {
     "ueberzeile": "Stellen",
     "titel": "Offene Stellen",
-    "einleitung": "Offene Stellen erscheinen hier, sobald wir eine Stelle ausschreiben. Initiativbewerbungen senden Sie an info@lwl-techniker.ch.",
+    "einleitung": "Offene Stellen erscheinen hier, sobald wir eine Stelle ausschreiben. Wir suchen regelmässig LWL-Techniker und Monteure für Spleiss-, Mess- und Installationsarbeiten in der Deutschschweiz, Einsatz ab St. Gallen. Initiativbewerbungen mit Lebenslauf senden Sie an info@lwl-techniker.ch.",
     "seo": {
-      "titel": "Offene Stellen",
-      "beschreibung": "Aktuelle Stellen bei der LWL-Techniker Schweiz GmbH in St. Gallen."
+      "titel": "Offene Stellen und Initiativbewerbung",
+      "beschreibung": "Stellen bei der LWL-Techniker Schweiz GmbH in St. Gallen: Techniker und Monteure für Spleiss-, Mess- und Installationsarbeiten. Initiativbewerbungen willkommen."
     }
   },
   "produkte": {

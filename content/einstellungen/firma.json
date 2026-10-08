@@ -1,5 +1,6 @@
 {
   "firmenname": "LWL-Techniker Schweiz GmbH",
+  "kurzname": "LWL-Techniker",
   "kurzbeschreibung": "Glasfaserinstallationen, Spleiss- und Messtechnik sowie LWL-Produkte aus St. Gallen. Unsere Montageteams sind in der ganzen Schweiz im Einsatz.",
   "logo": "/bilder/firma/logo.png",
   "logohell": "/bilder/firma/logohell.png",
@@ -11,7 +12,16 @@
   "ort": "St. Gallen",
   "kanton": "SG",
   "land": "CH",
-  "oeffnungszeiten": [],
+  "uid": "CHE-302.905.008",
+  "gruendungsjahr": "",
+  "einsatzgebiet": "Deutschschweiz und Liechtenstein",
+  "googleProfil": "",
+  "oeffnungszeiten": [
+    {
+      "tage": "Montag bis Freitag",
+      "zeiten": "07:00 bis 17:00"
+    }
+  ],
   "socialMedia": [
     {
       "plattform": "linkedin",

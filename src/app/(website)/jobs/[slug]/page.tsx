@@ -7,6 +7,7 @@ import { markdocAlsHtml, renderMarkdoc } from '@/lib/markdoc';
 import { metadaten } from '@/lib/seo';
 import { sauberText } from '@/lib/text';
 import { DOMAIN } from '@/site.config';
+import { aktualisiertVon } from '@/lib/aktualisiert';
 
 /** Nur offene Stellen erhalten eine Seite. Besetzte Stellen verschwinden beim nächsten Build automatisch. */
 export const dynamicParams = false;
@@ -66,7 +67,7 @@ export default async function JobSeite({ params }: Props) {
 
   return (
     <>
-      <Seitenkopf
+      <Seitenkopf aktualisiert={aktualisiertVon(`content/jobs/${slug}`)}
         titel={j.titel}
         einleitung={j.kurzbeschreibung}
         pfad={[

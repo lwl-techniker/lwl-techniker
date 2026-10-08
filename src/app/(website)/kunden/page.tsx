@@ -6,10 +6,11 @@ import { Seitenkopf } from '@/components/ui/Seitenkopf';
 import { holeEinstellungen, holeUebersichten } from '@/lib/cms';
 import { metadaten } from '@/lib/seo';
 import { absaetze, sauberText } from '@/lib/text';
+import { aktualisiertVon } from '@/lib/aktualisiert';
 
 export async function generateMetadata() {
   const { referenzen: u } = await holeUebersichten();
-  return metadaten({ pfad: '/kunden', seitentitel: 'Unsere Kunden', seo: { titel: 'Unsere Kunden und Referenzen', beschreibung: '' }, beschreibungFallback: u.allgemeinEinleitung || u.einleitung });
+  return metadaten({ pfad: '/kunden', seitentitel: 'Unsere Kunden', seo: u.kundenSeo, beschreibungFallback: u.allgemeinEinleitung || u.einleitung });
 }
 
 /**
@@ -23,7 +24,7 @@ export default async function KundenSeite() {
 
   return (
     <>
-      <Seitenkopf
+      <Seitenkopf aktualisiert={aktualisiertVon('content/einstellungen/uebersichten.json')}
         ueberzeile={u.logos.titel || 'Unsere Kunden'}
         titel={u.allgemeinTitel || 'Unsere Kunden'}
         einleitung={u.allgemeinEinleitung}

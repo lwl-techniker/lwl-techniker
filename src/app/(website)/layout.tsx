@@ -6,14 +6,15 @@ import { RoutenScroll } from '@/components/layout/RoutenScroll';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { Einblenden } from '@/components/ui/Einblenden';
 import { Faserwellen } from '@/components/ui/Faserwellen';
-import { holeEinstellungen, holeNavigation, holeProduktKategorien } from '@/lib/cms';
+import { holeEinstellungen, holeNavigation, holeProduktKategorien, holeTeam } from '@/lib/cms';
 import { sauberText } from '@/lib/text';
 import { organisationUndWebsite } from '@/lib/strukturierte-daten';
 
 export async function generateMetadata(): Promise<Metadata> {
   const e = await holeEinstellungen();
   return {
-    title: { default: sauberText(e.seoTitel), template: `%s | ${e.firmenname}` },
+    // Kurzname in der Vorlage, damit Seitentitel in Google nicht abgeschnitten werden (Firmenname steht in den Firmendaten)
+    title: { default: sauberText(e.seoTitel), template: `%s | ${e.kurzname || e.firmenname}` },
     description: sauberText(e.seoBeschreibung),
   };
 }
@@ -25,7 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
  * Untermenü Produkte: Kategorien der Datenblätter werden automatisch an die im CMS gepflegten Unterpunkte angehängt.
  */
 export default async function WebsiteLayout({ children }: { children: React.ReactNode }) {
-  const [e, n, kategorien] = await Promise.all([holeEinstellungen(), holeNavigation(), holeProduktKategorien()]);
+  const [e, n, kategorien, team] = await Promise.all([holeEinstellungen(), holeNavigation(), holeProduktKategorien(), holeTeam()]);
 
   const menue: Menuepunkt[] = n.hauptmenue
     .filter((p) => p.link !== (n.knopf.link || '/kontakt'))
@@ -45,7 +46,7 @@ export default async function WebsiteLayout({ children }: { children: React.Reac
     });
 
   // Organisation und Website als Graph; Unterseiten verweisen per @id darauf (src/lib/strukturierte-daten.ts)
-  const organisation = organisationUndWebsite(e);
+  const organisation = organisationUndWebsite(e, team.length);
 
   return (
     <>

@@ -6,6 +6,7 @@ import { metadaten } from '@/lib/seo';
 import { sauberText } from '@/lib/text';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { teamAlsPersonen } from '@/lib/strukturierte-daten';
+import { aktualisiertVon } from '@/lib/aktualisiert';
 
 export async function generateMetadata() {
   const { team: u } = await holeUebersichten();
@@ -20,7 +21,7 @@ export default async function TeamSeite() {
 
   return (
     <>
-      <Seitenkopf
+      <Seitenkopf aktualisiert={aktualisiertVon('content/einstellungen/uebersichten.json', 'content/team.json')}
         ueberzeile={u.ueberzeile}
         titel={u.titel}
         einleitung={u.einleitung}

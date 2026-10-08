@@ -48,7 +48,7 @@ Die Konfigurationsprüfung verhindert, dass `lokal` online landet, und warnt bei
 
 | Name | Datei | Inhalt |
 | --- | --- | --- |
-| Firma und Kontakt | `content/einstellungen/firma.json` | Name, Adresse, Telefon, Öffnungszeiten, Logos, Standard-SEO |
+| Firma und Kontakt | `content/einstellungen/firma.json` | Name, Kurzname (Titelvorlage), Adresse, Telefon, WhatsApp, UID, Gründungsjahr, Einsatzgebiet, Google-Profil, Öffnungszeiten, Logos, Standard-SEO |
 | Navigation | `content/einstellungen/navigation.json` | Hauptmenü, Knopf, Fusszeile, rechtliche Links |
 | Übersichtsseiten | `content/einstellungen/uebersichten.json` | Titel und Einleitung für /leistungen, /referenzen, /jobs |
 | Startseite | `content/startseite/startseite.json` | SEO und Blöcke |

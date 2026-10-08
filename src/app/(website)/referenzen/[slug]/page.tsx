@@ -9,6 +9,7 @@ import { renderMarkdoc } from '@/lib/markdoc';
 import { metadaten } from '@/lib/seo';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { referenzAlsArtikel } from '@/lib/strukturierte-daten';
+import { aktualisiertVon } from '@/lib/aktualisiert';
 
 export const dynamicParams = false;
 
@@ -48,7 +49,7 @@ export default async function ReferenzSeite({ params }: Props) {
   return (
     <>
       <JsonLd daten={referenzAlsArtikel(r)} />
-      <Seitenkopf
+      <Seitenkopf bild={r.titelbild} aktualisiert={aktualisiertVon(`content/referenzen/${slug}`)}
         ueberzeile={r.kategorie || undefined}
         titel={r.titel}
         einleitung={r.kurzbeschreibung}

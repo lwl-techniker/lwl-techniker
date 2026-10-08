@@ -219,7 +219,7 @@ export function logosFeld(o: { label?: string } = {}) {
 }
 
 /** SEO-Felder für jede Seite und jeden Sammlungseintrag. */
-export function seo() {
+export function seo(label = 'Google und Suchmaschinen (SEO)') {
   return fields.object(
     {
       titel: text('SEO-Titel', {
@@ -231,7 +231,7 @@ export function seo() {
         beschreibung: 'Erscheint in Google unter dem Titel. 120 bis 160 Zeichen, sachlich und konkret.',
       }),
     },
-    { label: 'Google und Suchmaschinen (SEO)' }
+    { label }
   );
 }
 

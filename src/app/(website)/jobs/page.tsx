@@ -2,6 +2,7 @@ import { Seitenkopf } from '@/components/ui/Seitenkopf';
 import { JobZeile } from '@/components/karten/Karten';
 import { holeEinstellungen, holeJobs, holeUebersichten } from '@/lib/cms';
 import { metadaten } from '@/lib/seo';
+import { aktualisiertVon } from '@/lib/aktualisiert';
 
 export async function generateMetadata() {
   const { jobs: u } = await holeUebersichten();
@@ -13,7 +14,7 @@ export default async function JobsSeite() {
 
   return (
     <>
-      <Seitenkopf ueberzeile={u.ueberzeile} titel={u.titel} einleitung={u.einleitung} pfad={[{ text: u.titel, href: '/jobs' }]} />
+      <Seitenkopf aktualisiert={aktualisiertVon('content/einstellungen/uebersichten.json', 'content/jobs')} ueberzeile={u.ueberzeile} titel={u.titel} einleitung={u.einleitung} pfad={[{ text: u.titel, href: '/jobs' }]} />
       <section className="abschnitt">
         <div className="container-seite">
           {jobs.length > 0 ? (

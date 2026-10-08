@@ -15,8 +15,49 @@ export const WEBSITE_ID = `${DOMAIN}/#website`;
 
 const url = (pfad: string) => new URL(pfad, DOMAIN).toString();
 
-/** Organisation (LocalBusiness) und Website als Graph für das Layout. */
-export function organisationUndWebsite(e: Einstellungen) {
+/** Koordinaten des Firmensitzes Langgasse 136, 9008 St. Gallen (OpenStreetMap, Oktober 2026). Bei Umzug anpassen. */
+const GEO = { latitude: 47.4438526, longitude: 9.3962406 };
+
+const WOCHENTAGE = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'];
+const TAG_SCHEMA = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+/**
+ * Einsatzgebiet aus dem CMS ("Deutschschweiz und Liechtenstein") als Liste von Gebieten.
+ * Länder werden als Country, alles andere als AdministrativeArea ausgegeben.
+ */
+export function einsatzgebiete(e: Einstellungen) {
+  const namen = (e.einsatzgebiet || 'Schweiz')
+    .split(/,| und /)
+    .map((n) => n.trim())
+    .filter(Boolean);
+  return namen.map((name) => ({ '@type': ['Schweiz', 'Liechtenstein', 'Deutschland', 'Österreich'].includes(name) ? 'Country' : 'AdministrativeArea', name }));
+}
+
+/**
+ * Öffnungszeiten aus dem CMS ("Montag bis Freitag", "07:00 bis 17:00") als OpeningHoursSpecification.
+ * Nicht erkennbare Angaben werden ausgelassen, nie geraten.
+ */
+function oeffnungszeiten(e: Einstellungen) {
+  const liste: { '@type': 'OpeningHoursSpecification'; dayOfWeek: string[]; opens: string; closes: string }[] = [];
+  for (const z of e.oeffnungszeiten) {
+    const tage = z.tage.match(/^(\S+)(?:\s+bis\s+(\S+))?$/);
+    if (!tage) continue;
+    const von = WOCHENTAGE.indexOf(tage[1]);
+    const bis = tage[2] ? WOCHENTAGE.indexOf(tage[2]) : von;
+    if (von < 0 || bis < 0 || bis < von) continue;
+    const dayOfWeek = TAG_SCHEMA.slice(von, bis + 1);
+    for (const bereich of z.zeiten.split(',')) {
+      const m = bereich.trim().match(/^(\d{1,2}[:.]\d{2})\s*bis\s*(\d{1,2}[:.]\d{2})$/);
+      if (!m) continue;
+      liste.push({ '@type': 'OpeningHoursSpecification', dayOfWeek, opens: m[1].replace('.', ':'), closes: m[2].replace('.', ':') });
+    }
+  }
+  return liste.length ? liste : undefined;
+}
+
+/** Organisation (LocalBusiness) und Website als Graph für das Layout. Personenzahl aus dem Team-Singleton. */
+export function organisationUndWebsite(e: Einstellungen, anzahlPersonen?: number) {
+  const adresse = `${e.strasse}, ${e.plz} ${e.ort}, Schweiz`;
   return {
     '@context': 'https://schema.org',
     '@graph': [
@@ -24,6 +65,7 @@ export function organisationUndWebsite(e: Einstellungen) {
         '@type': ['Organization', 'LocalBusiness'],
         '@id': ORGANISATION_ID,
         name: e.firmenname,
+        alternateName: e.kurzname || undefined,
         description: sauberText(e.kurzbeschreibung),
         url: DOMAIN,
         telephone: e.telefon,
@@ -38,9 +80,16 @@ export function organisationUndWebsite(e: Einstellungen) {
           addressRegion: e.kanton || undefined,
           addressCountry: e.land,
         },
-        areaServed: { '@type': 'Country', name: 'Schweiz' },
+        geo: { '@type': 'GeoCoordinates', ...GEO },
+        hasMap: e.googleProfil || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(adresse)}`,
+        openingHoursSpecification: oeffnungszeiten(e),
+        foundingDate: /^\d{4}$/.test(e.gruendungsjahr || '') ? e.gruendungsjahr : undefined,
+        vatID: e.uid || undefined,
+        taxID: e.uid || undefined,
+        numberOfEmployees: anzahlPersonen ? { '@type': 'QuantitativeValue', value: anzahlPersonen } : undefined,
+        areaServed: einsatzgebiete(e),
         knowsAbout: ['Glasfasertechnik', 'LWL-Installation', 'Muffenspleissung', 'FTTH', 'OTDR-Messung', 'Rechenzentrumsverkabelung'],
-        sameAs: e.socialMedia.map((s) => s.url),
+        sameAs: [...e.socialMedia.map((s) => s.url), ...(e.googleProfil ? [e.googleProfil] : [])],
       },
       {
         '@type': 'WebSite',
@@ -55,8 +104,8 @@ export function organisationUndWebsite(e: Einstellungen) {
   };
 }
 
-/** Eine Leistung als Service mit der Firma als Anbieter. */
-export function leistungAlsService(l: Leistung) {
+/** Eine Leistung als Service mit der Firma als Anbieter und dem Einsatzgebiet aus dem CMS. */
+export function leistungAlsService(l: Leistung, e?: Einstellungen) {
   return {
     '@context': 'https://schema.org',
     '@type': 'Service',
@@ -67,7 +116,27 @@ export function leistungAlsService(l: Leistung) {
     image: url(l.bild),
     serviceType: sauberText(l.titel),
     provider: { '@id': ORGANISATION_ID },
-    areaServed: { '@type': 'Country', name: 'Schweiz' },
+    areaServed: e ? einsatzgebiete(e) : { '@type': 'Country', name: 'Schweiz' },
+    inLanguage: 'de-CH',
+  };
+}
+
+/**
+ * Jede Seite als WebPage mit Zugehörigkeit zur Website und zur Firma. "dateModified" stammt aus der
+ * Git-Historie der Inhaltsdatei (src/lib/aktualisiert.ts), nie von Hand gepflegt.
+ */
+export function seiteAlsWebPage({ pfad, titel, beschreibung, aktualisiert, bild }: { pfad: string; titel: string; beschreibung?: string; aktualisiert?: string; bild?: string | null }) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${url(pfad)}#webpage`,
+    url: url(pfad),
+    name: sauberText(titel),
+    description: beschreibung ? sauberText(beschreibung).replace(/\s*\n\s*/g, ' ') : undefined,
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': ORGANISATION_ID },
+    primaryImageOfPage: bild ? { '@type': 'ImageObject', url: url(bild) } : undefined,
+    dateModified: aktualisiert,
     inLanguage: 'de-CH',
   };
 }

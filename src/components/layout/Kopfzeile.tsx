@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ArrowUpRight, ChevronDown, Menu, X } from 'lucide-react';
+import { ArrowUpRight, ChevronDown, Menu, Phone, X } from 'lucide-react';
 import { cn } from '@/lib/cn';
 import { ThemeSchalter } from '@/components/ui/ThemeSchalter';
 import { MarkenLogo } from '@/components/ui/MarkenLogo';
@@ -220,6 +220,10 @@ export function Kopfzeile({ firmenname, logoHell, logoDunkel, telefon, menue, ko
 
           <div className="flex items-center gap-1">
             <ThemeSchalter />
+            {/* Anruf-Knopf nur auf Mobil und Tablet (Notfalleinsätze: ein Tipp genügt) */}
+            <a href={telefonLink} className="inline-flex size-11 items-center justify-center rounded-full border border-marke/25 text-marke lg:hidden" aria-label={`Anrufen: ${telefon}`}>
+              <Phone className="size-5" aria-hidden />
+            </a>
             <button
               ref={ausloeser}
               type="button"

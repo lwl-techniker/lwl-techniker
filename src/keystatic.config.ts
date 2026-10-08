@@ -47,6 +47,11 @@ export default config({
       format: { data: 'json' },
       schema: {
         firmenname: text('Firmenname', { pflicht: true, max: 80, beschreibung: 'Vollständig mit Rechtsform, z. B. Muster AG.' }),
+        kurzname: text('Kurzname für Seitentitel', {
+          max: 30,
+          standard: 'LWL-Techniker',
+          beschreibung: 'Wird in Google und im Browser-Tab an jeden Seitentitel angehängt ("Seite | Kurzname"). Kurz halten, damit Titel nicht abgeschnitten werden.',
+        }),
         kurzbeschreibung: langtext('Kurzbeschreibung', {
           pflicht: true,
           max: 200,
@@ -80,6 +85,14 @@ export default config({
           ],
           defaultValue: 'CH',
         }),
+        uid: text('UID (Unternehmens-Identifikationsnummer)', { max: 20, beschreibung: 'z. B. CHE-123.456.789, wie im Impressum. Erscheint in den Firmendaten für Google.' }),
+        gruendungsjahr: text('Gründungsjahr', { max: 4, beschreibung: 'Vierstellig, z. B. 2015. Leer lassen, wenn unbekannt.' }),
+        einsatzgebiet: text('Einsatzgebiet', {
+          max: 80,
+          standard: 'Deutschschweiz und Liechtenstein',
+          beschreibung: 'Regionen, mit Komma oder "und" getrennt. Erscheint in den Firmendaten für Google und in llms.txt.',
+        }),
+        googleProfil: fields.url({ label: 'Google Business Profil (Link, optional)', description: 'Link "Auf Google Maps ansehen" aus dem Unternehmensprofil. Verknüpft die Website mit dem Profil.' }),
         oeffnungszeiten: fields.array(
           fields.object({
             tage: text('Tage', { pflicht: true, max: 40, beschreibung: 'z. B. "Montag bis Donnerstag"' }),
@@ -173,6 +186,7 @@ export default config({
             max: 500,
             beschreibung: 'z. B. Einordnung, dass Logos das Referenzumfeld zeigen und keine Aussage über eine aktuelle Partnerschaft sind.',
           }),
+          kundenSeo: seo('Seite /kunden: Google und Suchmaschinen (SEO)'),
         }),
         jobs: uebersicht('Seite /jobs', 'Offene Stellen'),
         produkte: uebersicht('Seite /produkte', 'Produkte und Datenblätter', {
@@ -250,8 +264,13 @@ export default config({
         // Gesperrte Adressen: gleiche Liste wie RESERVIERT in scripts/pruefe-konfiguration.mjs
         titel: titelMitAdresse('Seitentitel', { gesperrt: ['leistungen', 'referenzen', 'kunden', 'jobs', 'produkte', 'team', 'downloads', 'keystatic', 'api', 'bilder', 'dokumente'] }),
         inSitemap: fields.checkbox({
-          label: 'Für Google freigeben',
-          description: 'Für Impressum und Datenschutz ausschalten.',
+          label: 'In der Sitemap aufführen',
+          description: 'Für Impressum und Datenschutz ausschalten. Die Seite bleibt trotzdem für Suchmaschinen sichtbar.',
+          defaultValue: true,
+        }),
+        indexieren: fields.checkbox({
+          label: 'In Suchmaschinen anzeigen',
+          description: 'Ausschalten nur, wenn die Seite in Google nicht erscheinen soll (noindex).',
           defaultValue: true,
         }),
         seo: seo(),

@@ -7,6 +7,7 @@ import { metadaten } from '@/lib/seo';
 import { sauberText } from '@/lib/text';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { produkteAlsListe } from '@/lib/strukturierte-daten';
+import { aktualisiertVon } from '@/lib/aktualisiert';
 
 export async function generateMetadata() {
   const { produkte: u } = await holeUebersichten();
@@ -24,7 +25,7 @@ export default async function ProdukteSeite() {
 
   return (
     <>
-      <Seitenkopf ueberzeile={u.ueberzeile} titel={u.titel} einleitung={u.einleitung} pfad={[{ text: u.titel, href: '/produkte' }]}>
+      <Seitenkopf aktualisiert={aktualisiertVon('content/einstellungen/uebersichten.json', 'content/produkte')} ueberzeile={u.ueberzeile} titel={u.titel} einleitung={u.einleitung} pfad={[{ text: u.titel, href: '/produkte' }]}>
         {u.anfrageHinweis ? <p className="mt-6 max-w-3xl text-sm text-text-leise">{sauberText(u.anfrageHinweis)}</p> : null}
       </Seitenkopf>
       <JsonLd daten={produkteAlsListe(eintraege)} />

@@ -1,8 +1,10 @@
 {
   "titel": "Datenschutz",
   "inSitemap": false,
+  "indexieren": true,
   "seo": {
-    "titel": "Datenschutzerklärung"
+    "titel": "Datenschutzerklärung",
+    "beschreibung": "Datenschutzerklärung der LWL-Techniker Schweiz GmbH: Hosting, Kontaktformular, Google Maps, WhatsApp, soziale Netzwerke und Ihre Rechte nach DSG."
   },
   "bloecke": [
     {
