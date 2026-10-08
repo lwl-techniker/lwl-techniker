@@ -204,4 +204,4 @@ Mit Massnahmen 1 bis 6 steigt die Gesamtwertung nach dieser Skala auf etwa 94. D
 | 9 | Logoslider | bewusst unverändert: kein Pausenknopf (Vorgabe der Kundschaft), DOM-Verkleinerung ohne messbaren Nutzen bei LCP 0.3 s |
 | 11 | Impressum und Datenschutz indexierbar (neuer Schalter "In Suchmaschinen anzeigen"), bleiben ausserhalb der Sitemap. | umgesetzt |
 | 12 | GitHub Actions | offen, Entscheid der Kundschaft (docs/16 Nr. 21) |
-| 13 | Anruf-Knopf in der Kopfzeile auf Mobil, Kontaktseite mit Erreichbarkeit und Angaben für Offerten, Jobs-Seite mit Initiativbewerbung, Startseite mit Block "Warum LWL-Techniker" (vier Punkte aus Über uns). | umgesetzt |
+| 13 | Anruf-Knopf in der Kopfzeile auf Mobil, Kontaktseite mit Erreichbarkeit und Angaben für Offerten, Jobs-Seite mit Initiativbewerbung. Block "Warum LWL-Techniker" auf der Startseite nach Rückmeldung der Kundschaft wieder entfernt. | umgesetzt |

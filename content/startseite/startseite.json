@@ -96,31 +96,6 @@
       }
     },
     {
-      "discriminant": "vorteile",
-      "value": {
-        "ueberzeile": "Gründe",
-        "titel": "Warum LWL-Techniker",
-        "eintraege": [
-          {
-            "titel": "Nah an unseren Kunden",
-            "text": "Direkte Ansprechpersonen, offene Gespräche und Lösungen, die zum tatsächlichen Bedarf passen. Auch wenn die Aufgabe komplex wird."
-          },
-          {
-            "titel": "Technisch auf der Höhe",
-            "text": "Unser Team bringt über 20 Jahre Erfahrung in der Glasfasertechnik mit, bildet sich laufend weiter und arbeitet nach den anerkannten Regeln der Technik."
-          },
-          {
-            "titel": "Langlebig planen",
-            "text": "Eine gute Installation soll lange nutzbar bleiben. Deshalb denken wir Wartung und spätere Erweiterungen von Anfang an mit."
-          },
-          {
-            "titel": "Persönliche Ansprechpartner",
-            "text": "Sie erreichen uns direkt, ohne Umweg über eine Zentrale. Geschäftsleitung und Technik sind telefonisch und per E-Mail erreichbar."
-          }
-        ]
-      }
-    },
-    {
       "discriminant": "referenzen",
       "value": {
         "ueberzeile": "Referenzen",
