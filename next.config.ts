@@ -68,20 +68,6 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        source: '/veroeffentlichen',
-        headers: [
-          { key: 'Cache-Control', value: 'no-store' },
-          { key: 'X-Robots-Tag', value: 'noindex, nofollow, noarchive' },
-        ],
-      },
-      {
-        source: '/api/veroeffentlichen',
-        headers: [
-          { key: 'Cache-Control', value: 'no-store' },
-          { key: 'X-Robots-Tag', value: 'noindex, nofollow, noarchive' },
-        ],
-      },
-      {
         source: '/api/keystatic/:path*',
         headers: [
           { key: 'Cache-Control', value: 'no-store' },

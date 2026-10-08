@@ -24,7 +24,7 @@ Stand: 7. Oktober 2026. Keine dieser Fragen blockiert den Betrieb der Website; s
 | 18 | Gründungsjahr und Google-Profil-Link | Link zum Google-Unternehmensprofil (maps.app.goo.gl) am 8. Oktober 2026 unter "Firma und Kontakt" eingetragen; er dient als hasMap, sameAs und als Routenlink auf der Kontaktseite. Gründungsjahr bleibt auf Wunsch der Kundschaft leer. | Erledigt. |
 | 19 | Datenschutzerklärung | Am 8. Oktober 2026 ergänzt: Verweis auf das DSG, Abschnitt WhatsApp (Meta), Karte erst auf Klick, Recht auf Datenherausgabe. Keine juristische Prüfung. | Text durch die Kundschaft oder eine Rechtsberatung prüfen lassen. |
 | 20 | Spamfilter für das Kontaktformular | Netlify Forms bietet den Akismet-Filter kostenlos; die Einstellung liegt in der Netlify-Oberfläche (Forms > Settings), nicht im Code. | In Netlify aktivieren, sobald die Seite produktiv ist. |
-| 21 | Prüfung bei jedem Push (GitHub Actions) | Am 8. Oktober 2026 umgesetzt: `.github/workflows/pruefung.yml` (pruefen, build, Lighthouse), Veröffentlichung nur über Build-Hook nach grünem Lauf, Seite /veroeffentlichen mit Kennwort (docs/18). Netlify baut nicht mehr automatisch. | Einrichtung in Netlify und GitHub nach docs/18 (Build-Hook, Secret, Token, Kennwort). |
+| 21 | Prüfung bei jedem Push (GitHub Actions) | Am 8. Oktober 2026 umgesetzt: `.github/workflows/pruefung.yml` (pruefen, build, Lighthouse) als Kontrolle mit E-Mail bei Rot. Veröffentlichung bleibt bei jedem Speichern über Netlify (Entscheid der Kundschaft, eine getrennte Freigabe mit Kennwort wurde wieder entfernt). | Benachrichtigung im GitHub-Konto einschalten (docs/18). |
 
 ## Vor dem ersten Push (erledigt am 7. Oktober 2026)
 

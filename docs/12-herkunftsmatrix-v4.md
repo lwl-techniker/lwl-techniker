@@ -60,7 +60,7 @@ Next.js 16.3.5 (App Router, Turbopack), React 19.3, TypeScript, Tailwind 4, Keys
 | `scripts/verify-write-target.mjs` | Schreibziel und Schutz von V2/V3. |
 | `tests/` | Unit- und Inhaltstests (`npm test`), Browserprüfung (`npm run test:browser`). |
 
-Routing: `/`, `/leistungen`, `/leistungen/[slug]`, `/produkte` (mit `?kategorie=`), `/referenzen`, `/referenzen/[slug]`, `/kunden` (Referenzlogos, Weiterleitung von `/referenzen/allgemein`), `/ueber-uns`, `/team`, `/kontakt` (mit `?produkt=`, `?betreff=`), `/jobs`, `/jobs/[slug]`, `/impressum`, `/datenschutz`, `/agb` (alle freien Seiten über `/[slug]`), `/veroeffentlichen` (Kennwort, nicht indexiert, docs/18), `/keystatic`.
+Routing: `/`, `/leistungen`, `/leistungen/[slug]`, `/produkte` (mit `?kategorie=`), `/referenzen`, `/referenzen/[slug]`, `/kunden` (Referenzlogos, Weiterleitung von `/referenzen/allgemein`), `/ueber-uns`, `/team`, `/kontakt` (mit `?produkt=`, `?betreff=`), `/jobs`, `/jobs/[slug]`, `/impressum`, `/datenschutz`, `/agb` (alle freien Seiten über `/[slug]`), `/keystatic`.
 
 ## Routenwechsel (bekannter V2-Fehler)
 

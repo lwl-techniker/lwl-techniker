@@ -203,5 +203,5 @@ Mit Massnahmen 1 bis 6 steigt die Gesamtwertung nach dieser Skala auf etwa 94. D
 | 8 | Content-Security-Policy (next.config.ts, eigene Regel für /keystatic), HSTS (netlify.toml), X-Powered-By entfernt. Akismet nur in der Netlify-Oberfläche möglich (docs/16 Nr. 20). | umgesetzt |
 | 9 | Logoslider | bewusst unverändert: kein Pausenknopf (Vorgabe der Kundschaft), DOM-Verkleinerung ohne messbaren Nutzen bei LCP 0.3 s |
 | 11 | Impressum und Datenschutz indexierbar (neuer Schalter "In Suchmaschinen anzeigen"), bleiben ausserhalb der Sitemap. | umgesetzt |
-| 12 | GitHub Actions: Prüfung bei jedem Push, Veröffentlichung nur nach grünem Lauf über die Seite /veroeffentlichen (Kennwort) oder "Run workflow". Netlify baut nicht mehr automatisch. | umgesetzt (docs/18), Einrichtung der Secrets offen |
+| 12 | GitHub Actions: Prüfung bei jedem Push (pruefen, build, Lighthouse CI), E-Mail bei Rot. Netlify veröffentlicht weiterhin bei jedem Speichern (Vorgabe der Kundschaft). | umgesetzt (docs/18) |
 | 13 | Anruf-Knopf in der Kopfzeile auf Mobil, Kontaktseite mit Erreichbarkeit und Angaben für Offerten, Jobs-Seite mit Initiativbewerbung. Block "Warum LWL-Techniker" auf der Startseite nach Rückmeldung der Kundschaft wieder entfernt. | umgesetzt |

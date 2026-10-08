@@ -85,7 +85,7 @@ Das Team wird unter **Inhalte > Team** als eine Liste gepflegt.
 
 ## Veröffentlichen
 
-Speichern im CMS ändert die Website noch nicht. Wenn alle Änderungen gemacht sind: **www.lwl-techniker.ch/veroeffentlichen** öffnen, das Kennwort eingeben und **Prüfen und veröffentlichen** klicken. Die Website prüft die Änderungen und ist nach etwa zehn Minuten aktualisiert. Bei einem Fehler bleibt die bisherige Website online und der Webmaster meldet sich. Das Kennwort erhalten Sie vom Webmaster.
+Jedes Speichern im CMS wird automatisch veröffentlicht. Nach etwa fünf Minuten ist die Website aktualisiert. Parallel prüft GitHub die Änderung; bei einem Fehler meldet sich der Webmaster.
 
 ## Hilfe
 

@@ -263,7 +263,7 @@ export default config({
       columns: ['titel'],
       schema: {
         // Gesperrte Adressen: gleiche Liste wie RESERVIERT in scripts/pruefe-konfiguration.mjs
-        titel: titelMitAdresse('Seitentitel', { gesperrt: ['leistungen', 'referenzen', 'kunden', 'jobs', 'produkte', 'team', 'downloads', 'keystatic', 'veroeffentlichen', 'api', 'bilder', 'dokumente'] }),
+        titel: titelMitAdresse('Seitentitel', { gesperrt: ['leistungen', 'referenzen', 'kunden', 'jobs', 'produkte', 'team', 'downloads', 'keystatic', 'api', 'bilder', 'dokumente'] }),
         inSitemap: fields.checkbox({
           label: 'In der Sitemap aufführen',
           description: 'Für Impressum und Datenschutz ausschalten. Die Seite bleibt trotzdem für Suchmaschinen sichtbar.',

@@ -90,9 +90,9 @@ jobs:
 
 Hinweis: In öffentlichen Repositories pausiert GitHub zeitgesteuerte Abläufe nach 60 Tagen ohne Änderung. Unsere Repositories sind privat, trotzdem gelegentlich prüfen. Unter **Actions** lässt sich der Ablauf wieder aktivieren und mit **Run workflow** von Hand starten.
 
-## Schritt 6: Prüfung und Veröffentlichung
+## Schritt 6: Prüfung bei jedem Push
 
-Netlify baut nicht mehr bei jedem Push (`ignore` in `netlify.toml`), sondern nur über den Build-Hook nach grüner Prüfung bei GitHub. Einrichtung von Build-Hook, Secrets, Token und Kennwort: `docs/18-veroeffentlichung.md`. Zusätzliche Umgebungsvariablen in Netlify: `VEROEFFENTLICHEN_KENNWORT` und `GITHUB_WORKFLOW_TOKEN` (beide geheim).
+GitHub prüft jeden Push (pruefen, build, Lighthouse) und meldet Fehler per E-Mail; Netlify baut und veröffentlicht unabhängig davon wie gewohnt. Details: `docs/18-pruefung-github-actions.md`.
 
 ## Deploy-Vorschau
 
