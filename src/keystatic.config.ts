@@ -333,15 +333,6 @@ export default config({
           hinweis: 'JPG, erscheint vor dem Abspielen mit einem Abspielsymbol. Ohne Standbild wird das Titelbild verwendet.',
         }),
         videotext: text('Beschreibung des Videos', { max: 160, beschreibung: 'Ein Satz, was im Video zu sehen ist (für Suchmaschinen und Screenreader).' }),
-        videoformat: fields.select({
-          label: 'Format des Videos',
-          description: 'Querformat füllt die Textspalte, Hochformat (Handy) erscheint in einer schmalen Spalte.',
-          options: [
-            { label: 'Querformat', value: 'quer' },
-            { label: 'Hochformat', value: 'hoch' },
-          ],
-          defaultValue: 'quer',
-        }),
         seo: seo(),
         inhalt: fliesstext('Projektbeschrieb', 'referenzen'),
       },

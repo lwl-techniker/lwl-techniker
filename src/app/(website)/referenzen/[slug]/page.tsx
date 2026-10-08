@@ -1,7 +1,6 @@
 import { ImageOff } from 'lucide-react';
 import { notFound } from 'next/navigation';
-import { Galerie } from '@/components/ui/Galerie';
-import { Video } from '@/components/ui/Video';
+import { Galerie, type Folie } from '@/components/ui/Galerie';
 import { Seitenkopf } from '@/components/ui/Seitenkopf';
 import { ReferenzKarte } from '@/components/karten/Karten';
 import { holeReferenz, holeReferenzen, holeUebersichten } from '@/lib/cms';
@@ -32,7 +31,12 @@ export default async function ReferenzSeite({ params }: Props) {
   if (!r) notFound();
   const inhalt = await renderMarkdoc(r.inhalt);
   const weitere = alle.filter((x) => x.slug !== slug).slice(0, 3);
-  const bilder = [...(r.titelbild ? [{ bild: r.titelbild, alt: r.titelbildAlt }] : []), ...r.galerie];
+  // Galerie: Video zuerst (falls vorhanden), dann Titelbild und weitere Bilder
+  const folien: Folie[] = [
+    ...(r.video ? [{ art: 'video' as const, src: r.video, poster: r.videoposter ?? r.titelbild ?? null, text: r.videotext }] : []),
+    ...(r.titelbild ? [{ art: 'bild' as const, bild: r.titelbild, alt: r.titelbildAlt }] : []),
+    ...r.galerie.map((g) => ({ art: 'bild' as const, bild: g.bild, alt: g.alt })),
+  ];
 
   const fakten = [
     { titel: 'Bauherrschaft', wert: r.kunde },
@@ -55,14 +59,8 @@ export default async function ReferenzSeite({ params }: Props) {
       />
 
       <div className="container-seite pt-12 lg:pt-16">
-        {r.video ? (
-          // Video zuerst: Hochformat-Video als eigene Spalte neben der Galerie, Querformat über die ganze Breite
-          <div className={r.videoformat === 'hoch' ? 'grid gap-8 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:items-start lg:gap-12' : 'space-y-10'}>
-            <Video src={r.video} poster={r.videoposter ?? r.titelbild ?? null} beschreibung={r.videotext} hochformat={r.videoformat === 'hoch'} />
-            {bilder.length > 0 ? <Galerie bilder={bilder} /> : null}
-          </div>
-        ) : bilder.length > 0 ? (
-          <Galerie bilder={bilder} />
+        {folien.length > 0 ? (
+          <Galerie folien={folien} />
         ) : (
           <div className="relative aspect-[16/9] overflow-hidden rounded-[var(--radius-karte)] bg-flaeche lg:aspect-[21/9]">
             <span className="absolute inset-0 flex items-center justify-center text-linie" aria-hidden>
