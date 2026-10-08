@@ -38,7 +38,7 @@ Startseite und Seiten bestehen aus **Abschnitten** (Startbereich, Text mit Bild,
 
 ## Referenzen und Stellen auf der Startseite
 
-Die Startseite zeigt automatisch die **neusten** Referenzen und offenen Stellen.
+Die Startseite zeigt automatisch die **neusten** Referenzen und offenen Stellen. Massgebend ist das Feld **Datum** der Referenz: Zuerst kommen die markierten Referenzen (neuste zuerst), dann werden die freien Plätze mit den neusten übrigen aufgefüllt. Bei vier Plätzen und einer markierten Referenz erscheinen also diese plus die drei neusten anderen.
 
 - Soll eine bestimmte Referenz sicher erscheinen: Häkchen **Auf Startseite zeigen** setzen
 - Sollen genau bestimmte Referenzen erscheinen: bei genau so vielen das Häkchen setzen, wie auf der Startseite Platz haben (normalerweise 4)
@@ -64,7 +64,7 @@ Das Team wird unter **Inhalte > Team** als eine Liste gepflegt.
 ## Produkte und Datenblätter
 
 - Neues Produkt: **Inhalte > Produkte und Datenblätter > Add**, Produktname eintippen, PDF-Datenblatt hochladen, **Create**. Bild, Vorschau, Suchtext und Artikelnummern liest die Website beim Veröffentlichen automatisch aus dem PDF
-- Kategorie eintragen, damit das Produkt im Menü und im Katalog richtig gruppiert ist (gleicher Wortlaut wie bei den anderen Produkten der Gruppe). Ohne Kategorie erscheint es unter "Weitere Produkte"
+- Kategorie unter **Kategorie auswählen** aus der Liste wählen. Passt keine, das Feld **Neue Kategorie** ausfüllen; nach dem Veröffentlichen steht die neue Kategorie in der Liste. Die Auswahl hat Vorrang vor dem Textfeld. Beides leer: das Produkt erscheint unter "Weitere Produkte"
 - Datenblatt ersetzen: beim Produkt das neue PDF hochladen und **Save**. Bild, Text und die Kennzahl "Datenblätter" aktualisieren sich beim nächsten Veröffentlichen von selbst
 - Technische Angaben, Preise oder Beschreibungen werden nicht von Hand gepflegt, das PDF ist die Quelle
 

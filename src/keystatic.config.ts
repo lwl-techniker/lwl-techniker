@@ -2,6 +2,7 @@ import { collection, config, fields, singleton } from '@keystatic/core';
 import { GITHUB_REPO, KEYSTATIC_MODUS, PROJEKT_NAME } from './site.config';
 import { seitenBloecke } from './keystatic/bloecke';
 import { alttext, bild, datei, fliesstext, langtext, link, logosFeld, seo, text, titelMitAdresse } from './keystatic/felder';
+import produktKategorien from './keystatic/produkt-kategorien.json';
 
 /**
  * Titel, Einleitung und SEO für die festen Übersichtsseiten /leistungen, /referenzen und /jobs.
@@ -454,15 +455,23 @@ export default config({
       slugField: 'titel',
       path: 'content/produkte/*',
       format: { data: 'json' },
-      columns: ['titel', 'kategorie', 'reihenfolge'],
+      columns: ['titel', 'kategorieAuswahl', 'kategorie', 'reihenfolge'],
       schema: {
         titel: titelMitAdresse('Produktname', {
           beschreibung:
             'Neues Produkt in zwei Schritten: Produktname eintippen und unten das PDF-Datenblatt hochladen, dann speichern. Vorschaubild, Produktbild, Suchtext, Artikelnummern und Datum liest die Website automatisch aus dem PDF. Technische Angaben werden hier nicht gepflegt.',
         }),
-        kategorie: text('Kategorie', {
+        // Auswahlliste aus den vorhandenen Kategorien (scripts/produkt-kategorien.mjs, vor dev und build erzeugt).
+        // Neue Kategorie: unten als Text eintragen; nach dem nächsten Veröffentlichen steht sie in der Liste.
+        kategorieAuswahl: fields.select({
+          label: 'Kategorie auswählen',
+          description: 'Vorhandene Kategorie wählen. Hat Vorrang vor dem Textfeld darunter.',
+          options: [{ label: 'Keine Auswahl (Text unten verwenden)', value: '' }, ...produktKategorien.map((k) => ({ label: k, value: k }))],
+          defaultValue: '',
+        }),
+        kategorie: text('Neue Kategorie (nur wenn oben nichts passt)', {
           max: 60,
-          beschreibung: 'Gruppiert die Produkte im Katalog und im Menü, z. B. "Patchkabel LWL". Gleicher Wortlaut wie bei anderen Produkten derselben Gruppe. Leer lassen, dann erscheint das Produkt unter "Weitere Produkte".',
+          beschreibung: 'Gruppiert die Produkte im Katalog und im Menü, z. B. "Patchkabel LWL". Nach dem Veröffentlichen erscheint die neue Kategorie in der Auswahlliste. Beides leer: das Produkt erscheint unter "Weitere Produkte".',
         }),
         reihenfolge: fields.integer({
           label: 'Reihenfolge',

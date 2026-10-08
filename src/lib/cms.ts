@@ -132,7 +132,8 @@ export const KATEGORIE_OHNE = 'Weitere Produkte';
 export const holeProdukte = cache(async () => {
   const alle = await reader.collections.produkte.all();
   return alle
-    .map(({ slug, entry }) => ({ slug, ...entry, kategorie: entry.kategorie.trim() || KATEGORIE_OHNE }))
+    // Auswahlliste hat Vorrang, sonst das Textfeld (neue Kategorie), sonst "Weitere Produkte"
+    .map(({ slug, entry }) => ({ slug, ...entry, kategorie: entry.kategorieAuswahl || entry.kategorie.trim() || KATEGORIE_OHNE }))
     .sort((a, b) => a.reihenfolge - b.reihenfolge || a.titel.localeCompare(b.titel, 'de'));
 });
 
