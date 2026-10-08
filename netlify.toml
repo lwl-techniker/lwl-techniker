@@ -2,7 +2,7 @@
 # Den Adapter NICHT als Plugin fixieren, Netlify hält ihn aktuell.
 #
 # Umgebungsvariablen für V4 (in Netlify setzen, nicht hier):
-#   SITE_URL        kanonische Adresse, z. B. https://www.lwl-techniker.ch (Standard: https://lwl-techniker-v4.netlify.app)
+#   SITE_URL        kanonische Adresse, z. B. https://www.lwl-techniker.ch (Standard: https://lwl-techniker.netlify.app)
 #   SITE_INDEXABLE  "true" nur, wenn die produktive Seite von Google erfasst werden darf
 #   KEYSTATIC_*     vier Werte der GitHub-App von V4 (siehe .env.example), nie die Werte von V2 oder V3
 

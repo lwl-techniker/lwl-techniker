@@ -21,7 +21,7 @@ Die Zeile `GITHUB_REPO passt zum Git-Remote` muss erscheinen.
 ## Schritt 2: GitHub-App erstellen
 
 1. In `src/site.config.ts` vorübergehend `KEYSTATIC_MODUS = 'github'` setzen.
-2. `npm run dev` starten und http://127.0.0.1:3000/keystatic öffnen.
+2. `npm run dev` starten und http://127.0.0.1:3104/keystatic/setup öffnen (ohne `/setup` erscheint nur "Log in with GitHub").
 3. Keystatic zeigt einen Einrichtungsdialog:
    - **GitHub organization (if any):** `infraoneit` eintragen. Bleibt das Feld leer, gehört die App dem persönlichen Konto der Person, die gerade angemeldet ist.
    - **Deployed App URL:** die spätere Domain, z. B. `https://www.kunde.ch`. Dann wird die Callback-URL gleich mit eingetragen.

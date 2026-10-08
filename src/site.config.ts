@@ -15,7 +15,7 @@ export const PROJEKT_NAME = 'LWL-Techniker Schweiz GmbH';
  * Vorschau: Netlify-Adresse von V4. Produktiv: SITE_URL=https://www.lwl-techniker.ch als Umgebungsvariable setzen,
  * sobald die Domain auf V4 zeigt. V2 bleibt davon unberührt.
  */
-export const DOMAIN = process.env.SITE_URL || 'https://lwl-techniker-v4.netlify.app';
+export const DOMAIN = process.env.SITE_URL || 'https://lwl-techniker.netlify.app';
 
 /** GitHub-Repository im Format besitzer/repo-name. Einziges Schreibziel des CMS. Niemals V2 oder V3 eintragen. */
 export const GITHUB_REPO = 'lwl-techniker/lwl-techniker';
