@@ -68,3 +68,7 @@ Bilder, die **im CMS hochgeladen** werden, benennt Keystatic selbst (siehe [02-k
 ## Fotos von der Kundschaft
 
 Fotos kommen oft direkt vom Handy (4 bis 12 MB, teils HEIC). Vor dem Hochladen im CMS verkleinern, z. B. mit https://squoosh.app (WebP, Qualität 75 bis 80, Breite 2400 px). Der Hinweis steht auch im CMS beim Bildfeld und in [10-anleitung-kundschaft.md](10-anleitung-kundschaft.md).
+
+## Bildcache des Entwicklungsservers
+
+`next dev` legt optimierte Bilder unter `.next/dev/cache/images` ab und liefert sie bis zu vier Stunden weiter aus, auch wenn die Datei unter `public/` ersetzt wurde (zum Beispiel ein neu eingefärbtes Logo oder ein neues Teamfoto). Erscheint nach einem Austausch noch das alte Bild: Ordner `.next/dev/cache/images` löschen und im Browser mit Strg+F5 neu laden. Auf Netlify entsteht bei jedem Build ein frischer Cache, dort tritt das Problem nicht auf.
