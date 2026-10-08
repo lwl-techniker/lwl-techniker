@@ -381,6 +381,19 @@
     color: var(--color-band-text);
   }
 
+  /* Herz im Agentur-Hinweis der Fusszeile: weiss im dunklen, schwarz im hellen Erscheinungsbild */
+  .herz {
+    color: #ffffff;
+  }
+  :root[data-theme='hell'] .herz {
+    color: #000000;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme='dunkel']) .herz {
+      color: #000000;
+    }
+  }
+
   /* Überzeile mit Schrägstrich (V2) */
   .ueberzeile {
     @apply mb-4 inline-flex items-center gap-3 text-xs font-medium tracking-[0.42em] text-marke uppercase;

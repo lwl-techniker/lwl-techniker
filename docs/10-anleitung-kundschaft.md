@@ -45,15 +45,34 @@ Die Startseite zeigt automatisch die **neusten** Referenzen und offenen Stellen.
 - Eine Referenz ausblenden, ohne sie zu löschen: Häkchen **Veröffentlicht** entfernen
 - Eine Stelle ist besetzt: Häkchen **Stelle ist offen** entfernen. Mit einem Datum bei **Ausschreibung gültig bis (optional)** verschwindet sie automatisch
 
+## Team
+
+Das Team wird unter **Inhalte > Team** als eine Liste gepflegt.
+
+- Reihenfolge ändern: am Griff links neben einer Person ziehen und loslassen, dann **Save**
+- Neue Person: unten **Add** klicken, Name, Bereich, Funktion und Kontaktangaben ausfüllen, Foto hochladen
+- Bereich **Geschäftsleitung** erscheint auch auf der Startseite und auf Über uns, **Technik** nur auf der Teamseite
+- Foto im Hochformat 4:5 mit ruhigem, hellem Hintergrund, damit alle Porträts gleich wirken
+
+## Referenzen
+
+- Neue Referenz: **Inhalte > Referenzen > Add**. Titel, Kurzbeschreibung, Titelbild, weitere Bilder und den Projektbeschrieb ausfüllen
+- Die Startseite zeigt automatisch die vier neusten Referenzen. Soll eine bestimmte Referenz dort stehen, Häkchen **Auf Startseite zeigen** setzen. Nichts muss doppelt erfasst werden
+- Ein Video (MP4) kann direkt bei der Referenz hochgeladen werden. Es erscheint als erste Folie der Bildergalerie und lädt erst beim Klick. Videos vorher auf unter 5 MB komprimieren, z. B. mit HandBrake (Voreinstellung "Fast 720p30") oder einer Online-Komprimierung
+- Die Referenzlogos werden unter **Einstellungen > Übersichtsseiten > Seite /referenzen > Logos** gepflegt und erscheinen auf der Startseite und auf der Referenzseite
+
+## Produkte und Datenblätter
+
+- Neues Produkt: **Inhalte > Produkte und Datenblätter > Add**, Produktname eintippen, PDF-Datenblatt hochladen, **Create**. Bild, Vorschau, Suchtext und Artikelnummern liest die Website beim Veröffentlichen automatisch aus dem PDF
+- Kategorie eintragen, damit das Produkt im Menü und im Katalog richtig gruppiert ist (gleicher Wortlaut wie bei den anderen Produkten der Gruppe). Ohne Kategorie erscheint es unter "Weitere Produkte"
+- Datenblatt ersetzen: beim Produkt das neue PDF hochladen und **Save**. Bild, Text und die Kennzahl "Datenblätter" aktualisieren sich beim nächsten Veröffentlichen von selbst
+- Technische Angaben, Preise oder Beschreibungen werden nicht von Hand gepflegt, das PDF ist die Quelle
+
 ## Bilder hochladen
 
 - Beim Bildfeld **Choose file** klicken und die Datei wählen. Mit **Remove** wird ein Bild wieder entfernt
-- **Format:** JPG oder WebP. Keine HEIC-Dateien (Standardformat vom iPhone)
-- **Grösse:** Handyfotos vorher verkleinern, z. B. kostenlos auf https://squoosh.app
-  1. Foto hineinziehen
-  2. rechts **WebP** wählen, Qualität 75
-  3. **Resize** auf Breite 2400 (bei Porträts 800)
-  4. herunterladen und im CMS hochladen
+- **Format:** JPG, PNG oder WebP. Keine HEIC-Dateien (Standardformat vom iPhone)
+- **Grösse:** Grosse Dateien (über 500 KB oder 2560 px) werden beim Veröffentlichen automatisch verkleinert und neu komprimiert, ohne sichtbaren Qualitätsverlust. Die Website liefert Bilder zudem automatisch im sparsamen WebP- oder AVIF-Format aus. Wer eine Datei vorher selbst verkleinern will, kann das kostenlos auf https://squoosh.app tun (Breite 2400, bei Porträts 800)
 - **Bildbeschreibung (Alt-Text):** kurz und sachlich beschreiben, was zu sehen ist. Das hilft sehbehinderten Menschen und Google
 
 ## Texte schreiben

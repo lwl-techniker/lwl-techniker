@@ -201,6 +201,42 @@ export default config({
         bloecke: seitenBloecke('startseite'),
       },
     }),
+
+    team: singleton({
+      label: 'Team',
+      path: 'content/team',
+      format: { data: 'json' },
+      schema: {
+        personen: fields.array(
+          fields.object({
+            name: text('Vorname und Name', { pflicht: true, max: 60 }),
+            bereich: fields.select({
+              label: 'Bereich',
+              description: 'Geschäftsleitung erscheint auf der Startseite und auf Über uns, Technik nur auf der Teamseite.',
+              options: [
+                { label: 'Geschäftsleitung', value: 'leitung' },
+                { label: 'Technik', value: 'technik' },
+              ],
+              defaultValue: 'technik',
+            }),
+            funktion: text('Funktion', { pflicht: true, max: 80, beschreibung: 'z. B. Geschäftsleiter, LWL-Techniker, Allrounderin' }),
+            foto: bild('Porträt', 'team', {
+              hinweis: 'Hochformat 4:5 (z. B. 800 x 1000 px), JPG, PNG oder WebP, möglichst heller, ruhiger Hintergrund. Grosse Dateien werden beim Veröffentlichen automatisch verkleinert. Ohne Foto erscheint ein neutraler Platzhalter.',
+            }),
+            email: fields.text({
+              label: 'E-Mail (optional)',
+              validation: { pattern: { regex: /^$|^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: 'Bitte eine gültige E-Mail-Adresse eingeben.' } },
+            }),
+            telefon: text('Telefon (optional)', { max: 30, beschreibung: 'Internationales Format, z. B. +41 76 000 00 00' }),
+          }),
+          {
+            label: 'Personen',
+            description: 'Reihenfolge per Ziehen am Griff links ändern. Neue Person mit Hinzufügen unten anlegen.',
+            itemLabel: (p) => [p.fields.name.value || 'Person', p.fields.funktion.value].filter(Boolean).join(', '),
+          }
+        ),
+      },
+    }),
   },
 
   collections: {
@@ -403,17 +439,16 @@ export default config({
       schema: {
         titel: titelMitAdresse('Produktname', {
           beschreibung:
-            'Stabiler Anzeigename. Technische Angaben, Bilder und Suchtext stammen automatisch aus dem PDF-Datenblatt und werden hier nicht gepflegt.',
+            'Neues Produkt in zwei Schritten: Produktname eintippen und unten das PDF-Datenblatt hochladen, dann speichern. Vorschaubild, Produktbild, Suchtext, Artikelnummern und Datum liest die Website automatisch aus dem PDF. Technische Angaben werden hier nicht gepflegt.',
         }),
         kategorie: text('Kategorie', {
-          pflicht: true,
           max: 60,
-          beschreibung: 'Gruppiert die Produkte auf der Übersicht, z. B. "Patchkabel LWL". Gleicher Wortlaut wie bei anderen Produkten derselben Gruppe verwenden.',
+          beschreibung: 'Gruppiert die Produkte im Katalog und im Menü, z. B. "Patchkabel LWL". Gleicher Wortlaut wie bei anderen Produkten derselben Gruppe. Leer lassen, dann erscheint das Produkt unter "Weitere Produkte".',
         }),
         reihenfolge: fields.integer({
           label: 'Reihenfolge',
-          description: 'Bestimmt die Reihenfolge der Kategorien und der Produkte innerhalb einer Kategorie. Kleinere Zahl erscheint zuerst.',
-          defaultValue: 10,
+          description: 'Kleinere Zahl erscheint zuerst (innerhalb der Kategorie und für die Reihenfolge der Kategorien). Kann leer bleiben.',
+          defaultValue: 100,
           validation: { isRequired: true, min: 0, max: 999 },
         }),
         beschreibung: langtext('Hinweis (optional)', {
@@ -422,37 +457,8 @@ export default config({
         }),
         dokument: datei('Datenblatt', 'produkte', {
           beschreibung:
-            'Zum Aktualisieren einfach das neue PDF hochladen und speichern. Vorschau, Suchtext und Kennzahl werden beim nächsten Build automatisch neu erzeugt.',
+            'Das PDF ist die einzige Quelle für Bild, Text und Suche. Zum Aktualisieren das neue PDF hochladen und speichern; die Website erzeugt Vorschau, Suchtext und die Kennzahl beim nächsten Veröffentlichen automatisch neu.',
         }),
-      },
-    }),
-
-    team: collection({
-      label: 'Team',
-      slugField: 'name',
-      path: 'content/team/*',
-      format: { data: 'json' },
-      columns: ['name', 'bereich', 'reihenfolge'],
-      schema: {
-        name: titelMitAdresse('Vorname und Name'),
-        bereich: fields.select({
-          label: 'Bereich',
-          options: [
-            { label: 'Geschäftsleitung', value: 'leitung' },
-            { label: 'Technik', value: 'technik' },
-          ],
-          defaultValue: 'technik',
-        }),
-        funktion: text('Funktion', { pflicht: true, max: 80 }),
-        reihenfolge: fields.integer({ label: 'Reihenfolge', description: 'Kleinere Zahl erscheint zuerst.', defaultValue: 10, validation: { isRequired: true, min: 0, max: 999 } }),
-        foto: bild('Porträt', 'team', {
-          hinweis: 'Hochformat 800 x 1000 px (4:5), JPG oder WebP, unter 120 KB. Gesicht im oberen Drittel. Ohne Foto erscheint ein neutraler Platzhalter.',
-        }),
-        email: fields.text({
-          label: 'E-Mail (optional)',
-          validation: { pattern: { regex: /^$|^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: 'Bitte eine gültige E-Mail-Adresse eingeben.' } },
-        }),
-        telefon: text('Telefon (optional)', { max: 30 }),
       },
     }),
   },

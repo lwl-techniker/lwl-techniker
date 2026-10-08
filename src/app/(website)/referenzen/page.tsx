@@ -15,8 +15,8 @@ export async function generateMetadata() {
 
 /**
  * Referenzen auf einer Seite (seit 8. Oktober 2026, vorher zusätzlich /referenzen/allgemein):
- * 1. Projektbeispiele als Kacheln, neuste zuerst (V2-Darstellung)
- * 2. Alle Referenzlogos mit Namen aus der zentralen Liste (Silhouette dunkel, Originalfarben hell)
+ * 1. Alle Referenzlogos mit Namen aus der zentralen Liste (Silhouette dunkel, Originalfarben hell), Anker #referenzlogos
+ * 2. Projektbeispiele als Kacheln, neuste zuerst (V2-Darstellung), Anker #projektbeispiele
  * 3. "Die Arbeit hinter den Logos" (Einordnung der Logos, Texte aus dem CMS)
  * 4. Gelbes Kontaktband
  */
@@ -26,29 +26,25 @@ export default async function ReferenzenSeite() {
 
   return (
     <>
-      <Seitenkopf ueberzeile={u.ueberzeile} titel={u.titel} einleitung={u.einleitung} pfad={[{ text: u.titel, href: '/referenzen' }]} />
+      <Seitenkopf ueberzeile={u.ueberzeile} titel={u.titel} einleitung={u.einleitung} pfad={[{ text: u.titel, href: '/referenzen' }]}>
+        {/* Sprungmarken zu den beiden Abschnitten (auch im Hauptmenü verlinkt) */}
+        <nav aria-label="Abschnitte dieser Seite" className="mt-8 flex flex-wrap gap-3">
+          <a href="#referenzlogos" className="pille">
+            Referenzlogos
+          </a>
+          <a href="#projektbeispiele" className="pille">
+            Projektbeispiele
+          </a>
+        </nav>
+      </Seitenkopf>
       <JsonLd daten={referenzenAlsListe(referenzen)} />
 
-      <section className="abschnitt" aria-labelledby="projektbeispiele">
-        <div className="container-seite">
-          <h2 id="projektbeispiele" className="titel-2 mb-10 lg:mb-14">
-            Projektbeispiele
-          </h2>
-          {referenzen.length === 0 ? <p className="einleitung">Die Referenzen werden zurzeit zusammengestellt.</p> : null}
-          <div className={`${rasterFuerKacheln(referenzen.length)} gap-y-14`}>
-            {referenzen.map((r) => (
-              <ReferenzKarte key={r.slug} referenz={r} />
-            ))}
-          </div>
-        </div>
-      </section>
-
       {logos.length > 0 ? (
-        <section className="flaeche-ruhig abschnitt" aria-labelledby="referenzlogos">
+        <section id="referenzlogos" className="abschnitt" aria-labelledby="referenzlogos-titel">
           <div className="container-seite">
             <div className="mb-12 max-w-4xl lg:mb-16">
               <p className="ueberzeile">{sauberText(u.logos.titel) || 'Referenzen'}</p>
-              <h2 id="referenzlogos" className="titel-2">
+              <h2 id="referenzlogos-titel" className="titel-2">
                 {sauberText(u.allgemeinTitel) || 'Allgemeine Referenzen'}
               </h2>
               {u.allgemeinEinleitung ? <p className="einleitung mt-6 max-w-3xl">{sauberText(u.allgemeinEinleitung)}</p> : null}
@@ -66,6 +62,20 @@ export default async function ReferenzenSeite() {
           </div>
         </section>
       ) : null}
+
+      <section id="projektbeispiele" className="flaeche-ruhig abschnitt" aria-labelledby="projektbeispiele-titel">
+        <div className="container-seite">
+          <h2 id="projektbeispiele-titel" className="titel-2 mb-10 lg:mb-14">
+            Projektbeispiele
+          </h2>
+          {referenzen.length === 0 ? <p className="einleitung">Die Referenzen werden zurzeit zusammengestellt.</p> : null}
+          <div className={`${rasterFuerKacheln(referenzen.length)} gap-y-14`}>
+            {referenzen.map((r) => (
+              <ReferenzKarte key={r.slug} referenz={r} />
+            ))}
+          </div>
+        </div>
+      </section>
 
       {u.allgemeinHinweis ? (
         <section className="abschnitt" aria-labelledby="arbeit-hinter-logos">

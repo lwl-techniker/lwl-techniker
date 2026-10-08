@@ -55,7 +55,7 @@ test('alle neun V2-Referenzen sind vorhanden und veröffentlicht, Bilder existie
 });
 
 test('Team: Leitung und Technik wie in V3 bestätigt, Lindi Selimi entfernt', () => {
-  const personen = readdirSync(path.join(wurzel, 'content/team')).map((f) => json(`content/team/${f}`));
+  const personen = json('content/team.json').personen;
   const leitung = personen.filter((p) => p.bereich === 'leitung').map((p) => p.name).sort();
   const technik = personen.filter((p) => p.bereich === 'technik').map((p) => p.name).sort();
   assert.deepEqual(leitung, ['Arsel Thuma', 'Lulzim Selimi']);

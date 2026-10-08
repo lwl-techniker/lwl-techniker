@@ -125,11 +125,14 @@ export async function holeJobsFuerStartseite(anzahl: number | 'alle') {
 type DatenblattIndex = typeof datenblattIndex;
 type IndexEintrag = DatenblattIndex['eintraege'][keyof DatenblattIndex['eintraege']];
 
+/** Produkte ohne eingetragene Kategorie landen hier (ein PDF plus Name genügt zum Anlegen). */
+export const KATEGORIE_OHNE = 'Weitere Produkte';
+
 /** Alle Produkte, sortiert nach Reihenfolge. Bestimmt zugleich die Reihenfolge der Kategorien (erstes Vorkommen). */
 export const holeProdukte = cache(async () => {
   const alle = await reader.collections.produkte.all();
   return alle
-    .map(({ slug, entry }) => ({ slug, ...entry }))
+    .map(({ slug, entry }) => ({ slug, ...entry, kategorie: entry.kategorie.trim() || KATEGORIE_OHNE }))
     .sort((a, b) => a.reihenfolge - b.reihenfolge || a.titel.localeCompare(b.titel, 'de'));
 });
 
@@ -170,11 +173,10 @@ export async function holeProduktKategorien() {
 
 // Team ------------------------------------------------------------------------
 
+/** Team aus dem Singleton "Team": die Reihenfolge im CMS (per Ziehen) ist die Reihenfolge auf der Website. */
 export const holeTeam = cache(async () => {
-  const alle = await reader.collections.team.all();
-  return alle
-    .map(({ slug, entry }) => ({ slug, ...entry }))
-    .sort((a, b) => a.reihenfolge - b.reihenfolge || a.name.localeCompare(b.name, 'de'));
+  const daten = await reader.singletons.team.read();
+  return (daten?.personen ?? []).map((p, i) => ({ ...p, reihenfolge: i }));
 });
 
 export type Referenz = Awaited<ReturnType<typeof holeReferenzen>>[number];

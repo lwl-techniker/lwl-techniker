@@ -1,0 +1,49 @@
+{
+  "personen": [
+    {
+      "name": "Lulzim Selimi",
+      "bereich": "leitung",
+      "funktion": "Gründer",
+      "foto": "/bilder/team/personen/0/foto.webp",
+      "email": "info@lwl-techniker.ch",
+      "telefon": "+41 78 920 80 00"
+    },
+    {
+      "name": "Arsel Thuma",
+      "bereich": "leitung",
+      "funktion": "Geschäftsleiter",
+      "foto": "/bilder/team/personen/1/foto.webp",
+      "email": "a.thuma@lwl-techniker.ch",
+      "telefon": "+41 79 225 34 74"
+    },
+    {
+      "name": "David Thuma",
+      "bereich": "technik",
+      "funktion": "LWL-Techniker",
+      "email": "d.thuma@lwl-techniker.ch",
+      "telefon": "+41 76 445 54 37"
+    },
+    {
+      "name": "Christian Colaci",
+      "bereich": "technik",
+      "funktion": "LWL-Techniker",
+      "email": "c.colaci@lwl-techniker.ch",
+      "telefon": "+41 79 262 43 92"
+    },
+    {
+      "name": "Edwin Stefanov",
+      "bereich": "technik",
+      "funktion": "LWL-Techniker",
+      "email": "e.stefanov@lwl-techniker.ch",
+      "telefon": "+41 76 408 63 04"
+    },
+    {
+      "name": "Zelije Selimi",
+      "bereich": "technik",
+      "funktion": "Allrounderin",
+      "foto": "/bilder/team/personen/5/foto.webp",
+      "email": "z.selimi@lwl-techniker.ch",
+      "telefon": "+41 76 732 90 32"
+    }
+  ]
+}

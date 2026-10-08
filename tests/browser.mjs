@@ -60,17 +60,27 @@ try {
   for (const [name, pfad] of ziele) {
     await seite.evaluate(() => window.scrollTo({ top: 1800, behavior: 'instant' }));
     const knopf = seite.getByRole('button', { name: `${name} Untermenü`, exact: true });
+    let anker = '';
     if (await knopf.count()) {
       await knopf.click();
       const panel = seite.locator(`#untermenue-${pfad.replace(/\W+/g, '')}`);
       await panel.waitFor({ state: 'visible' });
-      await panel.locator(`a[href="${pfad}"]`).first().click();
+      const link = panel.locator(`a[href^="${pfad}"]`).first();
+      anker = ((await link.getAttribute('href')) ?? '').split('#')[1] ?? '';
+      await link.click();
     } else {
-      // Menüpunkt ohne Untermenü (Referenzen): direkter Link
+      // Menüpunkt ohne Untermenü: direkter Link
       await seite.locator(`header nav a[href="${pfad}"]`).first().click();
     }
-    await seite.waitForURL(`**${pfad}`);
+    await seite.waitForURL(`**${pfad}**`);
     await seite.waitForLoadState('networkidle');
+    if (anker) {
+      // Sprungmarke (z. B. Referenzen): das Ziel steht unter der haftenden Kopfzeile im Bild
+      await seite.waitForTimeout(400);
+      const lage = await seite.evaluate((id) => document.getElementById(id)?.getBoundingClientRect().top ?? -1, anker);
+      assert.ok(lage >= 0 && lage < 200, `${name}: Sprungmarke #${anker} sichtbar (top=${lage})`);
+      continue;
+    }
     const y = await seite.evaluate(() => window.scrollY);
     assert.equal(y, 0, `${name}: Seite beginnt oben (scrollY=${y})`);
     const yNachher = await seite.evaluate(() => new Promise((r) => setTimeout(() => r(window.scrollY), 400)));

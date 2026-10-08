@@ -40,7 +40,7 @@ export function Personen({ personen, kompakt = false }: { personen: readonly Per
   return (
     <ul className={cn('grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-[repeat(auto-fill,minmax(13rem,18rem))] lg:gap-x-8', kompakt && 'sm:justify-start')}>
       {personen.map((p, i) => (
-        <li key={p.slug} data-einblenden style={{ '--einblenden-index': i % 5 } as React.CSSProperties}>
+        <li key={`${p.name}-${i}`} data-einblenden style={{ '--einblenden-index': i % 5 } as React.CSSProperties}>
           <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-karte)] bg-flaeche">
             {p.foto ? (
               <Image

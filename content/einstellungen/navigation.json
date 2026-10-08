@@ -86,7 +86,20 @@
     {
       "text": "Referenzen",
       "link": "/referenzen",
-      "unterpunkte": []
+      "unterpunkte": [
+        {
+          "text": "Referenzlogos",
+          "link": "/referenzen#referenzlogos",
+          "beschreibung": "Unsere Kundschaft und Auftraggeber im Überblick",
+          "hervorgehoben": false
+        },
+        {
+          "text": "Projektbeispiele",
+          "link": "/referenzen#projektbeispiele",
+          "beschreibung": "Dokumentierte Einsätze mit Bildern und Video",
+          "hervorgehoben": false
+        }
+      ]
     },
     {
       "text": "Über uns",

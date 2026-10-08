@@ -7,8 +7,8 @@
   },
   "scripts": {
     "dev": "next dev -p 3104",
-    "predev": "node scripts/erzeuge-formulare.mjs && node scripts/erzeuge-datenblaetter.mjs",
-    "prebuild": "node scripts/erzeuge-formulare.mjs && node scripts/erzeuge-datenblaetter.mjs && node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/pruefe-konfiguration.mjs --build && node scripts/pruefe-texte.mjs --build",
+    "predev": "node scripts/optimiere-bilder.mjs && node scripts/erzeuge-formulare.mjs && node scripts/erzeuge-datenblaetter.mjs",
+    "prebuild": "node scripts/optimiere-bilder.mjs && node scripts/erzeuge-formulare.mjs && node scripts/erzeuge-datenblaetter.mjs && node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/pruefe-konfiguration.mjs --build && node scripts/pruefe-texte.mjs --build",
     "build": "next build",
     "start": "next start -p 3104",
     "lint": "eslint",

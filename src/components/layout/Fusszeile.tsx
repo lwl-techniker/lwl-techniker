@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Heart } from 'lucide-react';
 import type { Einstellungen, Navigation } from '@/lib/cms';
 import { MarkenLogo } from '@/components/ui/MarkenLogo';
 import { sauberText, whatsappLink } from '@/lib/text';
@@ -114,34 +115,39 @@ export function Fusszeile({ einstellungen: e, navigation: n }: { einstellungen: 
             <span>
               © {jahr} {e.firmenname}
             </span>
-            {/* Dezenter Hinweis auf die Umsetzung der Website (Wunsch Kundschaft) */}
-            <a href="https://infraone.ch" target="_blank" rel="noopener noreferrer" className="inline-block py-1 normal-case tracking-normal hover:text-text">
-              Gemacht mit <span aria-label="Herz">❤️</span> von InfraOne
+            {/* Hinweis auf die Agentur (Wunsch Kundschaft): Herz weiss im dunklen, schwarz im hellen Modus (Klasse .herz in globals.css) */}
+            <a href="https://infraone.ch" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 py-1 normal-case tracking-normal hover:text-text">
+              Website erstellt mit <Heart className="herz size-3.5" fill="currentColor" strokeWidth={0} aria-label="Herz" role="img" /> von InfraOne IT Solutions
             </a>
           </p>
-          <ul className="flex flex-wrap items-center gap-x-6 gap-y-3">
-            {n.rechtliches.map((l) => (
-              <li key={l.link}>
-                <Link href={l.link} className="inline-block py-1 hover:text-text">
-                  {l.text}
-                </Link>
-              </li>
-            ))}
-            {e.socialMedia.map((s) => (
-              <li key={s.url}>
-                <a
-                  href={s.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex min-h-10 items-center gap-2 py-1 hover:text-text"
-                  aria-label={`${SOCIAL_NAMEN[s.plattform] ?? s.plattform} öffnen (neuer Tab)`}
-                >
-                  <SocialSymbol plattform={s.plattform} />
-                  {SOCIAL_NAMEN[s.plattform] ?? s.plattform}
-                </a>
-              </li>
-            ))}
-          </ul>
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:gap-6">
+            <ul className="flex flex-wrap items-center gap-x-6 gap-y-1">
+              {n.rechtliches.map((l) => (
+                <li key={l.link}>
+                  <Link href={l.link} className="inline-block py-1 hover:text-text">
+                    {l.text}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            {/* Social Media: auf dem Handy nur die Symbole in einer Zeile, ab md mit Namen */}
+            <ul className="flex items-center gap-x-5 md:gap-x-6">
+              {e.socialMedia.map((s) => (
+                <li key={s.url}>
+                  <a
+                    href={s.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex min-h-10 items-center gap-2 py-1 hover:text-text"
+                    aria-label={`${SOCIAL_NAMEN[s.plattform] ?? s.plattform} öffnen (neuer Tab)`}
+                  >
+                    <SocialSymbol plattform={s.plattform} />
+                    <span className="hidden md:inline">{SOCIAL_NAMEN[s.plattform] ?? s.plattform}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </footer>
