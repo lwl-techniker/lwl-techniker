@@ -120,7 +120,7 @@ test('Startseite: Hero ohne Bild, ohne entfernte V3-Zeilen, Slogan vorhanden', (
   assert.ok(!text.includes('Unser Zeichen. Ihre Verbindung.'));
   assert.ok(!text.includes('Licht in Bewegung'));
   const typen = s.bloecke.map((b) => b.discriminant);
-  for (const t of ['logoslider', 'kennzahlen', 'leistungsbereiche', 'referenzen', 'datenblaetter', 'teamAuszug', 'ctaBand']) assert.ok(typen.includes(t), `Block ${t} fehlt`);
+  for (const t of ['logoslider', 'kennzahlen', 'leistungsbereiche', 'referenzen', 'datenblaetter', 'ctaBand']) assert.ok(typen.includes(t), `Block ${t} fehlt`);
 });
 
 test('Startseite: vier Leistungsbereiche mit vorhandenen Leistungen', () => {

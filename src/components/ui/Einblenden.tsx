@@ -9,7 +9,7 @@ import { useEffect } from 'react';
  * Verwendung in beliebigen (auch Server-)Komponenten:
  *   <div data-einblenden>...</div>
  *
- * Geschwister mit data-einblenden (z. B. Kacheln in einem Raster) werden automatisch gestaffelt.
+ * Geschwister mit data-einblenden (z. B. Kacheln in einem Raster) werden über :nth-child in globals.css gestaffelt.
  * Eigene Staffelung: style={{ '--einblenden-index': i } as React.CSSProperties}
  *
  * Bei "Bewegung reduzieren" übernimmt globals.css eine reine Überblendung ohne Verschiebung (sanfter statt aus).
@@ -37,18 +37,23 @@ export function Einblenden() {
           el.setAttribute('data-einblenden', 'sofort');
           return;
         }
-        // Automatische Staffelung innerhalb eines Rasters, höchstens 4 Stufen pro Reihe
-        if (!el.style.getPropertyValue('--einblenden-index') && el.parentElement) {
-          const geschwister = [...el.parentElement.children].filter((k) => k.hasAttribute('data-einblenden'));
-          const index = geschwister.indexOf(el);
-          if (index > 0) el.style.setProperty('--einblenden-index', String(index % 4));
-        }
+        // Die automatische Staffelung innerhalb eines Rasters regelt globals.css über :nth-child (kein Inline-Stil:
+        // ein vor der Hydration gesetztes style-Attribut meldet React im Entwicklungsmodus als Abweichung)
         beobachter.observe(el);
       });
     };
 
-    anmelden();
-    document.documentElement.classList.add('js-einblenden');
+    // Erst nach dem Laden der Seite starten: Teile in Suspense-Grenzen (z. B. der Produktkatalog) werden später hydriert,
+    // und ein vorher geändertes data-einblenden meldet React im Entwicklungsmodus als Abweichung.
+    let startVerzug = 0;
+    const starten = () => {
+      startVerzug = window.setTimeout(() => {
+        anmelden();
+        document.documentElement.classList.add('js-einblenden');
+      }, 0);
+    };
+    if (document.readyState === 'complete') starten();
+    else window.addEventListener('load', starten, { once: true });
 
     // Nach einem Seitenwechsel im Browser nur die neu eingefügten Teile prüfen
     const aenderungen = new MutationObserver((liste) => {
@@ -63,6 +68,8 @@ export function Einblenden() {
     aenderungen.observe(document.body, { childList: true, subtree: true });
 
     return () => {
+      window.clearTimeout(startVerzug);
+      window.removeEventListener('load', starten);
       beobachter.disconnect();
       aenderungen.disconnect();
     };

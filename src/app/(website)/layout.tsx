@@ -55,7 +55,6 @@ export default async function WebsiteLayout({ children }: { children: React.Reac
         logoHell={e.logohell ?? null}
         logoDunkel={e.logo ?? null}
         telefon={e.telefon}
-        ort={e.ort}
         menue={menue}
         kontakt={{ text: n.knopf.text || 'Kontakt', link: n.knopf.link || '/kontakt' }}
       />

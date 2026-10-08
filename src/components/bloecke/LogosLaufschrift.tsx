@@ -29,7 +29,7 @@ export function LogosLaufschrift({ titel, logos }: { titel: string; logos: reado
           <h2 className="mb-6 text-center text-[0.7rem] font-medium tracking-[0.3em] text-text-leise uppercase">{sauberText(titel)}</h2>
         </div>
       ) : null}
-      <Link href="/referenzen/allgemein" aria-label="Alle Referenzlogos ansehen" className="logos-laufschrift block [mask-image:linear-gradient(90deg,transparent,black_6%,black_94%,transparent)]">
+      <Link href="/referenzen" aria-label="Alle Referenzen ansehen" className="logos-laufschrift block [mask-image:linear-gradient(90deg,transparent,black_6%,black_94%,transparent)]">
         <div className="logos-laufschrift-spur flex w-max" style={{ animationDuration: `${dauer}s` }}>
           {reihe(false)}
           {reihe(true)}

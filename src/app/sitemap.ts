@@ -12,7 +12,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: url('/produkte'), changeFrequency: 'monthly', priority: 0.8 },
     { url: url('/downloads'), changeFrequency: 'monthly', priority: 0.6 },
     { url: url('/referenzen'), changeFrequency: 'weekly', priority: 0.8 },
-    { url: url('/referenzen/allgemein'), changeFrequency: 'yearly', priority: 0.5 },
     { url: url('/team'), changeFrequency: 'monthly', priority: 0.6 },
     { url: url('/jobs'), changeFrequency: 'weekly', priority: 0.7 },
     ...seiten.filter((s) => s.inSitemap).map((s) => ({ url: url(`/${s.slug}`), changeFrequency: 'monthly' as const, priority: 0.7 })),

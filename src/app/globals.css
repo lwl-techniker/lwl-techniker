@@ -281,6 +281,16 @@
     animation: einblenden-scroll 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
     animation-delay: calc(var(--einblenden-index, 0) * 90ms);
   }
+  /* Automatische Staffelung in Rastern: vier Stufen pro Reihe. Ein eigener Inline-Wert (--einblenden-index) hat Vorrang. */
+  .js-einblenden [data-einblenden='sichtbar']:nth-child(4n + 2) {
+    --einblenden-index: 1;
+  }
+  .js-einblenden [data-einblenden='sichtbar']:nth-child(4n + 3) {
+    --einblenden-index: 2;
+  }
+  .js-einblenden [data-einblenden='sichtbar']:nth-child(4n + 4) {
+    --einblenden-index: 3;
+  }
   @keyframes einblenden-scroll {
     from {
       opacity: 0;

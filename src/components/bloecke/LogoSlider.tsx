@@ -7,7 +7,7 @@ import type { BlockDaten } from './BlockRenderer';
 
 /**
  * Logoslider (V3-Funktion, V2-Darstellung als ruhiges Band nach den Projekten): endlos laufende Referenzlogos aus der zentralen Liste unter "Übersichtsseiten > Referenzen".
- * Die Liste wird nur einmal gepflegt und gilt für Startseite, /referenzen und /referenzen/allgemein.
+ * Die Liste wird nur einmal gepflegt und gilt für Startseite und /referenzen.
  *
  * - zwei Durchläufe, die zweite Schleife ist für Screenreader unsichtbar
  * - feste Rahmen pro Logo, Silhouette im dunklen, Originalfarben im hellen Modus (ReferenzLogo)
@@ -34,12 +34,12 @@ export async function LogoSlider({ daten: d }: { daten: BlockDaten<'logoslider'>
     <section className="abschnitt-kompakt overflow-hidden border-y border-linie" aria-label="Referenzlogos">
       <div className="container-seite mb-10 flex flex-col items-center gap-3 text-center">
         <h2 className="text-sm font-semibold tracking-[0.14em] text-text-leise uppercase">{sauberText(d.titel) || 'Eine Auswahl unserer Referenzen'}</h2>
-        <Link href="/referenzen/allgemein" className="group inline-flex min-h-10 items-center gap-2 text-sm text-marke hover:text-marke-hell">
-          Alle Referenzlogos ansehen
+        <Link href="/referenzen" className="group inline-flex min-h-10 items-center gap-2 text-sm text-marke hover:text-marke-hell">
+          Alle Referenzen ansehen
           <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden />
         </Link>
       </div>
-      <Link href="/referenzen/allgemein" aria-label="Alle Referenzlogos ansehen" tabIndex={-1} className="logos-laufschrift block [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]">
+      <Link href="/referenzen" aria-label="Alle Referenzen ansehen" tabIndex={-1} className="logos-laufschrift block [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]">
         <div className="logos-laufschrift-spur flex w-max" style={{ '--laufschrift-dauer': `${dauer}s` } as React.CSSProperties}>
           {reihe(false)}
           {reihe(true)}

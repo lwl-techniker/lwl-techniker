@@ -166,10 +166,10 @@ export default config({
       schema: {
         leistungen: uebersicht('Seite /leistungen', 'Unsere Leistungen'),
         referenzen: uebersicht('Seite /referenzen', 'Referenzen', {
-          logos: logosFeld({ label: 'Referenzlogos (zentrale Liste für Logoslider, /referenzen und /referenzen/allgemein)' }),
-          allgemeinTitel: text('Seite /referenzen/allgemein: Titel', { max: 90, standard: 'Verbindungen, die Vertrauen schaffen' }),
-          allgemeinEinleitung: langtext('Seite /referenzen/allgemein: Einleitung', { max: 500 }),
-          allgemeinHinweis: langtext('Seite /referenzen/allgemein: Hinweis unter den Logos', {
+          logos: logosFeld({ label: 'Referenzlogos (zentrale Liste für Logoslider und /referenzen)' }),
+          allgemeinTitel: text('Abschnitt Logos auf /referenzen: Titel', { max: 90, standard: 'Verbindungen, die Vertrauen schaffen' }),
+          allgemeinEinleitung: langtext('Abschnitt Logos auf /referenzen: Einleitung', { max: 500 }),
+          allgemeinHinweis: langtext('Abschnitt Logos auf /referenzen: Text unter den Logos (Die Arbeit hinter den Logos)', {
             max: 500,
             beschreibung: 'z. B. Einordnung, dass Logos das Referenzumfeld zeigen und keine Aussage über eine aktuelle Partnerschaft sind.',
           }),

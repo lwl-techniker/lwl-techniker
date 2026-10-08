@@ -141,16 +141,6 @@
       }
     },
     {
-      "discriminant": "teamAuszug",
-      "value": {
-        "ueberzeile": "Team",
-        "titel": "Fachwissen hat ein Gesicht",
-        "text": "Direkte Ansprechpersonen, eigenes qualifiziertes Personal und die Bereitschaft, auch komplexe Aufgaben vor Ort zu lösen.",
-        "bereich": "leitung",
-        "linkText": "Das gesamte Team"
-      }
-    },
-    {
       "discriminant": "ctaBand",
       "value": {
         "ueberzeile": "Kontakt",

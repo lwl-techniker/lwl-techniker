@@ -86,20 +86,7 @@
     {
       "text": "Referenzen",
       "link": "/referenzen",
-      "unterpunkte": [
-        {
-          "text": "Projektbeispiele",
-          "link": "/referenzen",
-          "beschreibung": "Dokumentierte Projekte mit Bildern und Ablauf",
-          "hervorgehoben": false
-        },
-        {
-          "text": "Allgemeine Referenzen",
-          "link": "/referenzen/allgemein",
-          "beschreibung": "Alle Referenzlogos im Überblick",
-          "hervorgehoben": false
-        }
-      ]
+      "unterpunkte": []
     },
     {
       "text": "Über uns",

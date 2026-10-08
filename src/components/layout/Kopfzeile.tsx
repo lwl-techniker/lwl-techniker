@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ArrowUpRight, Menu, X } from 'lucide-react';
+import { ArrowUpRight, ChevronDown, Menu, X } from 'lucide-react';
 import { cn } from '@/lib/cn';
 import { ThemeSchalter } from '@/components/ui/ThemeSchalter';
 import { MarkenLogo } from '@/components/ui/MarkenLogo';
@@ -16,7 +16,6 @@ type Props = {
   logoHell: string | null;
   logoDunkel: string | null;
   telefon: string;
-  ort: string;
   menue: readonly Menuepunkt[];
   /** Letzter Menüpunkt rechts, hervorgehoben (Kontakt) */
   kontakt: { text: string; link: string };
@@ -29,11 +28,12 @@ type Props = {
  * - Desktop: Menüpunkte mit Untermenü öffnen per Klick auf den Text (kein Pfeil), Panel mit nummerierten Einträgen,
  *   Leistungen und Produkte zweispaltig, Escape schliesst und setzt den Fokus zurück, Klick ausserhalb schliesst,
  *   Fokus verlässt das Menü = schliessen
- * - Mobile: natives <dialog> als Vollbildmenü mit auf- und zuklappbaren Gruppen, Telefonnummer, Standortzeile
+ * - Mobile: Hamburger-Symbol öffnet ein natives <dialog> als Vollbildmenü (Aufbau V2): Menüpunkte als Links,
+ *   Untermenü über "Alle anzeigen", Kontakt und Telefonnummer als Knöpfe
  * - Jeder Linkklick schliesst alle Menüs. Beim erneuten Klick auf die aktuelle Route wird sofort nach oben gescrollt
  *   (Next.js navigiert dann nicht, RoutenScroll greift nicht).
  */
-export function Kopfzeile({ firmenname, logoHell, logoDunkel, telefon, ort, menue, kontakt }: Props) {
+export function Kopfzeile({ firmenname, logoHell, logoDunkel, telefon, menue, kontakt }: Props) {
   const pfad = usePathname();
   const [offen, setOffen] = useState<string | null>(null);
   const [mobilOffen, setMobilOffen] = useState<string | null>(null);
@@ -223,12 +223,12 @@ export function Kopfzeile({ firmenname, logoHell, logoDunkel, telefon, ort, menu
             <button
               ref={ausloeser}
               type="button"
-              className="inline-flex min-h-12 items-center gap-2 border border-marke/25 px-3 font-titel text-[0.8rem] font-semibold tracking-[0.18em] text-marke uppercase lg:hidden"
+              className="inline-flex size-11 items-center justify-center rounded-full border border-marke/25 text-marke lg:hidden"
               aria-haspopup="dialog"
               aria-label="Menü öffnen"
               onClick={dialogOeffnen}
             >
-              Menü <Menu className="size-6" aria-hidden />
+              <Menu className="size-6" aria-hidden />
             </button>
           </div>
         </div>
@@ -247,70 +247,87 @@ export function Kopfzeile({ firmenname, logoHell, logoDunkel, telefon, ort, menu
           document.body.style.overflow = '';
         }}
       >
+        {/* Aufbau wie V2: Kopfzeile mit Logo, Schalter und Schliessen-Symbol; Menüpunkte als Links, Untermenü über "Alle anzeigen"; Kontakt und Telefon als Knöpfe */}
         <div className="flex min-h-full flex-col overflow-y-auto px-5 pt-4 pb-10 sm:px-8">
-          <div className="flex items-center justify-between">
-            <span className="text-[0.68rem] font-medium tracking-[0.3em] text-text-leise uppercase">{firmenname}</span>
-            <button
-              type="button"
-              className="inline-flex min-h-11 items-center gap-2 border border-marke/25 px-3 font-titel text-[0.72rem] font-semibold tracking-[0.18em] text-marke uppercase"
-              aria-label="Menü schliessen"
-              onClick={() => dialogSchliessen()}
-            >
-              Schliessen <X className="size-5" aria-hidden />
-            </button>
+          <div className="flex items-center justify-between gap-4">
+            <Link href="/" className="flex shrink-0 items-center" aria-label={`${firmenname}, zur Startseite`} onClick={() => navigieren('/')}>
+              {logoHell || logoDunkel ? (
+                <MarkenLogo logoHell={logoHell} logoDunkel={logoDunkel} alt={firmenname} width={724} height={302} sizes="115px" className="h-12 w-auto" />
+              ) : (
+                <span className="font-titel text-base font-bold tracking-[0.06em] uppercase">{firmenname}</span>
+              )}
+            </Link>
+            <div className="flex items-center gap-1">
+              <ThemeSchalter />
+              <button
+                type="button"
+                className="inline-flex size-11 items-center justify-center rounded-full border border-marke/25 text-marke"
+                aria-label="Menü schliessen"
+                onClick={() => dialogSchliessen()}
+              >
+                <X className="size-6" aria-hidden />
+              </button>
+            </div>
           </div>
-          <nav aria-label="Mobile Hauptnavigation" className="mt-8">
-            {menue.map((punkt) => {
-              const hatUntermenue = punkt.unterpunkte.length > 0;
-              const aufgeklappt = mobilOffen === punkt.link;
-              const id = `mobil-${punkt.link.replace(/\W+/g, '')}`;
-              return (
-                <div key={punkt.link} className="border-t border-linie">
-                  {hatUntermenue ? (
-                    <button
-                      type="button"
-                      className={cn('flex w-full items-center justify-between py-4 text-left font-titel text-2xl font-semibold tracking-[0.06em] uppercase', aufgeklappt && 'text-marke')}
-                      aria-expanded={aufgeklappt}
-                      aria-controls={id}
-                      aria-label={`${punkt.text} Untermenü`}
-                      onClick={() => setMobilOffen(aufgeklappt ? null : punkt.link)}
+          <nav aria-label="Mobile Hauptnavigation" className="mt-10">
+            <ul className="space-y-1">
+              {menue.map((punkt) => {
+                const hatUntermenue = punkt.unterpunkte.length > 0;
+                const aufgeklappt = mobilOffen === punkt.link;
+                const id = `mobil-${punkt.link.replace(/\W+/g, '')}`;
+                return (
+                  <li key={punkt.link}>
+                    <Link
+                      href={punkt.link}
+                      onClick={() => navigieren(punkt.link)}
+                      aria-current={istAktiv(punkt.link) ? 'page' : undefined}
+                      className={cn('block py-3 font-titel text-2xl font-semibold tracking-[0.2em] text-text uppercase hover:text-marke', istAktiv(punkt.link) && 'text-marke')}
                     >
                       {punkt.text}
-                      <span className="font-sans text-base text-text-leise" aria-hidden>
-                        {aufgeklappt ? 'Schliessen' : 'Öffnen'}
-                      </span>
-                    </button>
-                  ) : (
-                    <Link href={punkt.link} onClick={() => navigieren(punkt.link)} className="block py-4 font-titel text-2xl font-semibold tracking-[0.06em] uppercase">
-                      {punkt.text}
                     </Link>
-                  )}
-                  {hatUntermenue ? (
-                    <div id={id} hidden={!aufgeklappt} className="pb-4">
-                      {punkt.unterpunkte.map((u) => (
-                        <Link
-                          key={u.link}
-                          href={u.link}
-                          onClick={() => navigieren(u.link)}
-                          className={cn('flex min-h-12 items-center justify-between gap-4 border-t border-linie/60 py-3 text-base text-text-leise', u.hervorgehoben && 'font-semibold text-marke')}
+                    {hatUntermenue ? (
+                      <div className="mb-3 border-l border-linie pl-4">
+                        <button
+                          type="button"
+                          className="flex min-h-10 items-center gap-2 py-1 text-sm font-medium tracking-[0.14em] text-text-leise uppercase hover:text-text"
+                          aria-expanded={aufgeklappt}
+                          aria-controls={id}
+                          aria-label={`${punkt.text} Untermenü`}
+                          onClick={() => setMobilOffen(aufgeklappt ? null : punkt.link)}
                         >
-                          {u.text}
-                          <ArrowUpRight className="size-4 shrink-0" aria-hidden />
-                        </Link>
-                      ))}
-                    </div>
-                  ) : null}
-                </div>
-              );
-            })}
-            <Link href={kontakt.link} onClick={() => navigieren(kontakt.link)} className="block border-t border-b border-linie py-4 font-titel text-2xl font-semibold tracking-[0.06em] text-marke uppercase">
-              {kontakt.text}
-            </Link>
+                          <ChevronDown className={cn('size-4 transition-transform', aufgeklappt && 'rotate-180')} aria-hidden />
+                          {aufgeklappt ? 'Weniger anzeigen' : 'Alle anzeigen'}
+                        </button>
+                        {aufgeklappt ? (
+                          <ul id={id} className="space-y-1 pb-2">
+                            {punkt.unterpunkte.map((u) => (
+                              <li key={u.link}>
+                                <Link
+                                  href={u.link}
+                                  onClick={() => navigieren(u.link)}
+                                  className={cn('block min-h-10 py-2 text-base text-text-leise hover:text-text', u.hervorgehoben && 'font-semibold text-marke')}
+                                >
+                                  {u.text}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        ) : null}
+                      </div>
+                    ) : null}
+                  </li>
+                );
+              })}
+            </ul>
+            <div className="mt-10 flex flex-col gap-4">
+              <Link href={kontakt.link} onClick={() => navigieren(kontakt.link)} className="knopf-primaer">
+                {kontakt.text}
+              </Link>
+              <a href={telefonLink} className="knopf-sekundaer">
+                {telefon}
+              </a>
+            </div>
           </nav>
-          <a href={telefonLink} className="mt-10 block py-2 font-titel text-xl font-semibold text-text hover:text-marke">
-            {telefon}
-          </a>
-          <p className="mt-2 text-sm text-text-leise">{ort} · Schweizweit im Einsatz</p>
         </div>
       </dialog>
     </>

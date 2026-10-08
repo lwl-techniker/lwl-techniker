@@ -16,7 +16,7 @@ export default async function NichtGefunden() {
 
   return (
     <>
-      <Kopfzeile firmenname={e.firmenname} logoHell={e.logohell ?? null} logoDunkel={e.logo ?? null} telefon={e.telefon} ort={e.ort} menue={menue} kontakt={kontakt} />
+      <Kopfzeile firmenname={e.firmenname} logoHell={e.logohell ?? null} logoDunkel={e.logo ?? null} telefon={e.telefon} menue={menue} kontakt={kontakt} />
       <Faserwellen />
       <main id="inhalt" className="container-seite abschnitt-gross">
         <p className="ueberzeile">Fehler 404</p>

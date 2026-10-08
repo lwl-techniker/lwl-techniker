@@ -13,6 +13,8 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       { source: '/produkte/:slug', destination: '/produkte', permanent: true },
+      // Allgemeine Referenzen (Logos) sind seit 8. Oktober 2026 Teil von /referenzen
+      { source: '/referenzen/allgemein', destination: '/referenzen', permanent: true },
     ];
   },
   async headers() {

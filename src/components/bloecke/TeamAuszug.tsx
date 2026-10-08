@@ -32,15 +32,13 @@ export async function TeamAuszug({ daten: d }: { daten: BlockDaten<'teamAuszug'>
   );
 }
 
-/** Personenraster, auch auf /team verwendet. Vier Spalten bei wenigen Personen, sonst fünf. */
+/**
+ * Personenraster, auch auf /team verwendet. Jede Karte ist höchstens 18 rem breit, damit Geschäftsleitung (zwei Personen)
+ * und Technik (vier Personen) gleich grosse Porträts erhalten (Wunsch Kundschaft, 8. Oktober 2026).
+ */
 export function Personen({ personen, kompakt = false }: { personen: readonly Person[]; kompakt?: boolean }) {
   return (
-    <ul
-      className={cn(
-        'grid grid-cols-2 gap-x-6 gap-y-10 lg:gap-x-8',
-        personen.length <= 2 ? 'sm:grid-cols-[repeat(2,minmax(0,18rem))]' : kompakt ? 'md:grid-cols-3 xl:grid-cols-4' : 'md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5'
-      )}
-    >
+    <ul className={cn('grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-[repeat(auto-fill,minmax(13rem,18rem))] lg:gap-x-8', kompakt && 'sm:justify-start')}>
       {personen.map((p, i) => (
         <li key={p.slug} data-einblenden style={{ '--einblenden-index': i % 5 } as React.CSSProperties}>
           <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-karte)] bg-flaeche">

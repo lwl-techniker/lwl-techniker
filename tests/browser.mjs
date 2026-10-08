@@ -60,10 +60,15 @@ try {
   for (const [name, pfad] of ziele) {
     await seite.evaluate(() => window.scrollTo({ top: 1800, behavior: 'instant' }));
     const knopf = seite.getByRole('button', { name: `${name} Untermenü`, exact: true });
-    await knopf.click();
-    const panel = seite.locator(`#untermenue-${pfad.replace(/\W+/g, '')}`);
-    await panel.waitFor({ state: 'visible' });
-    await panel.locator(`a[href="${pfad}"]`).first().click();
+    if (await knopf.count()) {
+      await knopf.click();
+      const panel = seite.locator(`#untermenue-${pfad.replace(/\W+/g, '')}`);
+      await panel.waitFor({ state: 'visible' });
+      await panel.locator(`a[href="${pfad}"]`).first().click();
+    } else {
+      // Menüpunkt ohne Untermenü (Referenzen): direkter Link
+      await seite.locator(`header nav a[href="${pfad}"]`).first().click();
+    }
     await seite.waitForURL(`**${pfad}`);
     await seite.waitForLoadState('networkidle');
     const y = await seite.evaluate(() => window.scrollY);
@@ -140,7 +145,7 @@ try {
     localStorage.setItem('lwl-theme', 'hell');
     document.documentElement.dataset.theme = 'hell';
   });
-  await seite.goto(`${base}/referenzen/allgemein`, { waitUntil: 'networkidle' });
+  await seite.goto(`${base}/referenzen`, { waitUntil: 'networkidle' });
   const farbigSichtbar = await seite.locator('.logo-farbig').first().evaluate((el) => getComputedStyle(el).display !== 'none');
   const silhouetteVersteckt = await seite.locator('.logo-silhouette:not(.immer)').first().evaluate((el) => getComputedStyle(el).display === 'none');
   assert.ok(farbigSichtbar && silhouetteVersteckt, 'Hell: farbige Logos sichtbar, Silhouetten verborgen');
@@ -154,7 +159,7 @@ try {
   ok('Referenzlogos: Originalfarben im hellen, Silhouetten im dunklen Modus');
 
   // 6. axe in beiden Modi
-  const routen = ['/', '/leistungen', '/produkte', '/referenzen', '/referenzen/allgemein', '/ueber-uns', '/team', '/kontakt'];
+  const routen = ['/', '/leistungen', '/produkte', '/referenzen', '/ueber-uns', '/team', '/kontakt'];
   for (const modus of ['dunkel', 'hell']) {
     await seite.evaluate((m) => localStorage.setItem('lwl-theme', m), modus);
     for (const r of routen) {
