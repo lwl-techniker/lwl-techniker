@@ -68,6 +68,7 @@ export async function llmsKurz(): Promise<string> {
     `- [Startseite](${url('/')})`,
     `- [Kontakt](${url('/kontakt')}): Formular, Adresse, Karte`,
     `- [Team](${url('/team')})`,
+    `- [Unsere Kunden (Referenzlogos)](${url('/kunden')})`,
     ...seiten.filter((s) => s.inSitemap && !['kontakt'].includes(s.slug)).map((s) => `- [${zeile(s.titel)}](${url(`/${s.slug}`)})`),
     `- [Vollständige Texte für Sprachmodelle](${url('/llms-full.txt')})`,
     `- [Sitemap](${url('/sitemap.xml')})`,

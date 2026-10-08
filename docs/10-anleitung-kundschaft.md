@@ -59,7 +59,7 @@ Das Team wird unter **Inhalte > Team** als eine Liste gepflegt.
 - Neue Referenz: **Inhalte > Referenzen > Add**. Titel, Kurzbeschreibung, Titelbild, weitere Bilder und den Projektbeschrieb ausfüllen
 - Die Startseite zeigt automatisch die vier neusten Referenzen. Soll eine bestimmte Referenz dort stehen, Häkchen **Auf Startseite zeigen** setzen. Nichts muss doppelt erfasst werden
 - Ein Video (MP4) kann direkt bei der Referenz hochgeladen werden. Es erscheint als erste Folie der Bildergalerie und lädt erst beim Klick. Videos vorher auf unter 5 MB komprimieren, z. B. mit HandBrake (Voreinstellung "Fast 720p30") oder einer Online-Komprimierung
-- Die Referenzlogos werden unter **Einstellungen > Übersichtsseiten > Seite /referenzen > Logos** gepflegt und erscheinen auf der Startseite und auf der Referenzseite
+- Die Referenzlogos werden unter **Einstellungen > Übersichtsseiten > Seite /referenzen > Logos** gepflegt und erscheinen auf der Startseite (Logoslider) und auf der Seite "Unsere Kunden" (/kunden)
 
 ## Produkte und Datenblätter
 

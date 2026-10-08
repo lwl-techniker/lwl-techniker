@@ -19,9 +19,9 @@ Die Bilddateien wurden byteidentisch aus V2 übernommen (`public/bilder/referenz
 
 Startseite: Block "Referenzen" zeigt automatisch die vier neusten (Kerenzerberg, FC St. Gallen, Notfalleinsatz, Weissenstein), identisch mit der V2-Liveansicht. Mit dem Häkchen "Auf Startseite zeigen" lässt sich die Auswahl im CMS steuern.
 
-Links geprüft: Alle internen Links der Referenzen (Übersicht, Detailseiten, "Weitere Referenzen", Logoslider nach `/referenzen/allgemein`) wurden im Browser aufgerufen (Prüfprotokoll). In den Referenztexten gibt es keine externen Links; defekte Links wurden keine gefunden.
+Links geprüft: Alle internen Links der Referenzen (Übersicht, Detailseiten, "Weitere Referenzen", Logoslider nach `/kunden`) wurden im Browser aufgerufen (Prüfprotokoll). In den Referenztexten gibt es keine externen Links; defekte Links wurden keine gefunden.
 
-Referenzlogos: 44 Logos aus V2 plus "NEP Switzerland" und "Swiss Football League" aus V3 (Dateien PNG als Silhouette, WebP in Farbe). Die zentrale Liste liegt in `content/einstellungen/uebersichten.json` unter `referenzen.logos` und speist Logoslider, `/referenzen` und `/referenzen/allgemein`.
+Referenzlogos: 44 Logos aus V2 plus "NEP Switzerland" und "Swiss Football League" aus V3 (Dateien PNG als Silhouette, WebP in Farbe). Die zentrale Liste liegt in `content/einstellungen/uebersichten.json` unter `referenzen.logos` und speist den Logoslider und die Seite `/kunden` (Unsere Kunden). `/referenzen` zeigt nur noch die Projektbeispiele; beide Seiten verweisen aufeinander.
 
 ## Abgleich mit dem Kundenmaterial vom 16. September 2026 (Stand 7. Oktober 2026)
 

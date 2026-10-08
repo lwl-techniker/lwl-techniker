@@ -50,7 +50,7 @@ Erneute Prüfung der fünf schwächsten Stellen danach: Kontaktseite (Karte läd
 - Desktop-Untermenü: Leistungen 9 Einträge, Escape schliesst und gibt Fokus zurück, Klick ausserhalb schliesst, Produkte-Untermenü enthält Kategorien (16 Einträge), Kategorie-Link filtert den Katalog.
 - Farbmodus: Schalter ändert `data-theme`, Wahl bleibt nach Neuladen (localStorage `lwl-theme`), keine Hydrationwarnungen, keine Konsolenfehler (Google-Maps-Netzwerkfehler des geschlossenen Arbeitsbereichs ausgenommen).
 - Referenzlogos: hell = farbige Logos sichtbar und Silhouetten verborgen, dunkel = Silhouetten sichtbar.
-- axe WCAG 2.1 A/AA: keine schweren oder kritischen Verstösse auf `/`, `/leistungen`, `/produkte`, `/referenzen`, `/referenzen/allgemein`, `/ueber-uns`, `/team`, `/kontakt` in beiden Modi (iframe der Karte ausgenommen).
+- axe WCAG 2.1 A/AA: keine schweren oder kritischen Verstösse auf `/`, `/leistungen`, `/produkte`, `/referenzen`, `/kunden`, `/ueber-uns`, `/team`, `/kontakt` in beiden Modi (iframe der Karte ausgenommen).
 - Mobil 390 px: Dialogmenü öffnet, Untermenü, Auswahl schliesst, Zielseite oben, Escape schliesst.
 - 320 px: kein horizontaler Überlauf auf fünf Routen.
 - Team: 2 Leitung, 4 Technik, Lindi Selimi nicht vorhanden.

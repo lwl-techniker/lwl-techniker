@@ -34,12 +34,12 @@ export async function LogoSlider({ daten: d }: { daten: BlockDaten<'logoslider'>
     <section className="abschnitt-kompakt overflow-hidden border-y border-linie" aria-label="Referenzlogos">
       <div className="container-seite mb-10 flex flex-col items-center gap-3 text-center">
         <h2 className="text-sm font-semibold tracking-[0.14em] text-text-leise uppercase">{sauberText(d.titel) || 'Eine Auswahl unserer Referenzen'}</h2>
-        <Link href="/referenzen" className="group inline-flex min-h-10 items-center gap-2 text-sm text-marke hover:text-marke-hell">
-          Alle Referenzen ansehen
+        <Link href="/kunden" className="group inline-flex min-h-10 items-center gap-2 text-sm text-marke hover:text-marke-hell">
+          Unsere Kunden ansehen
           <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden />
         </Link>
       </div>
-      <Link href="/referenzen" aria-label="Alle Referenzen ansehen" tabIndex={-1} className="logos-laufschrift block [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]">
+      <Link href="/kunden" aria-label="Unsere Kunden ansehen" tabIndex={-1} className="logos-laufschrift block [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]">
         <div className="logos-laufschrift-spur flex w-max" style={{ '--laufschrift-dauer': `${dauer}s` } as React.CSSProperties}>
           {reihe(false)}
           {reihe(true)}

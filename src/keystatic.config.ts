@@ -166,10 +166,10 @@ export default config({
       schema: {
         leistungen: uebersicht('Seite /leistungen', 'Unsere Leistungen'),
         referenzen: uebersicht('Seite /referenzen', 'Referenzen', {
-          logos: logosFeld({ label: 'Referenzlogos (zentrale Liste für Logoslider und /referenzen)' }),
-          allgemeinTitel: text('Abschnitt Logos auf /referenzen: Titel', { max: 90, standard: 'Verbindungen, die Vertrauen schaffen' }),
-          allgemeinEinleitung: langtext('Abschnitt Logos auf /referenzen: Einleitung', { max: 500 }),
-          allgemeinHinweis: langtext('Abschnitt Logos auf /referenzen: Text unter den Logos (Die Arbeit hinter den Logos)', {
+          logos: logosFeld({ label: 'Referenzlogos (zentrale Liste für Logoslider und die Seite /kunden)' }),
+          allgemeinTitel: text('Seite /kunden: Titel', { max: 90, standard: 'Verbindungen, die Vertrauen schaffen' }),
+          allgemeinEinleitung: langtext('Seite /kunden: Einleitung', { max: 500 }),
+          allgemeinHinweis: langtext('Seite /kunden: Text unter den Logos (Die Arbeit hinter den Logos)', {
             max: 500,
             beschreibung: 'z. B. Einordnung, dass Logos das Referenzumfeld zeigen und keine Aussage über eine aktuelle Partnerschaft sind.',
           }),
@@ -248,7 +248,7 @@ export default config({
       columns: ['titel'],
       schema: {
         // Gesperrte Adressen: gleiche Liste wie RESERVIERT in scripts/pruefe-konfiguration.mjs
-        titel: titelMitAdresse('Seitentitel', { gesperrt: ['leistungen', 'referenzen', 'jobs', 'produkte', 'team', 'downloads', 'keystatic', 'api', 'bilder', 'dokumente'] }),
+        titel: titelMitAdresse('Seitentitel', { gesperrt: ['leistungen', 'referenzen', 'kunden', 'jobs', 'produkte', 'team', 'downloads', 'keystatic', 'api', 'bilder', 'dokumente'] }),
         inSitemap: fields.checkbox({
           label: 'Für Google freigeben',
           description: 'Für Impressum und Datenschutz ausschalten.',
