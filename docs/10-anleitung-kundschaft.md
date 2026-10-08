@@ -63,7 +63,7 @@ Das Team wird unter **Inhalte > Team** als eine Liste gepflegt.
 
 ## Produkte und Datenblätter
 
-- Neues Produkt: **Inhalte > Produkte und Datenblätter > Add**, Produktname eintippen, PDF-Datenblatt hochladen, **Create**. Bild, Vorschau, Suchtext und Artikelnummern liest die Website beim Veröffentlichen automatisch aus dem PDF
+- Neues Produkt: **Inhalte > Produkte und Datenblätter > Add**, Produktname eintippen, PDF-Datenblatt hochladen, **Create**. Bild, Vorschau, Seitenzahl, Suchtext und Artikelnummern liest die Website automatisch aus dem PDF: online beim Veröffentlichen, lokal beim nächsten Aufruf des Katalogs (erste Anfrage dauert ein bis zwei Sekunden länger)
 - Kategorie unter **Kategorie auswählen** aus der Liste wählen. Passt keine, das Feld **Neue Kategorie** ausfüllen; nach dem Veröffentlichen steht die neue Kategorie in der Liste. Die Auswahl hat Vorrang vor dem Textfeld. Beides leer: das Produkt erscheint unter "Weitere Produkte"
 - Datenblatt ersetzen: beim Produkt das neue PDF hochladen und **Save**. Bild, Text und die Kennzahl "Datenblätter" aktualisieren sich beim nächsten Veröffentlichen von selbst
 - Technische Angaben, Preise oder Beschreibungen werden nicht von Hand gepflegt, das PDF ist die Quelle

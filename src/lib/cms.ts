@@ -1,4 +1,8 @@
 import 'server-only';
+import { execFile } from 'node:child_process';
+import { readFileSync, statSync } from 'node:fs';
+import path from 'node:path';
+import { promisify } from 'node:util';
 import { cache } from 'react';
 import { createReader } from '@keystatic/core/reader';
 import config from '@/keystatic.config';
@@ -128,6 +132,46 @@ type IndexEintrag = DatenblattIndex['eintraege'][keyof DatenblattIndex['eintraeg
 /** Produkte ohne eingetragene Kategorie landen hier (ein PDF plus Name genügt zum Anlegen). */
 export const KATEGORIE_OHNE = 'Weitere Produkte';
 
+const ENTWICKLUNG = process.env.NODE_ENV === 'development';
+let indexLauf: Promise<void> | null = null;
+
+/**
+ * Datenblatt-Index lesen. Im Build ist die eingebaute Datei massgebend (prebuild hat sie erzeugt).
+ * Im Entwicklungsmodus wird der Index sofort nachgeführt, wenn ein Produkt ein Datenblatt hat, das noch nicht
+ * (oder in anderer Grösse) im Index steht, z. B. direkt nach dem Anlegen im CMS. Dafür läuft
+ * scripts/erzeuge-datenblaetter.mjs einmalig für die Anfrage; gleichzeitige Anfragen warten auf denselben Lauf.
+ */
+async function datenblattIndexLesen(produkte: { slug: string; dokument: string | null }[]): Promise<DatenblattIndex> {
+  if (!ENTWICKLUNG) return datenblattIndex;
+  const datei = path.join(process.cwd(), 'src', 'generated', 'datenblaetter.json');
+  const lesen = () => JSON.parse(readFileSync(datei, 'utf8')) as DatenblattIndex;
+  let aktuell = lesen();
+  const veraltet = produkte.some((p) => {
+    if (!p.dokument) return false;
+    const e = (aktuell.eintraege as Record<string, IndexEintrag | undefined>)[p.slug];
+    if (!e || e.dokument !== p.dokument) return true;
+    try {
+      return statSync(path.join(process.cwd(), 'public', p.dokument)).size !== e.bytes;
+    } catch {
+      return false;
+    }
+  });
+  if (!veraltet) return aktuell;
+  indexLauf ??= promisify(execFile)(process.execPath, [path.join(process.cwd(), 'scripts', 'erzeuge-datenblaetter.mjs')])
+    .then(() => undefined)
+    .catch((fehler: unknown) => console.error('Datenblatt-Index konnte nicht nachgeführt werden:', fehler))
+    .finally(() => {
+      indexLauf = null;
+    });
+  await indexLauf;
+  try {
+    aktuell = lesen();
+  } catch {
+    // Datei gerade im Schreiben: alter Stand bleibt
+  }
+  return aktuell;
+}
+
 /** Alle Produkte, sortiert nach Reihenfolge. Bestimmt zugleich die Reihenfolge der Kategorien (erstes Vorkommen). */
 export const holeProdukte = cache(async () => {
   const alle = await reader.collections.produkte.all();
@@ -144,7 +188,8 @@ export const holeProdukte = cache(async () => {
  */
 export const holeDatenblaetter = cache(async () => {
   const produkte = await holeProdukte();
-  const eintraege = datenblattIndex.eintraege as Record<string, IndexEintrag | undefined>;
+  const index = await datenblattIndexLesen(produkte);
+  const eintraege = index.eintraege as Record<string, IndexEintrag | undefined>;
   return produkte.map((p) => {
     const index = p.dokument ? eintraege[p.slug] : undefined;
     const passt = index && index.dokument === p.dokument ? index : undefined;

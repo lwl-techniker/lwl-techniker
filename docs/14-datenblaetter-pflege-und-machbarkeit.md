@@ -16,7 +16,7 @@ Variante A (automatisch gepflegte Eigenschaftsfelder) wäre damit eine scheinbar
 
 ## Was automatisch passiert (scripts/erzeuge-datenblaetter.mjs)
 
-Beim Build (`prebuild`) und mit `npm run datenblaetter`:
+Beim Build (`prebuild`) und mit `npm run datenblaetter`. Im Entwicklungsmodus (`npm run dev`) zusätzlich sofort beim ersten Aufruf von `/produkte` oder `/downloads`, wenn ein Produkt ein Datenblatt hat, das noch nicht oder in anderer Grösse im Index steht (`datenblattIndexLesen` in `src/lib/cms.ts`, seit 8. Oktober 2026). Ein im CMS neu angelegtes Produkt zeigt damit Vorschau, Seitenzahl und Suchtext ohne Neustart; die erste Anfrage dauert ein bis zwei Sekunden länger.
 
 1. Jedes Produkt in `content/produkte` mit Feld `dokument` wird gelesen. Dateien über 15 MB oder fehlende Dateien werden gemeldet, der letzte gültige Index-Eintrag bleibt erhalten.
 2. SHA-256-Prüfsumme. Unveränderte PDFs (gleiche Prüfsumme, Vorschau vorhanden) werden übersprungen; ein erneuter Upload derselben Datei erzeugt keine Duplikate und keine Änderung.
