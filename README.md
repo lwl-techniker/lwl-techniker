@@ -10,6 +10,7 @@ Dokumentation zu V4 in `docs/12` bis `docs/16`:
 - `docs/15-pruefprotokoll.md`: Build-, Browser- und Accessibility-Prüfungen
 - `docs/16-offene-entscheidungen.md`: Datenfragen, Freigaben, Checkliste vor dem ersten Push
 - `docs/17-gesamtaudit-2026-10-08.md`: Gesamtaudit (Technik, SEO, AEO, GEO, Barrierefreiheit, Inhalt) mit Punktzahlen und priorisierten Massnahmen
+- `docs/18-veroeffentlichung.md`: Prüfung bei jedem Push, Veröffentlichung über Build-Hook und Seite /veroeffentlichen
 
 Die Dokumente `docs/01` bis `docs/11` stammen aus der InfraOne-Vorlage (V2) und beschreiben Keystatic, Netlify, Formulare, Bilder und Texte allgemein. Wo sie Port 3000 nennen, gilt für V4 Port 3104.
 

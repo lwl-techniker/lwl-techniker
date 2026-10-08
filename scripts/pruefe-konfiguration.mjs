@@ -151,7 +151,7 @@ if (!existsSync(formsHtml)) fehler.push('public/__forms.html fehlt. "npm run for
 else ok.push('public/__forms.html vorhanden');
 
 // 8. Reservierte Seitenadressen ----------------------------------------------------------
-const RESERVIERT = ['leistungen', 'referenzen', 'jobs', 'produkte', 'team', 'downloads', 'keystatic', 'api', 'sitemap.xml', 'robots.txt', 'bilder', 'dokumente', '_next'];
+const RESERVIERT = ['leistungen', 'referenzen', 'kunden', 'jobs', 'produkte', 'team', 'downloads', 'keystatic', 'veroeffentlichen', 'api', 'sitemap.xml', 'robots.txt', 'bilder', 'dokumente', '_next'];
 for (const datei of dateien(path.join(wurzel, 'content', 'seiten'), ['.json'])) {
   const slug = path.basename(datei, '.json');
   if (RESERVIERT.includes(slug)) fehler.push(`Die Seite "${slug}" (content/seiten) kollidiert mit einer festen Route. Bitte eine andere Adresse wählen.`);

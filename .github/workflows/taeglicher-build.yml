@@ -1,0 +1,12 @@
+# Täglicher Build bei Netlify, damit Stellen mit "gültig bis" auch ohne neue Änderung verschwinden (docs/04, Schritt 5).
+# Ruft nur den Build-Hook auf; geprüft wurde der Stand bereits bei der letzten Veröffentlichung.
+name: Täglicher Build
+on:
+  schedule:
+    - cron: '5 23 * * *' # 23:05 UTC, in der Schweiz immer nach Mitternacht (Winter 00:05, Sommer 01:05)
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: curl -fsS -X POST -d '{}' "${{ secrets.NETLIFY_BUILD_HOOK }}"

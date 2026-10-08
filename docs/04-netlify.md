@@ -73,7 +73,7 @@ Stellen mit **gültig bis** verschwinden beim nächsten Build. Damit das auch oh
 
 1. **Project configuration, Build and deploy, Continuous deployment, Build hooks, Add build hook**, Name `taeglich`, Branch `main`
 2. Die angezeigte URL im Repository als Secret speichern: **Settings, Secrets and variables, Actions, New repository secret**, Name `NETLIFY_BUILD_HOOK`
-3. Datei `.github/workflows/taeglicher-build.yml` anlegen:
+3. Die Datei `.github/workflows/taeglicher-build.yml` liegt im Repository (Inhalt zur Kontrolle):
 
 ```yaml
 name: Täglicher Build
@@ -89,6 +89,10 @@ jobs:
 ```
 
 Hinweis: In öffentlichen Repositories pausiert GitHub zeitgesteuerte Abläufe nach 60 Tagen ohne Änderung. Unsere Repositories sind privat, trotzdem gelegentlich prüfen. Unter **Actions** lässt sich der Ablauf wieder aktivieren und mit **Run workflow** von Hand starten.
+
+## Schritt 6: Prüfung und Veröffentlichung
+
+Netlify baut nicht mehr bei jedem Push (`ignore` in `netlify.toml`), sondern nur über den Build-Hook nach grüner Prüfung bei GitHub. Einrichtung von Build-Hook, Secrets, Token und Kennwort: `docs/18-veroeffentlichung.md`. Zusätzliche Umgebungsvariablen in Netlify: `VEROEFFENTLICHEN_KENNWORT` und `GITHUB_WORKFLOW_TOKEN` (beide geheim).
 
 ## Deploy-Vorschau
 

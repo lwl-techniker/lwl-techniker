@@ -83,6 +83,10 @@ Das Team wird unter **Inhalte > Team** als eine Liste gepflegt.
 - Konkret statt werblich: "Wir melden uns innert eines Arbeitstages" statt "Wir sind immer für Sie da"
 - Nur Kennzahlen und Kundenstimmen verwenden, die belegt sind
 
+## Veröffentlichen
+
+Speichern im CMS ändert die Website noch nicht. Wenn alle Änderungen gemacht sind: **www.lwl-techniker.ch/veroeffentlichen** öffnen, das Kennwort eingeben und **Prüfen und veröffentlichen** klicken. Die Website prüft die Änderungen und ist nach etwa zehn Minuten aktualisiert. Bei einem Fehler bleibt die bisherige Website online und der Webmaster meldet sich. Das Kennwort erhalten Sie vom Webmaster.
+
 ## Hilfe
 
 Bei Fragen oder wenn etwas nach 5 Minuten noch nicht online ist: InfraOne IT Solutions kontaktieren. Es geht nichts verloren, jede Änderung ist gespeichert und kann wiederhergestellt werden.

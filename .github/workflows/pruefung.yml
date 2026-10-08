@@ -1,0 +1,86 @@
+# Prüfung bei jedem Push auf main und Veröffentlichung auf Wunsch.
+#
+# - Push (z. B. Speichern im CMS): pruefen, build und Lighthouse laufen, es wird NICHT veröffentlicht.
+#   Bei Rot schickt GitHub eine E-Mail an den Webmaster, die Website bleibt unverändert.
+# - Veröffentlichen: über die Seite /veroeffentlichen der Website (Kennwort) oder hier unter
+#   "Actions > Prüfung und Veröffentlichung > Run workflow". Erst nach grüner Prüfung ruft der Lauf den
+#   Netlify-Build-Hook auf. Netlify baut sonst nichts automatisch (netlify.toml, "ignore").
+#
+# Secrets (Repository > Settings > Secrets and variables > Actions):
+#   NETLIFY_BUILD_HOOK   Adresse des Build-Hooks "Veröffentlichung" (Netlify > Build & deploy > Build hooks)
+#
+# Dokumentation: docs/18-veroeffentlichung.md
+name: Prüfung und Veröffentlichung
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      veroeffentlichen:
+        description: 'Nach erfolgreicher Prüfung bei Netlify veröffentlichen'
+        type: boolean
+        default: true
+
+# Ein Lauf nach dem anderen, laufende Prüfungen werden nicht abgebrochen (eine Veröffentlichung darf nicht verloren gehen)
+concurrency:
+  group: pruefung-main
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  pruefung:
+    name: Prüfen, bauen, Lighthouse
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      NEXT_TELEMETRY_DISABLED: '1'
+      # Wie produktiv, damit Lighthouse die freigegebene Seite misst (robots, Canonical)
+      SITE_URL: https://www.lwl-techniker.ch
+      SITE_INDEXABLE: 'true'
+      CONTEXT: production
+    steps:
+      - name: Quelltext holen (ganze Historie für die Änderungsdaten der Inhalte)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Node einrichten
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Abhängigkeiten installieren
+        run: npm ci
+
+      - name: Prüfen (Konfiguration, Texte, Bilder, TypeScript, ESLint, Tests)
+        run: npm run pruefen
+
+      - name: Bauen
+        run: npm run build
+
+      - name: Lighthouse (Barrierefreiheit, Best Practices, SEO müssen 100 sein)
+        run: npx --yes @lhci/cli@0.15.1 autorun
+
+      - name: Lighthouse-Berichte ablegen
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse
+          path: .lighthouseci
+          retention-days: 14
+
+      - name: Bei Netlify veröffentlichen
+        if: success() && github.event_name == 'workflow_dispatch' && inputs.veroeffentlichen
+        env:
+          HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
+        run: |
+          if [ -z "$HOOK" ]; then
+            echo "Secret NETLIFY_BUILD_HOOK fehlt (docs/18-veroeffentlichung.md)." >&2
+            exit 1
+          fi
+          curl --fail --silent --show-error -X POST -d '{}' "$HOOK"
+          echo "Netlify baut jetzt den Stand ${{ github.sha }} von main."

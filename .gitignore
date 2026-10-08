@@ -28,3 +28,6 @@ logos-quellen/
 
 # Übergabe-Archive und Logs gehören nicht ins Repository
 *.zip
+
+# Lighthouse-CI-Berichte (lokal und in GitHub Actions erzeugt)
+.lighthouseci

@@ -9,6 +9,10 @@
 [build]
   command = "npm run build"
   publish = ".next"
+  # Kein automatischer Build bei jedem Push (Speichern im CMS). Gebaut wird nur über einen Build-Hook:
+  # die GitHub-Prüfung ruft ihn nach grünem Lauf auf (.github/workflows/pruefung.yml), der tägliche Build
+  # für abgelaufene Stellen ebenfalls. Bei Hook-Builds ist INCOMING_HOOK_URL gesetzt, dann wird gebaut.
+  ignore = "test -z \"$INCOMING_HOOK_URL\""
 
 [build.environment]
   NODE_VERSION = "22.23.2"
