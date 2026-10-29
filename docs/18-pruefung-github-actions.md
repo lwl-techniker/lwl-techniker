@@ -31,7 +31,7 @@ Nicht abgefangen: inhaltliche Fehler (falsche Zahlen, Tippfehler), die Browserpr
 ## Lighthouse lokal
 
 ```bash
-SITE_INDEXABLE=true CONTEXT=production SITE_URL=https://www.lwl-techniker.ch npm run build && npx --yes @lhci/cli@0.15.1 autorun
+SITE_INDEXABLE=true CONTEXT=production SITE_URL=https://lwl-techniker.ch npm run build && npx --yes @lhci/cli@0.15.1 autorun
 ```
 
 Konfiguration in `lighthouserc.json` (fünf Seiten, Desktop, Berichte unter `.lighthouseci/`). Unter Windows `CHROME_PATH` auf Chrome setzen.

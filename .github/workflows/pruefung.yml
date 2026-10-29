@@ -24,7 +24,7 @@ jobs:
     env:
       NEXT_TELEMETRY_DISABLED: '1'
       # Wie produktiv, damit Lighthouse die freigegebene Seite misst (robots, Canonical)
-      SITE_URL: https://www.lwl-techniker.ch
+      SITE_URL: https://lwl-techniker.ch
       SITE_INDEXABLE: 'true'
       CONTEXT: production
     steps:

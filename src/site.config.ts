@@ -11,11 +11,15 @@
 export const PROJEKT_NAME = 'LWL-Techniker Schweiz GmbH';
 
 /**
- * Kanonische Adresse ohne Schrägstrich am Ende.
- * Vorschau: Netlify-Adresse von V4. Produktiv: SITE_URL=https://www.lwl-techniker.ch als Umgebungsvariable setzen,
- * sobald die Domain auf V4 zeigt. V2 bleibt davon unberührt.
+ * Kanonische Adresse ohne Schrägstrich am Ende (Canonical, Sitemap, llms.txt, strukturierte Daten).
+ * Reihenfolge: SITE_URL (falls gesetzt), sonst im produktiven Netlify-Build die Primary Domain aus der
+ * Netlify-Variable URL (nur wenn es eine eigene Domain ist, nicht *.netlify.app), sonst die Netlify-Adresse.
+ * Seit 29. Oktober 2026 braucht es damit keine SITE_URL mehr, sobald in Netlify eine Primary Domain gesetzt ist.
  */
-export const DOMAIN = process.env.SITE_URL || 'https://lwl-techniker.netlify.app';
+const netlifyProduktiv = process.env.CONTEXT === 'production';
+const netlifyAdresse = (process.env.URL || '').replace(/\/$/, '');
+const eigeneDomain = netlifyProduktiv && /^https:\/\/[^/]+$/.test(netlifyAdresse) && !netlifyAdresse.endsWith('.netlify.app') ? netlifyAdresse : '';
+export const DOMAIN = process.env.SITE_URL || eigeneDomain || 'https://lwl-techniker.netlify.app';
 
 /** GitHub-Repository im Format besitzer/repo-name. Einziges Schreibziel des CMS. Niemals V2 oder V3 eintragen. */
 export const GITHUB_REPO = 'lwl-techniker/lwl-techniker';
@@ -32,10 +36,11 @@ export const GESCHUETZTE_REPOS = ['infraoneit/lwl-techniker-v2', 'infraoneit/lwl
 export const KEYSTATIC_MODUS: 'automatisch' | 'lokal' | 'github' = 'automatisch';
 
 /**
- * Indexierung: nur freigeben, wenn SITE_INDEXABLE=true gesetzt ist UND der Build im Netlify-Production-Kontext läuft.
- * Vorschauen von V4 bleiben so auf noindex, bis die Umstellung auf die Firmendomain entschieden ist.
+ * Indexierung (robots.txt, Sitemap-Verweis): frei im produktiven Netlify-Build, sobald eine eigene Domain die
+ * Primary Domain ist oder SITE_INDEXABLE=true gesetzt wurde. SITE_INDEXABLE=false sperrt ausdrücklich.
+ * Vorschauen, Branch-Deploys und die reine Netlify-Adresse bleiben gesperrt.
  */
-export const INDEXIERBAR = process.env.SITE_INDEXABLE === 'true' && process.env.CONTEXT === 'production';
+export const INDEXIERBAR = netlifyProduktiv && process.env.SITE_INDEXABLE !== 'false' && (process.env.SITE_INDEXABLE === 'true' || eigeneDomain !== '');
 
 /** Sprache für <html lang> und Open Graph. */
 export const SPRACHE = 'de-CH';

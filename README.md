@@ -36,7 +36,7 @@ Node 22.18 bis 24.x. `npm ci`, dann `npm run dev` (Port 3104, erzeugt vorher For
 
 ## Netlify
 
-`netlify.toml`: Build `npm run build`, Publish `.next`, Node 22. Umgebungsvariablen: `SITE_URL` (kanonische Adresse), `SITE_INDEXABLE=true` nur für die freigegebene produktive Seite, vier `KEYSTATIC_*`-Werte einer eigenen GitHub-App für V4 (`.env.example`). Netlify Forms über `public/__forms.html`.
+`netlify.toml`: Build `npm run build`, Publish `.next`, Node 22. Umgebungsvariablen: optional `SITE_URL` (übersteuert die Primary Domain aus der Netlify-Variable `URL`) und `SITE_INDEXABLE` (`false` sperrt, sonst frei bei eigener Primary Domain), vier `KEYSTATIC_*`-Werte einer eigenen GitHub-App für V4 (`.env.example`). Netlify Forms über `public/__forms.html`.
 
 ## Schutz von V2 und V3
 

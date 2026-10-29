@@ -55,7 +55,7 @@ Die Meldung steht im Deploy-Log. Textverstösse in Inhalten erscheinen dort nur 
 
 3. `www.kunde.ch` als **Primary domain** setzen. Netlify leitet `kunde.ch` automatisch dorthin um.
 4. HTTPS stellt Netlify automatisch aus (Let's Encrypt). DNS-Änderungen brauchen bis zu 48 Stunden.
-5. `DOMAIN` in `src/site.config.ts` auf die endgültige Adresse setzen und committen.
+5. Nichts im Code anpassen: `src/site.config.ts` übernimmt im produktiven Build die Primary Domain automatisch aus der Netlify-Variable `URL` und gibt damit auch robots.txt frei. `SITE_URL` und `SITE_INDEXABLE` sind nur noch Übersteuerungen (`SITE_INDEXABLE=false` sperrt).
 6. Callback-URL für die neue Domain in der GitHub-App ergänzen ([03-github-verbinden.md](03-github-verbinden.md), Schritt 4).
 
 ## Schritt 4: Formulare aktivieren
