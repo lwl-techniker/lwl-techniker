@@ -102,6 +102,7 @@ Jeder Pull Request und jeder andere Branch erhält eine eigene Vorschauadresse. 
 
 | Problem | Lösung |
 | --- | --- |
+| robots.txt, Sitemap oder llms.txt zeigen nach einem Deploy noch den alten Stand (Header `Age` sehr gross, `Cache-Status: "Netlify Durable"; hit`) | Netlify Durable Cache leeren: in der Netlify-Oberfläche beim Projekt "Purge cache" (Deploys), oder per API `curl -X POST https://api.netlify.com/api/v1/purge -H "Authorization: Bearer <Token>" -H "Content-Type: application/json" -d "{\"site_id\":\"<Site-ID>\"}"`. Seit 29. Oktober 2026 begrenzt `next.config.ts` die CDN-Haltezeit dieser Dateien auf eine Stunde. |
 | Build bricht mit `Konfigurationsprüfung` ab | Meldung im Deploy-Log lesen, sie nennt die Ursache |
 | Formular zeigt online einen Fehler | Form detection nicht aktiv, oder das Formular sendet nicht an `/__forms.html` |
 | `/keystatic` online meldet fehlende Einrichtung | Umgebungsvariablen fehlen, danach Clear cache and deploy |

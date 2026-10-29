@@ -59,6 +59,16 @@ const nextConfig: NextConfig = {
           { key: 'Content-Security-Policy', value: CSP },
         ],
       },
+      // Crawler-Dateien höchstens eine Stunde im Netlify-CDN halten. Ohne diese Regel speichert der Durable Cache
+      // robots.txt bis zu ein Jahr; am 29. Oktober 2026 lieferte lwl-techniker.ch dadurch eine drei Wochen alte,
+      // sperrende robots.txt aus, obwohl der neue Build längst frei war.
+      {
+        source: '/:datei(robots.txt|sitemap.xml|llms.txt|llms-full.txt|manifest.webmanifest)',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=0, must-revalidate' },
+          { key: 'Netlify-CDN-Cache-Control', value: 'public, max-age=3600, must-revalidate' },
+        ],
+      },
       // Spätere Regeln überschreiben gleichnamige Header der allgemeinen Regel (CSP für das CMS)
       {
         source: '/keystatic/:path*',
