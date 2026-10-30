@@ -1,5 +1,7 @@
 import type { Block, Einstellungen } from '@/lib/cms';
+import { faqAlsFaqPage } from '@/lib/strukturierte-daten';
 import { sauberText } from '@/lib/text';
+import { JsonLd } from '@/components/seo/JsonLd';
 import { Hero } from './Hero';
 import { TextMitBild } from './TextMitBild';
 import { Fliesstext } from './Fliesstext';
@@ -49,10 +51,13 @@ export function ersterBlockHatH1(bloecke: readonly Block[]): boolean {
 export function BlockRenderer({ bloecke, einstellungen, seitentitel, hatSeitenkopf = false }: Props) {
   const ersterIstTitelText = bloecke[0]?.discriminant === 'fliesstext' && Boolean(bloecke[0].value.titel);
   const brauchtH1 = !hatSeitenkopf && !ersterBlockHatH1(bloecke);
+  // Eine FAQPage je Seite aus allen FAQ-Blöcken (src/lib/strukturierte-daten.ts)
+  const faqDaten = faqAlsFaqPage(bloecke.flatMap((b) => (b.discriminant === 'faq' ? b.value.eintraege : [])));
 
   return (
     <>
       {brauchtH1 ? <h1 className="sr-only">{sauberText(seitentitel)}</h1> : null}
+      {faqDaten ? <JsonLd daten={faqDaten} /> : null}
       {bloecke.map((block, index) => {
         const key = `${block.discriminant}-${index}`;
         switch (block.discriminant) {

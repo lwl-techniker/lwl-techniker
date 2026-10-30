@@ -4,8 +4,7 @@ import type { BlockDaten } from './BlockRenderer';
 
 /**
  * Häufige Fragen mit nativem <details>, funktioniert ohne JavaScript.
- * Bewusst ohne FAQPage Daten: Google zeigt FAQ Ergebnisse seit 2023 nur noch für Behörden und Gesundheitsseiten,
- * und mehrere FAQ-Blöcke auf einer Seite würden in der Search Console als Fehler gemeldet.
+ * Die FAQPage-Daten gibt der BlockRenderer einmal je Seite aus, alle FAQ-Blöcke zusammengefasst (src/lib/strukturierte-daten.ts).
  */
 export function Faq({ daten: d }: { daten: BlockDaten<'faq'> }) {
   return (

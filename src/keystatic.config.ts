@@ -118,6 +118,11 @@ export default config({
           }),
           { label: 'Social Media', itemLabel: (p) => p.fields.plattform.value }
         ),
+        weitereProfile: fields.array(fields.url({ label: 'Link', description: 'Vollständige Adresse, z. B. https://www.moneyhouse.ch/de/company/...' }), {
+          label: 'Weitere Profile (Links)',
+          description: 'Weitere Firmenprofile wie Moneyhouse, local.ch, search.ch oder Kununu. Erscheinen nicht sichtbar, nur in den Firmendaten für Suchmaschinen (sameAs).',
+          itemLabel: (p) => p.value || 'Link',
+        }),
         seoTitel: text('Standard-SEO-Titel', { pflicht: true, max: 60, beschreibung: 'Titel der Startseite in Google.' }),
         seoBeschreibung: langtext('Standard-SEO-Beschreibung', { pflicht: true, max: 160 }),
         ogbild: bild('Vorschaubild für Social Media', 'firma', { hinweis: 'Erscheint, wenn die Website auf LinkedIn, WhatsApp usw. geteilt wird. JPG, genau 1200 x 630 px, unter 200 KB.' }),

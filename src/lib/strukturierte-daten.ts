@@ -16,8 +16,8 @@ export const WEBSITE_ID = `${DOMAIN}/#website`;
 
 const url = (pfad: string) => new URL(pfad, DOMAIN).toString();
 
-/** Koordinaten des Firmensitzes Langgasse 134, 9008 St. Gallen (OpenStreetMap, Oktober 2026, wie im Google-Unternehmensprofil). Bei Umzug anpassen. */
-const GEO = { latitude: 47.4436505, longitude: 9.3960517 };
+/** Koordinaten des Firmensitzes Langgasse 136, 9008 St. Gallen (OpenStreetMap, 30. Oktober 2026, Rechtssitz laut UID-Register). Bei Umzug anpassen. */
+const GEO = { latitude: 47.4438526, longitude: 9.3962406 };
 
 const WOCHENTAGE = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'];
 const TAG_SCHEMA = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -32,6 +32,14 @@ export function einsatzgebiete(e: Einstellungen) {
     .map((n) => n.trim())
     .filter(Boolean);
   return namen.map((name) => ({ '@type': ['Schweiz', 'Liechtenstein', 'Deutschland', 'Österreich'].includes(name) ? 'Country' : 'AdministrativeArea', name }));
+}
+
+const LAENDER_CODES: Record<string, string> = { Schweiz: 'CH', Deutschschweiz: 'CH', Liechtenstein: 'LI', Deutschland: 'DE', Österreich: 'AT' };
+
+/** Ländercodes des Einsatzgebiets für den ContactPoint. Regionen zählen zu ihrem Land, unbekannte Angaben fallen weg, ohne Treffer bleibt CH. */
+export function einsatzlaender(e: Einstellungen) {
+  const codes = [...new Set(einsatzgebiete(e).map((g) => LAENDER_CODES[g.name]).filter(Boolean))];
+  return codes.length ? codes : ['CH'];
 }
 
 /**
@@ -70,7 +78,7 @@ export function organisationUndWebsite(e: Einstellungen, anzahlPersonen?: number
         description: sauberText(e.kurzbeschreibung),
         url: DOMAIN,
         telephone: e.telefon,
-        contactPoint: telefonnummern(e).map((n) => ({ '@type': 'ContactPoint', telephone: n, contactType: 'customer service', areaServed: 'CH', availableLanguage: 'German' })),
+        contactPoint: telefonnummern(e).map((n) => ({ '@type': 'ContactPoint', telephone: n, contactType: 'customer service', areaServed: einsatzlaender(e), availableLanguage: 'German' })),
         email: e.email,
         logo: e.logo ? url(e.logo) : undefined,
         image: e.ogbild ? url(e.ogbild) : undefined,
@@ -91,7 +99,7 @@ export function organisationUndWebsite(e: Einstellungen, anzahlPersonen?: number
         numberOfEmployees: anzahlPersonen ? { '@type': 'QuantitativeValue', value: anzahlPersonen } : undefined,
         areaServed: einsatzgebiete(e),
         knowsAbout: ['Glasfasertechnik', 'LWL-Installation', 'Muffenspleissung', 'FTTH', 'OTDR-Messung', 'Rechenzentrumsverkabelung'],
-        sameAs: [...e.socialMedia.map((s) => s.url), ...(e.googleProfil ? [e.googleProfil] : [])],
+        sameAs: [...new Set([...e.socialMedia.map((s) => s.url), ...(e.googleProfil ? [e.googleProfil] : []), ...(e.weitereProfile ?? [])].filter(Boolean))],
       },
       {
         '@type': 'WebSite',
@@ -140,6 +148,24 @@ export function seiteAlsWebPage({ pfad, titel, beschreibung, aktualisiert, bild 
     primaryImageOfPage: bild ? { '@type': 'ImageObject', url: url(bild) } : undefined,
     dateModified: aktualisiert,
     inLanguage: 'de-CH',
+  };
+}
+
+/**
+ * Häufige Fragen einer Seite als FAQPage: eine je Seite, alle FAQ-Blöcke zusammengefasst, damit die Search Console keine
+ * doppelten FAQPage-Knoten meldet. Google zeigt FAQ-Treffer seit 2023 nur für Behörden und Gesundheitsseiten, Bing und
+ * KI-Assistenten lesen die Daten weiterhin. Ohne FAQ-Block wird nichts ausgegeben.
+ */
+export function faqAlsFaqPage(eintraege: readonly { frage: string; antwort: string }[]) {
+  if (eintraege.length === 0) return null;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: eintraege.map((e) => ({
+      '@type': 'Question',
+      name: sauberText(e.frage),
+      acceptedAnswer: { '@type': 'Answer', text: sauberText(e.antwort).replace(/\s*\n\s*/g, ' ') },
+    })),
   };
 }
 

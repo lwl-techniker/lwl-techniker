@@ -93,7 +93,7 @@ Bei Fragen oder wenn etwas nach 5 Minuten noch nicht online ist: InfraOne IT Sol
 
 ## Firmendaten für Google und KI-Suche
 
-Unter **Einstellungen > Firma und Kontakt** stehen seit 8. Oktober 2026 zusätzliche Felder. Sie erscheinen nicht sichtbar auf der Website, sondern in den Firmendaten, die Google, Bing und KI-Suchsysteme lesen:
+Unter **Einstellungen > Firma und Kontakt** stehen seit 8. Oktober 2026 zusätzliche Felder. Das Feld **Einsatzgebiet** bestimmt auch, für welche Länder der Kontaktpunkt gilt (Schweiz, Liechtenstein, Deutschland und Österreich werden erkannt). Häufige Fragen (Abschnitt "Häufige Fragen") erscheinen seit 30. Oktober 2026 zusätzlich als FAQ-Daten für Suchmaschinen, einmal je Seite. Sie erscheinen nicht sichtbar auf der Website, sondern in den Firmendaten, die Google, Bing und KI-Suchsysteme lesen:
 
 - **Kurzname für Seitentitel**: wird an jeden Seitentitel angehängt ("Muffenspleissungen | LWL-Techniker"). Kurz lassen, sonst schneidet Google die Titel ab.
 - **UID**: die Unternehmens-Identifikationsnummer wie im Impressum.
@@ -101,6 +101,7 @@ Unter **Einstellungen > Firma und Kontakt** stehen seit 8. Oktober 2026 zusätzl
 - **Einsatzgebiet**: Regionen mit Komma oder "und" getrennt, z. B. "Deutschschweiz und Liechtenstein".
 - **Weitere Telefonnummer (optional)**: seit 30. Oktober 2026, z. B. die Festnetznummer neben der Mobilnummer. Sie erscheint zusätzlich auf der Kontaktseite, in der Fusszeile, im Kontaktblock und in den Firmendaten für Suchmaschinen (mit Zusatz "Festnetz" oder "Mobil"). Die Anruf-Knöpfe (Kopfzeile, gelbes Band, Leistungsseiten) verwenden immer das Feld **Telefon**; soll eine andere Nummer dort erscheinen, die beiden Felder tauschen.
 - **Google Business Profil (Link)**: der Link "Auf Google Maps ansehen" aus dem Unternehmensprofil. Wichtig: Name, Adresse und Telefon müssen im Profil und auf der Website identisch sein.
+- **Weitere Profile (Links)**: seit 30. Oktober 2026. Vollständige Adressen weiterer Firmenprofile, z. B. Moneyhouse, local.ch, search.ch oder Kununu. Sie erscheinen nicht sichtbar, sondern nur in den Firmendaten für Suchmaschinen (sameAs), damit diese die Profile derselben Firma zuordnen.
 - **Öffnungszeiten**: je Zeile Tage ("Montag bis Freitag") und Zeiten ("07:00 bis 17:00"). Diese Form wird automatisch für Google übersetzt; mehrere Zeitbereiche mit Komma trennen.
 
 Bei freien Seiten gibt es zwei Schalter: **In der Sitemap aufführen** (für Impressum und Datenschutz aus) und **In Suchmaschinen anzeigen** (nur ausschalten, wenn eine Seite in Google gar nicht erscheinen soll).
