@@ -3,6 +3,7 @@ import { Heart } from 'lucide-react';
 import type { Einstellungen, Navigation } from '@/lib/cms';
 import { MarkenLogo } from '@/components/ui/MarkenLogo';
 import { sauberText, whatsappLink } from '@/lib/text';
+import { Telefonnummern } from '@/components/ui/Telefonnummern';
 
 const SOCIAL_NAMEN: Record<string, string> = {
   linkedin: 'LinkedIn',
@@ -74,11 +75,9 @@ export function Fusszeile({ einstellungen: e, navigation: n }: { einstellungen: 
               <p>
                 {e.plz} {e.ort}
               </p>
-              <p className="pt-2">
-                <a href={`tel:${e.telefon.replaceAll(' ', '')}`} className="inline-block py-1 hover:text-marke">
-                  {e.telefon}
-                </a>
-              </p>
+              <div className="pt-2">
+                <Telefonnummern einstellungen={e} />
+              </div>
               <p>
                 <a href={`mailto:${e.email}`} className="inline-block py-1 hover:text-marke">
                   {e.email}

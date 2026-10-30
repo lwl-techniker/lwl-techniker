@@ -5,6 +5,7 @@ import { Karte } from '@/components/ui/Karte';
 import type { Einstellungen } from '@/lib/cms';
 import { absaetze, sauberText, whatsappLink } from '@/lib/text';
 import type { BlockDaten } from './BlockRenderer';
+import { Telefonnummern } from '@/components/ui/Telefonnummern';
 
 /**
  * Kontaktseite: Gestaltung und Grundaufbau aus V2 (Formular links, Kontaktdaten als haftende Tafel rechts),
@@ -49,9 +50,7 @@ export function Kontaktformular({ daten: d, einstellungen: e }: { daten: BlockDa
               </li>
               <li className="flex gap-4">
                 <Phone className="mt-1 size-5 shrink-0 text-marke" aria-hidden />
-                <a href={`tel:${e.telefon.replaceAll(' ', '')}`} className="inline-block py-1 hover:text-marke">
-                  {e.telefon}
-                </a>
+                <Telefonnummern einstellungen={e} />
               </li>
               <li className="flex gap-4">
                 <Mail className="mt-1 size-5 shrink-0 text-marke" aria-hidden />

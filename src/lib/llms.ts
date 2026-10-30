@@ -3,6 +3,7 @@ import { holeAlleSeiten, holeDatenblaetter, holeEinstellungen, holeJobs, holeLei
 import { markdocAlsText } from './markdoc';
 import { sauberText } from './text';
 import { DOMAIN } from '@/site.config';
+import { telefonText } from './telefon';
 
 /**
  * Zusammenfassung der Website für Sprachmodelle und KI-Suchsysteme (llms.txt, https://llmstxt.org).
@@ -22,7 +23,7 @@ async function kopf() {
     '',
     zeile(e.kurzbeschreibung),
     '',
-    `Sitz: ${e.strasse}, ${e.plz} ${e.ort}, Schweiz. Telefon ${e.telefon}, E-Mail ${e.email}. Einsatzgebiet: ${e.einsatzgebiet || 'Schweiz'}. Sprache der Website: Deutsch (Schweiz).`,
+    `Sitz: ${e.strasse}, ${e.plz} ${e.ort}, Schweiz. Telefon ${telefonText(e)}, E-Mail ${e.email}. Einsatzgebiet: ${e.einsatzgebiet || 'Schweiz'}. Sprache der Website: Deutsch (Schweiz).`,
     ...(e.oeffnungszeiten.length ? [`Erreichbarkeit: ${e.oeffnungszeiten.map((z) => `${z.tage} ${z.zeiten} Uhr`).join('; ')}.`] : []),
     ...(e.uid ? [`UID: ${e.uid}.`] : []),
     'Preise stehen nicht auf der Website; Offerten gibt es auf Anfrage über das Kontaktformular.',

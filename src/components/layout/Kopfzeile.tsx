@@ -28,8 +28,9 @@ type Props = {
  * - Desktop: Menüpunkte mit Untermenü öffnen per Klick auf den Text (kein Pfeil), Panel mit nummerierten Einträgen,
  *   Leistungen und Produkte zweispaltig, Escape schliesst und setzt den Fokus zurück, Klick ausserhalb schliesst,
  *   Fokus verlässt das Menü = schliessen
- * - Mobile: Hamburger-Symbol öffnet ein natives <dialog> als Vollbildmenü (Aufbau V2): Menüpunkte als Links,
- *   Untermenü über "Alle anzeigen", Kontakt und Telefonnummer als Knöpfe
+ * - Mobile: Hamburger-Symbol öffnet ein natives <dialog> als Vollbildmenü (Aufbau V2): Menüpunkte mit Untermenü als
+ *   ganze klickbare Zeile mit Pfeil rechts (Akkordeon, ein Punkt offen, Übersichtsseite als erster Untereintrag),
+ *   Menüpunkte ohne Untermenü als Links, Kontakt und Telefonnummer als Knöpfe
  * - Jeder Linkklick schliesst alle Menüs. Beim erneuten Klick auf die aktuelle Route wird sofort nach oben gescrollt
  *   (Next.js navigiert dann nicht, RoutenScroll greift nicht).
  */
@@ -256,7 +257,7 @@ export function Kopfzeile({ firmenname, logoHell, logoDunkel, telefon, menue, ko
           setDialogOffen(false);
         }}
       >
-        {/* Aufbau wie V2: Kopfzeile mit Logo, Schalter und Schliessen-Symbol; Menüpunkte als Links, Untermenü über "Alle anzeigen"; Kontakt und Telefon als Knöpfe */}
+        {/* Aufbau wie V2: Kopfzeile mit Logo, Schalter und Schliessen-Symbol; Menüpunkte als Akkordeon-Zeilen; Kontakt und Telefon als Knöpfe */}
         <div className="flex min-h-full flex-col overflow-y-auto px-5 pt-4 pb-10 sm:px-8">
           <div className="flex items-center justify-between gap-4">
             <Link href="/" className="flex shrink-0 items-center" aria-label={`${firmenname}, zur Startseite`} onClick={() => navigieren('/')}>
@@ -278,52 +279,55 @@ export function Kopfzeile({ firmenname, logoHell, logoDunkel, telefon, menue, ko
               </button>
             </div>
           </div>
-          <nav aria-label="Mobile Hauptnavigation" className="mt-10">
-            <ul className="space-y-1">
+          <nav aria-label="Mobile Hauptnavigation" className="mt-8">
+            {/* Akkordeon: Menüpunkte mit Untermenü sind eine ganze klickbare Zeile mit Pfeil rechts, es ist höchstens ein Punkt offen.
+                Die Übersichtsseite (z. B. "Alle Leistungen") ist der erste Eintrag im Untermenü. Menüpunkte ohne Untermenü sind Links. */}
+            <ul className="border-t border-linie/70">
               {menue.map((punkt) => {
                 const hatUntermenue = punkt.unterpunkte.length > 0;
                 const aufgeklappt = mobilOffen === punkt.link;
                 const id = `mobil-${punkt.link.replace(/\W+/g, '')}`;
+                const zeile = 'flex min-h-14 w-full items-center justify-between gap-4 py-3 text-left font-titel text-2xl font-semibold tracking-[0.2em] text-text uppercase transition-colors hover:text-marke';
                 return (
-                  <li key={punkt.link}>
-                    <Link
-                      href={punkt.link}
-                      onClick={() => navigieren(punkt.link)}
-                      aria-current={istAktiv(punkt.link) ? 'page' : undefined}
-                      className={cn('block py-3 font-titel text-2xl font-semibold tracking-[0.2em] text-text uppercase hover:text-marke', istAktiv(punkt.link) && 'text-marke')}
-                    >
-                      {punkt.text}
-                    </Link>
+                  <li key={punkt.link} className="border-b border-linie/70">
                     {hatUntermenue ? (
-                      <div className="mb-3 border-l border-linie pl-4">
+                      <>
                         <button
                           type="button"
-                          className="flex min-h-10 items-center gap-2 py-1 text-sm font-medium tracking-[0.14em] text-text-leise uppercase hover:text-text"
+                          className={cn(zeile, (aufgeklappt || istAktiv(punkt.link)) && 'text-marke')}
                           aria-expanded={aufgeklappt}
                           aria-controls={id}
                           aria-label={`${punkt.text} Untermenü`}
                           onClick={() => setMobilOffen(aufgeklappt ? null : punkt.link)}
                         >
-                          <ChevronDown className={cn('size-4 transition-transform', aufgeklappt && 'rotate-180')} aria-hidden />
-                          {aufgeklappt ? 'Weniger anzeigen' : 'Alle anzeigen'}
+                          <span>{punkt.text}</span>
+                          <ChevronDown className={cn('size-6 shrink-0 text-text-leise transition-transform', aufgeklappt && 'rotate-180 text-marke')} aria-hidden />
                         </button>
-                        {aufgeklappt ? (
-                          <ul id={id} className="space-y-1 pb-2">
-                            {punkt.unterpunkte.map((u) => (
-                              <li key={u.link}>
-                                <Link
-                                  href={u.link}
-                                  onClick={() => navigieren(u.link)}
-                                  className={cn('block min-h-10 py-2 text-base text-text-leise hover:text-text', u.hervorgehoben && 'font-semibold text-marke')}
-                                >
-                                  {u.text}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        ) : null}
-                      </div>
-                    ) : null}
+                        <ul id={id} hidden={!aufgeklappt} className="mb-3 border-l border-linie pl-4">
+                          {punkt.unterpunkte.map((u) => (
+                            <li key={u.link}>
+                              <Link
+                                href={u.link}
+                                onClick={() => navigieren(u.link)}
+                                aria-current={pfad === u.link ? 'page' : undefined}
+                                className={cn('flex min-h-11 items-center py-2 text-base text-text-leise hover:text-text', u.hervorgehoben && 'font-semibold text-marke')}
+                              >
+                                {u.text}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </>
+                    ) : (
+                      <Link
+                        href={punkt.link}
+                        onClick={() => navigieren(punkt.link)}
+                        aria-current={istAktiv(punkt.link) ? 'page' : undefined}
+                        className={cn(zeile, istAktiv(punkt.link) && 'text-marke')}
+                      >
+                        {punkt.text}
+                      </Link>
+                    )}
                   </li>
                 );
               })}

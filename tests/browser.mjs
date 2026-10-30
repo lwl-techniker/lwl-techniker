@@ -5,7 +5,7 @@
  *   1. Menüwechsel ohne sichtbares nachträgliches Hochscrollen (bekannter V2-Fehler): nach jedem Routenwechsel
  *      steht die Seite sofort oben, auch beim erneuten Klick auf die aktuelle Route.
  *   2. Desktop-Untermenüs: öffnen per Klick, Escape schliesst und setzt den Fokus zurück, Klick ausserhalb schliesst.
- *   3. Mobiles Menü (Dialog): öffnen, Untermenü aufklappen, Link wählen, Dialog geschlossen, Seite oben.
+ *   3. Mobiles Menü (Dialog): öffnen, Akkordeon (ganze Zeile klappt auf, ein Punkt offen), Link wählen, Dialog geschlossen, Seite oben.
  *   4. Farbmodus: Schalter wechselt data-theme, Wahl bleibt nach Neuladen erhalten, keine Hydrationfehler in der Konsole.
  *   5. Lightmode-Logos: im hellen Modus sind farbige Logos sichtbar, im dunklen Modus die Silhouetten.
  *   6. Accessibility (axe, WCAG 2.1 A/AA) auf den wichtigsten Routen in beiden Modi.
@@ -199,7 +199,15 @@ try {
   await m.getByRole('button', { name: 'Menü öffnen' }).click();
   const dialog = m.locator('dialog');
   assert.equal(await dialog.evaluate((d) => d.open), true, 'Mobiles Menü öffnet als Dialog');
-  await dialog.getByRole('button', { name: 'Leistungen Untermenü' }).click();
+  assert.equal(await dialog.getByText('Alle anzeigen').count(), 0, 'Kein Knopf "Alle anzeigen" mehr, die ganze Zeile klappt auf');
+  const leistungenZeile = dialog.getByRole('button', { name: 'Leistungen Untermenü' });
+  await leistungenZeile.click();
+  assert.equal(await leistungenZeile.getAttribute('aria-expanded'), 'true', 'Zeile Leistungen aufgeklappt');
+  assert.equal(await dialog.locator('#mobil-leistungen a:visible').count(), 9, 'Mobiles Untermenü Leistungen: Alle Leistungen plus acht Leistungen');
+  await dialog.getByRole('button', { name: 'Produkte Untermenü' }).click();
+  assert.equal(await leistungenZeile.getAttribute('aria-expanded'), 'false', 'Akkordeon: Produkte öffnen schliesst Leistungen');
+  assert.equal(await dialog.locator('#mobil-leistungen').isVisible(), false, 'Untermenü Leistungen ausgeblendet');
+  await leistungenZeile.click();
   await dialog.getByRole('link', { name: 'Muffenspleissungen', exact: true }).click();
   await m.waitForURL('**/leistungen/muffenspleissungen');
   await m.waitForLoadState('networkidle');
@@ -208,7 +216,7 @@ try {
   await m.getByRole('button', { name: 'Menü öffnen' }).click();
   await m.keyboard.press('Escape');
   assert.equal(await dialog.evaluate((d) => d.open), false, 'Escape schliesst das mobile Menü');
-  ok('Mobiles Menü: öffnen, Untermenü, Auswahl schliesst, Seite oben, Escape');
+  ok('Mobiles Menü: öffnen, Akkordeon, Auswahl schliesst, Seite oben, Escape');
 
   // 7. Kein Überlauf bei 320 px
   const schmal = await browser.newContext({ viewport: { width: 320, height: 640 } });

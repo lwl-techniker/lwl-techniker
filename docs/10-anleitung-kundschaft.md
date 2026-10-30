@@ -99,6 +99,7 @@ Unter **Einstellungen > Firma und Kontakt** stehen seit 8. Oktober 2026 zusätzl
 - **UID**: die Unternehmens-Identifikationsnummer wie im Impressum.
 - **Gründungsjahr**: vierstellig, leer lassen, wenn unbekannt.
 - **Einsatzgebiet**: Regionen mit Komma oder "und" getrennt, z. B. "Deutschschweiz und Liechtenstein".
+- **Weitere Telefonnummer (optional)**: seit 30. Oktober 2026, z. B. die Festnetznummer neben der Mobilnummer. Sie erscheint zusätzlich auf der Kontaktseite, in der Fusszeile, im Kontaktblock und in den Firmendaten für Suchmaschinen (mit Zusatz "Festnetz" oder "Mobil"). Die Anruf-Knöpfe (Kopfzeile, gelbes Band, Leistungsseiten) verwenden immer das Feld **Telefon**; soll eine andere Nummer dort erscheinen, die beiden Felder tauschen.
 - **Google Business Profil (Link)**: der Link "Auf Google Maps ansehen" aus dem Unternehmensprofil. Wichtig: Name, Adresse und Telefon müssen im Profil und auf der Website identisch sein.
 - **Öffnungszeiten**: je Zeile Tage ("Montag bis Freitag") und Zeiten ("07:00 bis 17:00"). Diese Form wird automatisch für Google übersetzt; mehrere Zeitbereiche mit Komma trennen.
 

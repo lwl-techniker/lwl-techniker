@@ -60,7 +60,8 @@ export default config({
         }),
         logo: bild('Logo für hellen Hintergrund', 'firma', { hinweis: 'SVG, sonst PNG mit transparentem Hintergrund, unter 30 KB.' }),
         logohell: bild('Logo für dunklen Hintergrund', 'firma', { hinweis: 'Helle Version für die Fusszeile. SVG, sonst PNG mit transparentem Hintergrund.' }),
-        telefon: text('Telefon', { pflicht: true, max: 30, beschreibung: 'Internationales Format, z. B. +41 71 000 00 00' }),
+        telefon: text('Telefon', { pflicht: true, max: 30, beschreibung: 'Haupt-Telefonnummer wie im Google-Unternehmensprofil, internationales Format, z. B. +41 71 000 00 00. Wird für die Anruf-Knöpfe verwendet.' }),
+        telefonWeitere: text('Weitere Telefonnummer (optional)', { max: 30, beschreibung: 'Zweite Nummer, z. B. Mobil. Erscheint zusätzlich auf der Kontaktseite, in der Fusszeile und für Suchmaschinen.' }),
         whatsapp: text('WhatsApp-Nummer (optional)', {
           max: 30,
           beschreibung: 'Internationales Format, z. B. +41 71 000 00 00. Leer lassen, dann erscheint kein WhatsApp-Knopf.',

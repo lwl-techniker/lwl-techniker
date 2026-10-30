@@ -1,6 +1,7 @@
 import { DOMAIN } from '@/site.config';
 import type { Einstellungen, Leistung, Person, Referenz } from './cms';
 import { sauberText } from './text';
+import { telefonnummern } from './telefon';
 
 /**
  * Strukturierte Daten (schema.org, JSON-LD) für Google, Bing und KI-Suchsysteme.
@@ -69,6 +70,7 @@ export function organisationUndWebsite(e: Einstellungen, anzahlPersonen?: number
         description: sauberText(e.kurzbeschreibung),
         url: DOMAIN,
         telephone: e.telefon,
+        contactPoint: telefonnummern(e).map((n) => ({ '@type': 'ContactPoint', telephone: n, contactType: 'customer service', areaServed: 'CH', availableLanguage: 'German' })),
         email: e.email,
         logo: e.logo ? url(e.logo) : undefined,
         image: e.ogbild ? url(e.ogbild) : undefined,

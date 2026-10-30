@@ -2,6 +2,7 @@ import Link from 'next/link';
 import type { Einstellungen } from '@/lib/cms';
 import { sauberText } from '@/lib/text';
 import type { BlockDaten } from './BlockRenderer';
+import { telefonArt, telefonLink, telefonnummern } from '@/lib/telefon';
 
 const SOCIAL_NAMEN: Record<string, string> = {
   linkedin: 'LinkedIn',
@@ -17,10 +18,11 @@ const SOCIAL_NAMEN: Record<string, string> = {
 export function Kontaktaufruf({ daten: d, einstellungen: e }: { daten: BlockDaten<'kontaktaufruf'>; einstellungen: Einstellungen }) {
   const woerter = sauberText(d.titel).trim().split(/\s+/);
   const letztes = woerter.length > 1 ? woerter.pop() : null;
-  const daten = [
+  const nummern = telefonnummern(e);
+  const daten: { k: string; v: string; href?: string }[] = [
     { k: 'Firma', v: e.firmenname },
     { k: 'Adresse', v: `${e.strasse}, ${e.plz} ${e.ort}` },
-    ...(d.telefonZeigen ? [{ k: 'Telefon', v: e.telefon, href: `tel:${e.telefon.replaceAll(' ', '')}` }] : []),
+    ...(d.telefonZeigen ? nummern.map((n) => ({ k: nummern.length > 1 ? telefonArt(n) : 'Telefon', v: n, href: telefonLink(n) })) : []),
     { k: 'E-Mail', v: e.email, href: `mailto:${e.email}` },
   ];
 
