@@ -97,7 +97,7 @@ export function organisationUndWebsite(e: Einstellungen, anzahlPersonen?: number
         vatID: e.uid || undefined,
         taxID: e.uid || undefined,
         numberOfEmployees: anzahlPersonen ? { '@type': 'QuantitativeValue', value: anzahlPersonen } : undefined,
-        areaServed: einsatzgebiete(e),
+        areaServed: [{ '@type': 'Country', name: 'Schweiz' }, ...einsatzgebiete(e).filter((g) => g.name !== 'Schweiz')],
         knowsAbout: ['Glasfasertechnik', 'LWL-Installation', 'Muffenspleissung', 'FTTH', 'OTDR-Messung', 'Rechenzentrumsverkabelung'],
         sameAs: [...new Set([...e.socialMedia.map((s) => s.url), ...(e.googleProfil ? [e.googleProfil] : []), ...(e.weitereProfile ?? [])].filter(Boolean))],
       },

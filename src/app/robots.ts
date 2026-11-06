@@ -12,6 +12,7 @@ import { DOMAIN, INDEXIERBAR } from '@/site.config';
  */
 const GESPERRT = ['/keystatic', '/api/', '/__forms.html'];
 const NAMENTLICH = [
+  'Googlebot',
   'Bingbot',
   'GPTBot',
   'ChatGPT-User',

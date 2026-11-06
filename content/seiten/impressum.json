@@ -1,6 +1,6 @@
 {
   "titel": "Impressum",
-  "inSitemap": false,
+  "inSitemap": true,
   "indexieren": true,
   "seo": {
     "titel": "Impressum",

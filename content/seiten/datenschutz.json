@@ -1,6 +1,6 @@
 {
   "titel": "Datenschutz",
-  "inSitemap": false,
+  "inSitemap": true,
   "indexieren": true,
   "seo": {
     "titel": "Datenschutzerklärung",
