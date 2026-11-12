@@ -62,7 +62,7 @@ Die Meldung steht im Deploy-Log. Textverstösse in Inhalten erscheinen dort nur 
 
 Zusätzliche Domains werden unter **Domain management, Add a domain alias** derselben Site zugewiesen, Apex und `www` je einzeln. DNS wie oben: A-Eintrag `@` auf `75.2.60.5`, CNAME `www` auf `lwl-techniker.netlify.app`. Vorhandene AAAA-Einträge löschen, sonst stellt Netlify kein Zertifikat aus. Netlify leitet Aliase nicht von selbst auf die Hauptdomain um, die Weiterleitung steht in `public/_redirects` als Domain-Regeln mit `301!` (http und https getrennt, Pfad über `:splat`).
 
-Seit dem 12. November 2026 so eingerichtet für `lwl-techniker.de` und `www.lwl-techniker.de`, Ziel `https://lwl-techniker.ch/:splat`. Die DNS-Zone der .de liegt bei Hostpoint; dort bleiben die MX- und Mail-Einträge unverändert. Die Alternative ohne Deploy (Weiterleitung per `.htaccess` auf dem Hostpoint-Hosting mit FreeSSL) ist im Prüfprotokoll festgehalten.
+Seit dem 12. November 2026 so eingerichtet für `lwl-techniker.de` und `lwl-techniker.com`, je mit `www`, Ziel `https://lwl-techniker.ch/:splat`. Die DNS-Zonen beider Domains liegen bei Hostpoint; dort bleiben die MX- und Mail-Einträge unverändert. Kommt ein Alias nachträglich dazu, erweitert Netlify das Zertifikat nicht von selbst: unter **HTTPS** auf **Renew certificate** klicken. Die Alternative ohne Deploy (Weiterleitung per `.htaccess` auf dem Hostpoint-Hosting mit FreeSSL) ist im Prüfprotokoll festgehalten.
 
 ## Schritt 4: Formulare aktivieren
 
