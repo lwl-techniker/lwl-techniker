@@ -104,6 +104,6 @@ Unter **Einstellungen > Firma und Kontakt** stehen seit 8. Oktober 2026 zusätzl
 - **Weitere Profile (Links)**: seit 30. Oktober 2026. Vollständige Adressen weiterer Firmenprofile, z. B. Moneyhouse, local.ch, search.ch oder Kununu. Sie erscheinen nicht sichtbar, sondern nur in den Firmendaten für Suchmaschinen (sameAs), damit diese die Profile derselben Firma zuordnen.
 - **Öffnungszeiten**: je Zeile Tage ("Montag bis Freitag") und Zeiten ("07:00 bis 17:00"). Diese Form wird automatisch für Google übersetzt; mehrere Zeitbereiche mit Komma trennen.
 
-Bei freien Seiten gibt es zwei Schalter: **In der Sitemap aufführen** (für Impressum und Datenschutz aus) und **In Suchmaschinen anzeigen** (nur ausschalten, wenn eine Seite in Google gar nicht erscheinen soll).
+Bei freien Seiten gibt es zwei Schalter: **In der Sitemap aufführen** (seit dem 6. November 2026 auch bei Impressum und Datenschutz ein) und **In Suchmaschinen anzeigen** (nur ausschalten, wenn eine Seite in Google gar nicht erscheinen soll).
 
 Das Datum der letzten Änderung jeder Seite wird automatisch aus dem Speicherverlauf ermittelt. Es muss nirgends eingetragen werden.

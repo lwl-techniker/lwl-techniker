@@ -88,30 +88,8 @@
   color-scheme: dark;
 }
 
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme='dunkel']) {
-    --c-marke: #865800;
-    --c-marke-dunkel: #5c3c00;
-    --c-marke-hell: #6f4900;
-    --c-grund: #f5f3ed;
-    --c-flaeche: #fffef9;
-    --c-flaeche-dunkel: #e9e7df;
-    --c-flaeche-dunkel-2: #e9e7df;
-    --c-blau: #33468f;
-    --c-text: #142641;
-    --c-text-leise: #526074;
-    --c-linie: #d2d5d3;
-    --c-linie-dunkel: #c7c9c7;
-    --c-band: #efba36;
-    --c-band-text: #142641;
-    --f-ruhig: rgb(233 231 223 / 0.42);
-    --f-betont: rgb(255 254 249 / 0.55);
-    --f-tief: rgb(227 231 230 / 0.65);
-    --f-kopf: rgb(245 243 237 / 0.94);
-    --f-menue: rgb(245 243 237 / 0.985);
-    color-scheme: light;
-  }
-}
+/* Hell gibt es nur über den Schalter in der Kopfzeile (data-theme='hell'). Die Geräteeinstellung (prefers-color-scheme)
+   wird seit dem 12. November 2026 nicht mehr berücksichtigt: Die Kundschaft will, dass die Website immer dunkel startet. */
 
 :root[data-theme='hell'] {
   --c-marke: #865800;

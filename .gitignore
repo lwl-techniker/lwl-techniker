@@ -31,3 +31,6 @@ logos-quellen/
 
 # Lighthouse-CI-Berichte (lokal und in GitHub Actions erzeugt)
 .lighthouseci
+
+# Werkzeugkonfiguration von Claude Code (lokal)
+.claude/

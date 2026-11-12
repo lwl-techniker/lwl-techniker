@@ -7,7 +7,7 @@ import { setzeTheme, useAktivesTheme } from '@/lib/theme';
 /**
  * Kleiner, unaufdringlicher Schalter für den Lightmodus, in der Kopfzeile. Zeigt das Symbol des
  * Erscheinungsbilds, zu dem ein Klick wechselt (Mond im hellen, Sonne im dunklen Erscheinungsbild).
- * Merkt eine manuelle Wahl in localStorage, sonst gilt die Geräteeinstellung.
+ * Merkt eine manuelle Wahl in localStorage, ohne Wahl ist die Website dunkel.
  */
 export function ThemeSchalter({ className }: { className?: string }) {
   const theme = useAktivesTheme();

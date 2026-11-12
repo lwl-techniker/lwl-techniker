@@ -329,7 +329,7 @@ export function Faserwellen() {
       if (aktiv) anfrage = requestAnimationFrame(schleife);
     };
 
-    /** Beim Wechsel des Erscheinungsbilds (Schalter oder Geräteeinstellung) Farben neu lesen; die Schleife zeichnet das nächste Bild damit */
+    /** Beim Wechsel des Erscheinungsbilds über den Schalter Farben neu lesen; die Schleife zeichnet das nächste Bild damit */
     const themenwechsel = () => {
       hell = holeAktivesTheme() === 'hell';
       grundFarbe = leseFarbvariable('--color-grund', hell ? '244,245,250' : '8,17,46');
@@ -338,18 +338,15 @@ export function Faserwellen() {
     groesse();
     anfrage = requestAnimationFrame(schleife);
 
-    const geraet = window.matchMedia('(prefers-color-scheme: light)');
     window.addEventListener('resize', groesse);
     document.addEventListener('visibilitychange', sichtbarkeit);
     document.addEventListener(THEMA_GEAENDERT, themenwechsel);
-    geraet.addEventListener('change', themenwechsel);
     return () => {
       aktiv = false;
       cancelAnimationFrame(anfrage);
       window.removeEventListener('resize', groesse);
       document.removeEventListener('visibilitychange', sichtbarkeit);
       document.removeEventListener(THEMA_GEAENDERT, themenwechsel);
-      geraet.removeEventListener('change', themenwechsel);
     };
   }, []);
 

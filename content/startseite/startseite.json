@@ -32,8 +32,8 @@
             "bezeichnung": "Projekte umgesetzt"
           },
           {
-            "wert": "30+",
-            "bezeichnung": "Gemeinden mit FTTH erschlossen"
+            "wert": "50+",
+            "bezeichnung": "Gemeinden, in denen wir FTTH installiert haben"
           }
         ],
         "darstellung": "dunkel"
@@ -138,6 +138,46 @@
           "lwl-spleissbox-mini"
         ],
         "linkText": "Alle Datenblätter"
+      }
+    },
+    {
+      "discriminant": "faq",
+      "value": {
+        "titel": "Häufige Fragen",
+        "eintraege": [
+          {
+            "frage": "Welche Leistungen bietet die LWL-Techniker Schweiz GmbH an?",
+            "antwort": "Muffenspleissungen, FTTH-Installationen vom Verteilkasten bis zur Dose, Inhouse-Installationen, die Verkabelung von Serverräumen und Rechenzentren, Glasfaseranlagen für Verkehrstechnik und Autobahnprojekte, Fehlerlokalisation mit Notfalleinsätzen sowie Schulungen. Dazu liefern wir vorkonfektionierte LWL-Kabel und passive Komponenten."
+          },
+          {
+            "frage": "In welchen Regionen sind Sie im Einsatz?",
+            "antwort": "Unser Sitz ist in St. Gallen. Die Montageteams arbeiten in der ganzen Deutschschweiz, in Liechtenstein und in Süddeutschland: auf Autobahnen und in Tunnels, in Gemeinden und in Gebäuden."
+          },
+          {
+            "frage": "Wie schnell sind Sie bei einer Störung vor Ort?",
+            "antwort": "Bei einer Störung im Glasfasernetz sind wir am selben oder am nächsten Arbeitstag vor Ort. Mit OTDR-Messgeräten und Rotlichtlasern finden wir Faserbrüche, hohe Dämpfungen und fehlerhafte Stecker und beheben den Fehler direkt. Rufen Sie uns bei einer Störung an, wir besprechen das Vorgehen am Telefon."
+          },
+          {
+            "frage": "Erhalten wir nach den Arbeiten ein Messprotokoll?",
+            "antwort": "Ja. Wir messen jede Faser (Dämpfung und OTDR), kontrollieren die Kabelanlage und übergeben ein Abnahmeprotokoll. Die Messung und die Dokumentation gehören bei jedem Auftrag dazu."
+          },
+          {
+            "frage": "Was kostet eine Spleissung oder eine FTTH-Installation?",
+            "antwort": "Preise stehen nicht auf der Website, weil jeder Auftrag anders ist. Schicken Sie uns die Eckdaten über das Kontaktformular, also Ort, Faserzahl, Termin und Besonderheiten, wir melden uns mit einer Offerte."
+          },
+          {
+            "frage": "Für wen arbeiten Sie?",
+            "antwort": "Für Netzbetreiber, Gemeinden, Installationsfirmen und Unternehmen. Bei Bedarf begleiten wir unsere Partner auch bei deren Kundschaft, zum Beispiel bei der Evaluation von Produkten oder mit technischer Unterstützung vor Ort."
+          },
+          {
+            "frage": "Liefern Sie auch Material?",
+            "antwort": "Ja. Wir liefern vorkonfektionierte LWL-Kabel, Spleissboxen, FTTH-Dosen, 19-Zoll-Komponenten, Patchkabel, Transceiver und Zubehör. Die Datenblätter stehen als PDF im Produktkatalog. Für spezielle Anforderungen entwickeln wir eigene Komponenten."
+          },
+          {
+            "frage": "Bieten Sie Schulungen an?",
+            "antwort": "Ja. Wir schulen Teams in den Grundlagen der Glasfasertechnik, im Spleissen, Messen und Installieren, bei Ihnen vor Ort und abgestimmt auf Ihre Aufgaben."
+          }
+        ]
       }
     },
     {

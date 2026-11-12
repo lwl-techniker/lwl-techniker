@@ -89,6 +89,12 @@
       }
     },
     {
+      "discriminant": "fliesstext",
+      "value": {
+        "titel": "Einsatzgebiet Deutschland"
+      }
+    },
+    {
       "discriminant": "ctaBand",
       "value": {
         "ueberzeile": "Kontakt",

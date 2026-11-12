@@ -4,6 +4,7 @@ import { markdocAlsText } from './markdoc';
 import { sauberText } from './text';
 import { DOMAIN } from '@/site.config';
 import { telefonText } from './telefon';
+import { einsatzlaender } from './strukturierte-daten';
 
 /**
  * Zusammenfassung der Website für Sprachmodelle und KI-Suchsysteme (llms.txt, https://llmstxt.org).
@@ -24,6 +25,9 @@ async function kopf() {
     zeile(e.kurzbeschreibung),
     '',
     `Sitz: ${e.strasse}, ${e.plz} ${e.ort}, Schweiz. Telefon ${telefonText(e)}, E-Mail ${e.email}. Einsatzgebiet: ${e.einsatzgebiet || 'Schweiz'}. Sprache der Website: Deutsch (Schweiz).`,
+    ...(einsatzlaender(e).includes('DE') ? ['Alle Leistungen auch für Kundschaft in Deutschland, Anfahrt ab St. Gallen.'] : []),
+    'Messung und Dokumentation: Jede Kabelanlage wird gemessen (Dämpfung und OTDR) und mit Messprotokoll (Abnahmeprotokoll) übergeben.',
+    'Störung: Fehlersuche mit OTDR und Rotlichtlaser, vor Ort am selben oder nächsten Arbeitstag.',
     ...(e.oeffnungszeiten.length ? [`Erreichbarkeit: ${e.oeffnungszeiten.map((z) => `${z.tage} ${z.zeiten} Uhr`).join('; ')}.`] : []),
     ...(e.uid ? [`UID: ${e.uid}.`] : []),
     'Preise stehen nicht auf der Website; Offerten gibt es auf Anfrage über das Kontaktformular.',

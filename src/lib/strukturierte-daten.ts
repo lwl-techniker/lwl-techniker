@@ -34,7 +34,7 @@ export function einsatzgebiete(e: Einstellungen) {
   return namen.map((name) => ({ '@type': ['Schweiz', 'Liechtenstein', 'Deutschland', 'Österreich'].includes(name) ? 'Country' : 'AdministrativeArea', name }));
 }
 
-const LAENDER_CODES: Record<string, string> = { Schweiz: 'CH', Deutschschweiz: 'CH', Liechtenstein: 'LI', Deutschland: 'DE', Österreich: 'AT' };
+const LAENDER_CODES: Record<string, string> = { Schweiz: 'CH', Deutschschweiz: 'CH', Liechtenstein: 'LI', Deutschland: 'DE', Süddeutschland: 'DE', Österreich: 'AT' };
 
 /** Ländercodes des Einsatzgebiets für den ContactPoint. Regionen zählen zu ihrem Land, unbekannte Angaben fallen weg, ohne Treffer bleibt CH. */
 export function einsatzlaender(e: Einstellungen) {
@@ -74,11 +74,12 @@ export function organisationUndWebsite(e: Einstellungen, anzahlPersonen?: number
         '@type': ['Organization', 'LocalBusiness'],
         '@id': ORGANISATION_ID,
         name: e.firmenname,
+        legalName: e.firmenname,
         alternateName: e.kurzname || undefined,
         description: sauberText(e.kurzbeschreibung),
         url: DOMAIN,
         telephone: e.telefon,
-        contactPoint: telefonnummern(e).map((n) => ({ '@type': 'ContactPoint', telephone: n, contactType: 'customer service', areaServed: einsatzlaender(e), availableLanguage: 'German' })),
+        contactPoint: telefonnummern(e).map((n) => ({ '@type': 'ContactPoint', telephone: n, contactType: 'customer service', areaServed: einsatzlaender(e), availableLanguage: ['de-CH', 'de-DE'] })),
         email: e.email,
         logo: e.logo ? url(e.logo) : undefined,
         image: e.ogbild ? url(e.ogbild) : undefined,
@@ -98,7 +99,20 @@ export function organisationUndWebsite(e: Einstellungen, anzahlPersonen?: number
         taxID: e.uid || undefined,
         numberOfEmployees: anzahlPersonen ? { '@type': 'QuantitativeValue', value: anzahlPersonen } : undefined,
         areaServed: [{ '@type': 'Country', name: 'Schweiz' }, ...einsatzgebiete(e).filter((g) => g.name !== 'Schweiz')],
-        knowsAbout: ['Glasfasertechnik', 'LWL-Installation', 'Muffenspleissung', 'FTTH', 'OTDR-Messung', 'Rechenzentrumsverkabelung'],
+        knowsAbout: [
+          'Glasfasertechnik',
+          'Glasfaser spleissen',
+          'LWL-Installation',
+          'Muffenspleissung',
+          'FTTH',
+          'FTTH-Inhouse-Installation',
+          'OTDR-Messung',
+          'LWL-Messprotokolle',
+          'Fehlerlokalisation im Glasfasernetz',
+          'Rechenzentrumsverkabelung',
+          'Verkehrstechnik auf Nationalstrassen',
+          'ASTRA 13022',
+        ],
         sameAs: [...new Set([...e.socialMedia.map((s) => s.url), ...(e.googleProfil ? [e.googleProfil] : []), ...(e.weitereProfile ?? [])].filter(Boolean))],
       },
       {
@@ -251,7 +265,11 @@ export function referenzenAlsListe(referenzen: Referenz[]) {
   };
 }
 
-/** Datenblattkatalog: Produkte mit Kategorie und PDF, ohne Preise (gibt es auf der Website bewusst nicht). */
+/**
+ * Datenblattkatalog: Produkte mit Kategorie und PDF, ohne Preise (gibt es auf der Website bewusst nicht).
+ * Seit dem 12. November 2026 als DigitalDocument statt Product: Google verlangt für Product Preise oder Bewertungen
+ * (Search-Console-Meldung "Produkt-Snippets"), beides gibt es hier nicht. Produkte ohne PDF bleiben ein Thing.
+ */
 export function produkteAlsListe(produkte: { slug: string; titel: string; kategorie: string; dokument: string | null; bild: { pfad: string } | null }[]) {
   return {
     '@context': 'https://schema.org',
@@ -261,15 +279,23 @@ export function produkteAlsListe(produkte: { slug: string; titel: string; katego
     itemListElement: produkte.map((p, i) => ({
       '@type': 'ListItem',
       position: i + 1,
-      item: {
-        '@type': 'Product',
-        name: sauberText(p.titel),
-        category: sauberText(p.kategorie),
-        url: `${url('/produkte')}?kategorie=${encodeURIComponent(p.kategorie)}`,
-        image: p.bild ? url(p.bild.pfad) : undefined,
-        subjectOf: p.dokument ? { '@type': 'DigitalDocument', name: `Datenblatt ${sauberText(p.titel)}`, url: url(p.dokument), encodingFormat: 'application/pdf' } : undefined,
-        manufacturer: { '@id': ORGANISATION_ID },
-      },
+      item: p.dokument
+        ? {
+            '@type': 'DigitalDocument',
+            name: `Datenblatt ${sauberText(p.titel)}`,
+            about: { '@type': 'Thing', name: sauberText(p.titel) },
+            genre: sauberText(p.kategorie),
+            url: url(p.dokument),
+            encodingFormat: 'application/pdf',
+            image: p.bild ? url(p.bild.pfad) : undefined,
+            publisher: { '@id': ORGANISATION_ID },
+          }
+        : {
+            '@type': 'Thing',
+            name: sauberText(p.titel),
+            url: `${url('/produkte')}?kategorie=${encodeURIComponent(p.kategorie)}`,
+            image: p.bild ? url(p.bild.pfad) : undefined,
+          },
     })),
   };
 }

@@ -6,11 +6,9 @@ export const metadata: Metadata = {
   metadataBase: new URL(DOMAIN),
 };
 
+/** Farbe der Browserleiste: immer dunkel, weil die Website unabhängig von der Geräteeinstellung dunkel startet. */
 export const viewport: Viewport = {
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#f4f5fa' },
-    { media: '(prefers-color-scheme: dark)', color: '#08112e' },
-  ],
+  themeColor: '#08112e',
 };
 
 /** Setzt data-theme auf <html>, bevor irgendetwas gezeichnet wird, falls die Kundschaft den Schalter schon einmal manuell benutzt hat. Ohne das würde die Seite kurz im falschen Erscheinungsbild aufblitzen. */
