@@ -58,6 +58,12 @@ Die Meldung steht im Deploy-Log. Textverstösse in Inhalten erscheinen dort nur 
 5. Nichts im Code anpassen: `src/site.config.ts` übernimmt im produktiven Build die Primary Domain automatisch aus der Netlify-Variable `URL` und gibt damit auch robots.txt frei. `SITE_URL` und `SITE_INDEXABLE` sind nur noch Übersteuerungen (`SITE_INDEXABLE=false` sperrt).
 6. Callback-URL für die neue Domain in der GitHub-App ergänzen ([03-github-verbinden.md](03-github-verbinden.md), Schritt 4).
 
+### Weitere Domains als Alias
+
+Zusätzliche Domains werden unter **Domain management, Add a domain alias** derselben Site zugewiesen, Apex und `www` je einzeln. DNS wie oben: A-Eintrag `@` auf `75.2.60.5`, CNAME `www` auf `lwl-techniker.netlify.app`. Vorhandene AAAA-Einträge löschen, sonst stellt Netlify kein Zertifikat aus. Netlify leitet Aliase nicht von selbst auf die Hauptdomain um, die Weiterleitung steht in `public/_redirects` als Domain-Regeln mit `301!` (http und https getrennt, Pfad über `:splat`).
+
+Seit dem 12. November 2026 so eingerichtet für `lwl-techniker.de` und `www.lwl-techniker.de`, Ziel `https://lwl-techniker.ch/:splat`. Die DNS-Zone der .de liegt bei Hostpoint; dort bleiben die MX- und Mail-Einträge unverändert. Die Alternative ohne Deploy (Weiterleitung per `.htaccess` auf dem Hostpoint-Hosting mit FreeSSL) ist im Prüfprotokoll festgehalten.
+
 ## Schritt 4: Formulare aktivieren
 
 1. **Forms, Enable form detection**

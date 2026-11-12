@@ -1,3 +1,11 @@
+# Deutsche Domain: lwl-techniker.de und www.lwl-techniker.de sind Domain-Aliase dieser Site.
+# Alles geht mit 301 auf die Schweizer Hauptdomain, der Pfad bleibt erhalten (seit 12. November 2026).
+# http und https brauchen je eine eigene Regel, das Ausrufezeichen erzwingt die Regel vor den Next.js-Seiten.
+http://lwl-techniker.de/*        https://lwl-techniker.ch/:splat                             301!
+https://lwl-techniker.de/*       https://lwl-techniker.ch/:splat                             301!
+http://www.lwl-techniker.de/*    https://lwl-techniker.ch/:splat                             301!
+https://www.lwl-techniker.de/*   https://lwl-techniker.ch/:splat                             301!
+
 # Weiterleitungen alter Adressen der bisherigen Website (Webflow)
 /pages/team                      /ueber-uns                                                  301
 /pages/philosophie               /ueber-uns                                                  301
