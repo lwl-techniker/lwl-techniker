@@ -16,6 +16,12 @@
           "hervorgehoben": false
         },
         {
+          "text": "OTDR-Messung und Messprotokoll",
+          "link": "/leistungen/otdr-messung",
+          "beschreibung": "OTDR-Messung mit Abnahmeprotokoll, uni- oder bidirektional",
+          "hervorgehoben": false
+        },
+        {
           "text": "FTTH-Installation",
           "link": "/leistungen/ftth-installation",
           "beschreibung": "Glasfaseranschlüsse bis in Wohnungen und Geschäftshäuser",
@@ -156,6 +162,10 @@
     {
       "text": "Offene Stellen",
       "link": "/jobs"
+    },
+    {
+      "text": "Häufige Fragen",
+      "link": "/haeufige-fragen"
     },
     {
       "text": "Kontakt",

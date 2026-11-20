@@ -65,7 +65,7 @@ function oeffnungszeiten(e: Einstellungen) {
 }
 
 /** Organisation (LocalBusiness) und Website als Graph für das Layout. Personenzahl aus dem Team-Singleton. */
-export function organisationUndWebsite(e: Einstellungen, anzahlPersonen?: number) {
+export function organisationUndWebsite(e: Einstellungen, anzahlPersonen?: number, leistungen?: Leistung[]) {
   const adresse = `${e.strasse}, ${e.plz} ${e.ort}, Schweiz`;
   return {
     '@context': 'https://schema.org',
@@ -79,7 +79,7 @@ export function organisationUndWebsite(e: Einstellungen, anzahlPersonen?: number
         description: sauberText(e.kurzbeschreibung),
         url: DOMAIN,
         telephone: e.telefon,
-        contactPoint: telefonnummern(e).map((n) => ({ '@type': 'ContactPoint', telephone: n, contactType: 'customer service', areaServed: einsatzlaender(e), availableLanguage: ['de-CH', 'de-DE'] })),
+        contactPoint: telefonnummern(e).map((n) => ({ '@type': 'ContactPoint', telephone: n, contactType: 'customer service', email: e.email, hoursAvailable: oeffnungszeiten(e), areaServed: einsatzlaender(e), availableLanguage: ['de-CH', 'de-DE'] })),
         email: e.email,
         logo: e.logo ? url(e.logo) : undefined,
         image: e.ogbild ? url(e.ogbild) : undefined,
@@ -99,6 +99,16 @@ export function organisationUndWebsite(e: Einstellungen, anzahlPersonen?: number
         taxID: e.uid || undefined,
         numberOfEmployees: anzahlPersonen ? { '@type': 'QuantitativeValue', value: anzahlPersonen } : undefined,
         areaServed: [{ '@type': 'Country', name: 'Schweiz' }, ...einsatzgebiete(e).filter((g) => g.name !== 'Schweiz')],
+        hasOfferCatalog: leistungen?.length
+          ? {
+              '@type': 'OfferCatalog',
+              name: 'Leistungen',
+              itemListElement: leistungen.map((l) => ({
+                '@type': 'Offer',
+                itemOffered: { '@id': `${url(`/leistungen/${l.slug}`)}#service` },
+              })),
+            }
+          : undefined,
         knowsAbout: [
           'Glasfasertechnik',
           'Glasfaser spleissen',
@@ -149,10 +159,10 @@ export function leistungAlsService(l: Leistung, e?: Einstellungen) {
  * Jede Seite als WebPage mit Zugehörigkeit zur Website und zur Firma. "dateModified" stammt aus der
  * Git-Historie der Inhaltsdatei (src/lib/aktualisiert.ts), nie von Hand gepflegt.
  */
-export function seiteAlsWebPage({ pfad, titel, beschreibung, aktualisiert, bild }: { pfad: string; titel: string; beschreibung?: string; aktualisiert?: string; bild?: string | null }) {
+export function seiteAlsWebPage({ pfad, titel, beschreibung, aktualisiert, bild, typ = 'WebPage' }: { pfad: string; titel: string; beschreibung?: string; aktualisiert?: string; bild?: string | null; typ?: 'WebPage' | 'ContactPage' }) {
   return {
     '@context': 'https://schema.org',
-    '@type': 'WebPage',
+    '@type': typ,
     '@id': `${url(pfad)}#webpage`,
     url: url(pfad),
     name: sauberText(titel),

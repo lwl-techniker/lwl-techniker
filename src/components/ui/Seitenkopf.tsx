@@ -19,6 +19,7 @@ export function Seitenkopf({
   pfad,
   aktualisiert,
   bild,
+  seitentyp,
   children,
 }: {
   ueberzeile?: string;
@@ -29,6 +30,8 @@ export function Seitenkopf({
   aktualisiert?: string;
   /** Hauptbild der Seite für primaryImageOfPage */
   bild?: string | null;
+  /** schema.org-Typ der Seite, Standard WebPage (Kontakt: ContactPage) */
+  seitentyp?: 'WebPage' | 'ContactPage';
   children?: React.ReactNode;
 }) {
   const alle = [{ text: 'Startseite', href: '/' }, ...pfad];
@@ -80,7 +83,7 @@ export function Seitenkopf({
           })),
         }}
       />
-      <JsonLd daten={seiteAlsWebPage({ pfad: eigener.href, titel, beschreibung: einleitung, aktualisiert, bild })} />
+      <JsonLd daten={seiteAlsWebPage({ pfad: eigener.href, titel, beschreibung: einleitung, aktualisiert, bild, typ: seitentyp })} />
     </header>
   );
 }

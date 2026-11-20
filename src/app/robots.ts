@@ -45,6 +45,5 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: NAMENTLICH, allow: ['/', '/llms.txt', '/llms-full.txt'], disallow: GESPERRT },
     ],
     sitemap: new URL('/sitemap.xml', DOMAIN).toString(),
-    host: DOMAIN,
   };
 }
