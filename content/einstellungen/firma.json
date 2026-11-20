@@ -15,7 +15,7 @@
   "land": "CH",
   "uid": "CHE-302.905.008",
   "gruendungsjahr": "",
-  "einsatzgebiet": "Deutschschweiz, Liechtenstein und Süddeutschland",
+  "einsatzgebiet": "Deutschschweiz, Liechtenstein, Deutschland und Süddeutschland",
   "googleProfil": "https://maps.app.goo.gl/QttoTJ9vUBsm7wQ17",
   "oeffnungszeiten": [
     {
@@ -24,10 +24,6 @@
     }
   ],
   "socialMedia": [
-    {
-      "plattform": "linkedin",
-      "url": "https://www.linkedin.com/in/lulzim-selimi-555474168/"
-    },
     {
       "plattform": "facebook",
       "url": "https://www.facebook.com/DieGlasfaser/"

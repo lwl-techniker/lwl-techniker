@@ -6,7 +6,7 @@
       "value": {
         "ueberzeile": "Glasfasertechnik aus St. Gallen",
         "titel": "Wir bringen\nLicht\nans Ziel.",
-        "text": "Die LWL-Techniker Schweiz GmbH spleisst, misst und installiert Glasfaseranlagen für Netzbetreiber, Gemeinden und Unternehmen in der ganzen Schweiz. Dazu liefern wir vorkonfektionierte LWL-Kabel und passive Komponenten.",
+        "text": "Die LWL-Techniker Schweiz GmbH spleisst, misst und installiert Glasfaseranlagen für Netzbetreiber, Gemeinden und Unternehmen in der ganzen Schweiz, in Liechtenstein und in Süddeutschland. Dazu liefern wir vorkonfektionierte LWL-Kabel und passive Komponenten.",
         "knopfPrimaer": {
           "text": "Projekt besprechen",
           "link": "/kontakt"
@@ -155,7 +155,7 @@
           },
           {
             "frage": "Wie schnell sind Sie bei einer Störung vor Ort?",
-            "antwort": "Bei einer Störung im Glasfasernetz sind wir am selben oder am nächsten Arbeitstag vor Ort. Mit OTDR-Messgeräten und Rotlichtlasern finden wir Faserbrüche, hohe Dämpfungen und fehlerhafte Stecker und beheben den Fehler direkt. Rufen Sie uns bei einer Störung an, wir besprechen das Vorgehen am Telefon."
+            "antwort": "Bei einer Störung im Glasfasernetz sind wir am selben oder am nächsten Arbeitstag vor Ort. Mit dem OTDR-Messgerät finden wir Faserbrüche, hohe Dämpfungen und fehlerhafte Stecker und beheben den Fehler direkt vor Ort, in der Regel in Stunden statt Tagen. Den Rotlichtlaser setzen wir nur im Verteilkasten (BEP) ein, um die korrekte Ablage der Fasern zu prüfen. Rufen Sie uns bei einer Störung an, wir besprechen das Vorgehen am Telefon."
           },
           {
             "frage": "Erhalten wir nach den Arbeiten ein Messprotokoll?",

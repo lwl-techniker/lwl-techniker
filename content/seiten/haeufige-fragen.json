@@ -1,0 +1,67 @@
+{
+  "titel": "Häufige Fragen",
+  "inSitemap": true,
+  "indexieren": true,
+  "seo": {
+    "titel": "Häufige Fragen zu Glasfaser, Spleissen und Messung",
+    "beschreibung": "Antworten zu Störung, OTDR-Messprotokoll, Muffenspleissung, FTTH, Einsatz in Deutschland, Schulungen und Offerte der LWL-Techniker Schweiz GmbH in St. Gallen."
+  },
+  "bloecke": [
+    {
+      "discriminant": "faq",
+      "value": {
+        "titel": "Häufige Fragen",
+        "eintraege": [
+          {
+            "frage": "Wer repariert eine Glasfaser-Störung in der Schweiz?",
+            "antwort": "Die LWL-Techniker Schweiz GmbH mit Sitz in St. Gallen (Langgasse 136, 9008 St. Gallen) ist schweizweit im Einsatz. Bei einer Störung im Glasfasernetz sind wir am selben oder am nächsten Arbeitstag vor Ort. Mit dem OTDR-Messgerät finden wir Faserbrüche, hohe Dämpfungen und fehlerhafte Stecker und beheben sie direkt. Telefon: +41 71 552 00 70, Montag bis Freitag 07:00 bis 17:00 Uhr."
+          },
+          {
+            "frage": "Wie finden Sie einen Faserbruch oder Kabelschaden?",
+            "antwort": "Mit dem OTDR-Messgerät messen wir von einem Kabelende aus, an welcher Stelle die Faser unterbrochen oder stark gedämpft ist. Danach spleissen wir die Stelle neu oder tauschen die Komponente. Die Reparatur dauert in der Regel Stunden, nicht Tage. Mit dem Rotlicht prüfen wir im Verteilkasten (BEP) nur, ob die Fasern richtig abgelegt sind."
+          },
+          {
+            "frage": "Was ist eine Muffenspleissung und was gehört dazu?",
+            "antwort": "Beim Spleissen verbinden wir zwei Glasfasern dauerhaft miteinander, zum Beispiel in einer Muffe, einem Verteiler oder einem Kabelendverschluss. Dazu gehören das Spleissen in Muffen, Spleissboxen und Kabelendverschlüssen, Patchungen in Verteilern und 19-Zoll-Racks sowie die Dämpfungs- und OTDR-Messung aller Fasern. Sie erhalten das Abnahmeprotokoll."
+          },
+          {
+            "frage": "Bekomme ich nach der Arbeit ein Messprotokoll?",
+            "antwort": "Ja, bei jedem Auftrag. Wir messen jede Faser (Dämpfung und OTDR), dokumentieren die Anlage und übergeben das Messprotokoll als PDF."
+          },
+          {
+            "frage": "Arbeiten Sie auch in Deutschland?",
+            "antwort": "Ja. Unser Sitz ist in St. Gallen, wir arbeiten in der ganzen Schweiz und auf Wunsch unserer Kunden auch in Deutschland. Dort arbeiten wir mit derselben Ausrüstung und liefern dieselbe Dokumentation wie in der Schweiz. Anfragen aus Deutschland beantworten wir per Kontaktformular oder telefonisch."
+          },
+          {
+            "frage": "Für wen arbeiten Sie?",
+            "antwort": "Für Netzbetreiber, Gemeinden, Installationsfirmen, Unternehmen und Privathaushalte. Bei Bedarf begleiten wir Partner auch bei deren Kundschaft, zum Beispiel bei der Evaluation von Produkten oder mit technischer Unterstützung vor Ort."
+          },
+          {
+            "frage": "Installieren Sie FTTH-Anschlüsse bis in die Wohnung?",
+            "antwort": "Ja. Wir erschliessen Gebäude ab dem Verteilkasten (BEP), installieren die Glasfaserdosen (OTO) in Wohnungen und Geschäftsräumen, spleissen und messen die Teilnehmeranschlüsse und schliessen auch grössere Firmen und Geschäftshäuser an. Wir haben in über 50 Gemeinden FTTH installiert, von Aadorf bis Zürich. Wir arbeiten für Netzbetreiber und Gemeinden und nehmen auch Aufträge von Einzelhaushalten an."
+          },
+          {
+            "frage": "Verkabeln Sie Serverräume und Rechenzentren?",
+            "antwort": "Ja. Wir übernehmen die Glasfaserverkabelung zwischen Racks, Etagen und Gebäuden, bestücken 19-Zoll-Kabelendverschlüsse und Patchpanels und patchen mit vorkonfektionierten Kabeln aus eigener Lieferung. Alle Verbindungen messen, beschriften und dokumentieren wir. Die Verkabelung ist strukturiert und anwendungsneutral."
+          },
+          {
+            "frage": "Haben Sie Erfahrung mit Autobahnen und Tunnels?",
+            "antwort": "Ja. Wir montieren, installieren und nehmen Glasfaseranlagen auf Nationalstrassen, in Tunnels, auf Kantonsstrassen und in Gemeinden in Betrieb. Zu unseren Referenzen gehören unter anderem Thun bis Wimmis (ASTRA), der Weissenstein-Tunnel bei Solothurn, der Tunnel Kerenzerberg sowie Arbeiten im Belchen- und im Bözbergtunnel."
+          },
+          {
+            "frage": "Liefern Sie konfektionierte Patchkabel und Zubehör?",
+            "antwort": "Ja. Wir liefern vorkonfektionierte LWL-Kabel und Patchkabel mit allen gängigen Steckern, von E2000 über LC und SC bis ST und FC, in allen Längen und Farben. Dazu kommen Spleissboxen, FTTH-Dosen, 19-Zoll-Komponenten, Transceiver und Zubehör. 40 Datenblätter stehen als PDF im Produktkatalog. Für besondere Anforderungen fertigen wir nach Ihren Angaben an."
+          },
+          {
+            "frage": "Bieten Sie Schulungen im Spleissen und Messen an?",
+            "antwort": "Ja. Eine Schulung dauert einen ganzen Tag und führt von der Theorie in die Praxis: Spleissen, Messen und Kabelhandling. Wir schulen Ihr Team bei Ihnen vor Ort und stimmen die Inhalte auf Ihre Aufgaben ab. Der Preis richtet sich nach Umfang und Teilnehmerzahl."
+          },
+          {
+            "frage": "Was kostet eine Spleissung oder Installation, und wie bekomme ich eine Offerte?",
+            "antwort": "Preise stehen nicht auf der Webseite, weil jeder Auftrag anders ist. Schicken Sie uns über das Kontaktformular den Ort, die Art der Anlage, den ungefähren Umfang (z. B. die Faserzahl) und Ihren Wunschtermin, oder rufen Sie uns an: +41 71 552 00 70. Sie erhalten von uns eine Offerte."
+          }
+        ]
+      }
+    }
+  ]
+}

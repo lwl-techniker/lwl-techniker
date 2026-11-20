@@ -32,13 +32,14 @@ export default async function Seite({ params }: Props) {
   // Beginnt die Seite nicht mit Startbereich oder Fliesstext mit Titel, erhält sie einen sichtbaren Seitenkopf
   const mitSeitenkopf = !ersterBlockHatH1(seite.bloecke);
   const aktualisiert = aktualisiertVon(`content/seiten/${slug}`);
+  const typ = slug === 'kontakt' ? 'ContactPage' : 'WebPage';
   return (
     <>
       {mitSeitenkopf ? (
-        <Seitenkopf titel={seite.titel} pfad={[{ text: seite.titel, href: `/${slug}` }]} aktualisiert={aktualisiert} />
+        <Seitenkopf titel={seite.titel} pfad={[{ text: seite.titel, href: `/${slug}` }]} aktualisiert={aktualisiert} seitentyp={typ} />
       ) : (
         // Seiten mit eigenem Startbereich (z. B. Über uns, Kontakt) erhalten den WebPage-Knoten direkt
-        <JsonLd daten={seiteAlsWebPage({ pfad: `/${slug}`, titel: seite.titel, beschreibung: seite.seo.beschreibung, aktualisiert })} />
+        <JsonLd daten={seiteAlsWebPage({ pfad: `/${slug}`, titel: seite.titel, beschreibung: seite.seo.beschreibung, aktualisiert, typ })} />
       )}
       <BlockRenderer bloecke={seite.bloecke} einstellungen={e} seitentitel={seite.titel} hatSeitenkopf={mitSeitenkopf} />
     </>
