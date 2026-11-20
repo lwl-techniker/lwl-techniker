@@ -25,7 +25,7 @@ async function kopf() {
     zeile(e.kurzbeschreibung),
     '',
     `Sitz: ${e.strasse}, ${e.plz} ${e.ort}, Schweiz. Telefon ${telefonText(e)}, E-Mail ${e.email}. Einsatzgebiet: ${e.einsatzgebiet || 'Schweiz'}. Sprache der Website: Deutsch (Schweiz).`,
-    ...(einsatzlaender(e).includes('DE') ? ['Alle Leistungen auch für Kundschaft in Deutschland, Anfahrt ab St. Gallen.'] : []),
+    ...(einsatzlaender(e).includes('DE') ? ['Einsatz in Deutschland auf Wunsch, Anfahrt ab St. Gallen.'] : []),
     'Messung und Dokumentation: Jede Kabelanlage wird gemessen (Dämpfung und OTDR) und mit Messprotokoll (Abnahmeprotokoll) übergeben.',
     'Störung: Fehlersuche und Lokalisierung mit OTDR, vor Ort am selben oder nächsten Arbeitstag, Reparatur in der Regel in Stunden. Rotlichtlaser nur zur Prüfung der Faserablage im Verteilkasten (BEP).',
     ...(e.oeffnungszeiten.length ? [`Erreichbarkeit: ${e.oeffnungszeiten.map((z) => `${z.tage} ${z.zeiten} Uhr`).join('; ')}.`] : []),
